@@ -1,0 +1,208 @@
+colors = {
+    primary: #4eb11e,
+    secondary: #b7e696,
+    subtle: #d0d0d0,
+    win: #4eb11e,
+    tie: #fee784,
+    loss: #e14644
+}
+
+*
+    box-sizing: border-box;
+
+body
+    font-size: 14px
+    font-family: 'helvetica neue', Helvetica, Arial, sans-serif
+    font-weight: 300
+    margin: 0
+    padding: 0
+
+h1, h2, h3, h4, h5
+    font-weight: inherit
+
+    &.title:before
+        color: colors.subtle
+        content: "#"
+        padding-right: 0.3em
+
+section
+    margin-bottom: 1.5em
+
+a
+    color: #2996cc
+    text-decoration: none
+
+p
+    margin: 0
+    padding: 0
+
+ul
+    padding: 0
+    margin: 0.4em 0
+    list-style: none
+
+.left
+    float: left
+
+.right
+    float: right
+
+.subtle
+    color: colors.subtle
+
+.win
+    color: colors.win
+
+.loss
+    color: colors.loss
+
+.tie
+    color: colors.tie
+
+
+.page-width
+    max-width: 645px
+    padding: 0 20px
+    margin: auto
+
+header
+    text-align: center
+    background: colors.primary
+    color: colors.secondary
+    padding: 20px 0 25px
+    width: 100%
+    color: #fff
+
+.notification
+    padding: 10px
+    color: colors.primary
+    background: colors.secondary
+
+.notification.warning
+    background-color: colors.tie
+    color: darken(colors.tie, 60%)
+
+#content
+    margin: 20px auto
+
+
+.header-leaderboard
+    text-align: left
+
+    .rank
+        margin-right: 0.4em
+
+    .score:before
+        content: "–"
+        margin: 0 0.3em
+
+
+    ul
+        li:not(.me)
+            opacity: 0.7
+        li.me
+            font-size: 1.7em
+            margin: 0.3em 0
+
+            span.rank
+                font-size: 4.5em
+                line-height: 0.7em
+
+div.progress
+    text-align: center
+
+div.group
+    margin-bottom: 2em
+    margin-left: 1.5em
+
+div.game
+    overflow: hidden
+    width: 100%
+    margin-bottom: 0.6em
+    margin-left: 1.5em
+
+    > div
+        float: left
+    .date
+        width: 30%
+        color: colors.subtle
+
+
+    .team
+        width: 30%
+        text-align: center
+
+    .score
+        width: 10%
+        text-align: center
+
+.point
+    display: inline-block
+    margin-right: 0.3em
+    border-radius: 10px
+    width: 10px
+    height: 10px
+
+    &.win
+        background-color: colors.win
+
+    &.tie
+        background-color: colors.tie
+
+    &.loss
+        background-color: colors.loss
+
+    &.future
+        background-color: colors.subtle
+
+
+div.scores
+    overflow: hidden
+    div.score
+        width: 33.3%
+        float: left
+        text-align: center
+        font-size: 5em
+
+        &:first-of-type
+            text-align: right
+
+        &:last-of-type
+            text-align: left
+
+
+.flag
+    position: relative
+
+.flag:after
+    position: absolute
+    content: ""
+    top: 0
+    left: 0
+    bottom: 0
+    right: 0
+    opacity: 0.3
+    background-repeat: no-repeat
+    background-position: left center
+
+.flag.flag-france:after
+    background-image: url(../images/flags/france.png)
+
+.flag.flag-brazil:after
+    background-image: url(../images/flags/brazil.png)
+    background-position: right center
+
+
+div.users
+    overflow: hidden
+
+    > div
+        float: left
+
+footer
+    border-top: 1px solid colors.subtle
+    text-align: center
+
+    li
+        margin-right: 1em
+        display: inline-block

@@ -1,0 +1,83 @@
+extends layout
+
+block header
+    div.header-leaderboard
+        ul
+            li
+                span.rank 1.
+                span.name Neil McCauley
+                span.score 90
+            li.me
+                span.rank 2.
+                span.name #{user.first_name}
+                span.score 87
+            li
+                span.rank 3.
+                span.name Michael Cheritto
+                span.score 69
+
+block notification
+    p.
+        You didn't bet on all the next games, <strong>do it now</strong>.
+
+block content
+    section
+        div.progress
+            div.point.past.win
+            div.point.past.win
+            div.point.past.loss
+            div.point.past.loss
+            div.point.past.tie
+            div.point.future
+            div.point.future
+            div.point.future
+            div.point.future
+            div.point.future
+            div.point.future
+            div.point.future
+            div.point.future
+            div.point.future
+            div.point.future
+            div.point.future
+            div.point.future
+            div.point.future
+            div.point.future
+            div.point.future
+            div.point.future
+            div.point.future
+            div.point.future
+            div.point.future
+            div.point.future
+
+    section
+        h2.title Games
+
+        div.games
+            each val in ['A', 'B', 'C']
+                div.group
+                    h3.title Group #{val}
+                    each val in [1,2,3,4]
+                        div.game
+                            div.date Thu, 28 May at 10:00
+                            div.team France
+                            div.score ? - ?
+                            div.team Brazil
+
+    section.live
+        h3.title France vs. Brazil
+            span.subtle &nbsp;– Thu, 28 May at 10:00
+
+        div.scores
+            div.score.win.flag.flag-france 3
+            div.score.separator –
+            div.score.flag.flag-brazil 0
+
+        div.users
+            div
+                ul
+                    li Neil McCauley
+
+            div
+                ul
+                    li Vincent Hanna
+                    li Michael Cheritto

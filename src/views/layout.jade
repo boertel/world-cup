@@ -1,0 +1,25 @@
+doctype html
+html
+    head
+        title= title
+        link(rel='stylesheet', href='/stylesheets/style.css')
+    body
+        header
+            div.page-width
+                block header
+
+
+        div.notification
+            div.page-width
+                block notification
+
+        div#content.page-width
+            block content
+
+        footer.page-width
+            ul
+                li
+                    a(href="https://twitter.com/boertel",target="_blank") @boertel
+                li
+                    a(href="mailto:support@oertel.fr") support
+                li – 2014

@@ -1,0 +1,203 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  font-size: 14px;
+  font-family: 'helvetica neue', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  margin: 0;
+  padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: inherit;
+}
+h1.title:before,
+h2.title:before,
+h3.title:before,
+h4.title:before,
+h5.title:before {
+  color: #d0d0d0;
+  content: "#";
+  padding-right: 0.3em;
+}
+section {
+  margin-bottom: 1.5em;
+}
+a {
+  color: #2996cc;
+  text-decoration: none;
+}
+p {
+  margin: 0;
+  padding: 0;
+}
+ul {
+  padding: 0;
+  margin: 0.4em 0;
+  list-style: none;
+}
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+.subtle {
+  color: #d0d0d0;
+}
+.win {
+  color: #4eb11e;
+}
+.loss {
+  color: #e14644;
+}
+.tie {
+  color: #fee784;
+}
+.page-width {
+  max-width: 645px;
+  padding: 0 20px;
+  margin: auto;
+}
+header {
+  text-align: center;
+  background: #4eb11e;
+  color: #b7e696;
+  padding: 20px 0 25px;
+  width: 100%;
+  color: #fff;
+}
+.notification {
+  padding: 10px;
+  color: #4eb11e;
+  background: #b7e696;
+}
+.notification.warning {
+  background-color: #fee784;
+  color: #997d01;
+}
+#content {
+  margin: 20px auto;
+}
+.header-leaderboard {
+  text-align: left;
+}
+.header-leaderboard .rank {
+  margin-right: 0.4em;
+}
+.header-leaderboard .score:before {
+  content: "–";
+  margin: 0 0.3em;
+}
+.header-leaderboard ul li:not(.me) {
+  opacity: 0.7;
+}
+.header-leaderboard ul li.me {
+  font-size: 1.7em;
+  margin: 0.3em 0;
+}
+.header-leaderboard ul li.me span.rank {
+  font-size: 4.5em;
+  line-height: 0.7em;
+}
+div.progress {
+  text-align: center;
+}
+div.group {
+  margin-bottom: 2em;
+  margin-left: 1.5em;
+}
+div.game {
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 0.6em;
+  margin-left: 1.5em;
+}
+div.game > div {
+  float: left;
+}
+div.game .date {
+  width: 30%;
+  color: #d0d0d0;
+}
+div.game .team {
+  width: 30%;
+  text-align: center;
+}
+div.game .score {
+  width: 10%;
+  text-align: center;
+}
+.point {
+  display: inline-block;
+  margin-right: 0.3em;
+  border-radius: 10px;
+  width: 10px;
+  height: 10px;
+}
+.point.win {
+  background-color: #4eb11e;
+}
+.point.tie {
+  background-color: #fee784;
+}
+.point.loss {
+  background-color: #e14644;
+}
+.point.future {
+  background-color: #d0d0d0;
+}
+div.scores {
+  overflow: hidden;
+}
+div.scores div.score {
+  width: 33.3%;
+  float: left;
+  text-align: center;
+  font-size: 5em;
+}
+div.scores div.score:first-of-type {
+  text-align: right;
+}
+div.scores div.score:last-of-type {
+  text-align: left;
+}
+.flag {
+  position: relative;
+}
+.flag:after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0.3;
+  background-repeat: no-repeat;
+  background-position: left center;
+}
+.flag.flag-france:after {
+  background-image: url("../images/flags/france.png");
+}
+.flag.flag-brazil:after {
+  background-image: url("../images/flags/brazil.png");
+  background-position: right center;
+}
+div.users {
+  overflow: hidden;
+}
+div.users > div {
+  float: left;
+}
+footer {
+  border-top: 1px solid #d0d0d0;
+  text-align: center;
+}
+footer li {
+  margin-right: 1em;
+  display: inline-block;
+}

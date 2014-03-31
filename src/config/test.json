@@ -1,0 +1,9 @@
+{
+    "database": {
+        "driver": "postgres",
+        "user": "ben",
+        "name": "worldcup_test",
+        "logging": false
+    }
+}
+
