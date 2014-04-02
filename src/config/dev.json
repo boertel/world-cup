@@ -10,5 +10,13 @@
             "clientID": "1477567782456567",
             "clientSecret": "566da822e81081ebd07917030807dc44"
         }
+    },
+    "session": {
+        "redis": {
+            "host": "localhost",
+            "port": "6379",
+            "ttl": 1296000,
+            "prefix": "sess:"
+        }
     }
 }

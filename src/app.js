@@ -5,7 +5,8 @@ var path = require('path');
 var db = require('./models')
 var passport = require('passport'),
     FacebookStrategy = require('passport-facebook').Strategy,
-    config = require('./config')
+    config = require('./config'),
+    RedisStore = require('connect-redis')(express);
 
 var app = express();
 
@@ -22,10 +23,9 @@ app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.cookieParser());
 app.use(express.session({
-    secret: 'elephantbleu',
-    cookie: {httpOnly: true},
-    key: 'cookie.monster'
-}));
+    store: new RedisStore(config.session.redis),
+    secret: 'elephan7Bleu'
+}))
 app.use(passport.initialize());
 app.use(passport.session());
 

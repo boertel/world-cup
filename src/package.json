@@ -7,7 +7,7 @@
     "test": "NODE_ENV=test make test"
   },
   "dependencies": {
-    "express": "3.4.8",
+    "express": "3.x",
     "jade": "*",
     "stylus": "*",
     "sequelize": "~1.7.0",
@@ -20,6 +20,8 @@
     "mocha": "~1.18.2",
     "supertest": "~0.10.0",
     "assert": "~1.1.1",
-    "moment-timezone": "0.0.3"
+    "moment-timezone": "0.0.3",
+    "connect-redis": "1.4.7",
+    "connect": "~2.14.3"
   }
 }
