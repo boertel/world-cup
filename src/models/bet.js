@@ -16,6 +16,16 @@ module.exports = function (sequelize, DataTypes) {
         }
     }, {
         classMethods: {
+            attrs: function () {
+                var attributes = [],
+                    not = ['created_at', 'updated_at', 'game_id']
+                for (var key in this.attributes) {
+                    if (not.indexOf(key) === -1) {
+                        attributes.push(key)
+                    }
+                }
+                return attributes
+            },
             associate: function (models) {
                 Bet.belongsTo(models.Game)
                 Bet.belongsTo(models.User)

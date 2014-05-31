@@ -1,7 +1,9 @@
 var competitors = require('./competitors.js'),
     groups = require('./groups.js'),
     games = require('./games.js'),
-    users = require('./users.js')
+    users = require('./users.js'),
+    bets = require('./bets.js'),
+    db = require('../models')
 
 module.exports = function (app) {
 
@@ -14,9 +16,14 @@ module.exports = function (app) {
     app.get('/api/v1/games', games.read)
     app.get('/api/v1/games/:id', games.read)
 
+    app.get('/api/v1/games/:id/bets', bets.read)
+    app.post('/api/v1/games/:id/bets', bets.post)
+    app.put('/api/v1/games/:id/bets', bets.post)
+
     app.get('/api/v1/users/:id', users.profile.read)
     app.get('/api/v1/users/:id/bets', users.bets.read)
 
+    // Views
     app.get('/', function(req, res) {
         if (!req.isAuthenticated()) {
             res.render('index', { title: 'Express'});

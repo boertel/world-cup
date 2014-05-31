@@ -2,11 +2,13 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 
-var db = require('./models')
+var db = require('./models');
 var passport = require('passport'),
     FacebookStrategy = require('passport-facebook').Strategy,
     config = require('./config'),
-    RedisStore = require('connect-redis')(express);
+    session = require('express-session'),
+    RedisStore = require('connect-redis')(session);
+
 
 var app = express();
 
@@ -14,20 +16,24 @@ var app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-app.use(express.favicon());
-app.use(express.logger('dev'));
+//app.use(require('static-favicon')(__dirname + '/public/favicon.ico'));
+app.use(require('morgan')('dev'));
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.json());
-app.use(express.urlencoded());
-app.use(express.methodOverride());
-app.use(express.cookieParser());
-app.use(express.session({
+app.use(require('serve-static')(path.join(__dirname, 'public')));
+app.use(require('body-parser')());
+app.use(require('method-override')());
+app.use(require('cookie-parser')());
+app.use(session({
     store: new RedisStore(config.session.redis),
     secret: 'elephan7Bleu'
-}))
+}));
 app.use(passport.initialize());
 app.use(passport.session());
+
+var env = process.env.NODE_ENV || 'development';
+if (env === 'prod') {
+    app.use(raven.middleware.express(config.utils.raven.url));
+}
 
 app.use(function (req, res, next) {
     res.locals.user = {}
@@ -48,12 +54,10 @@ app.param('user', function (req, res, next, id) {
     }
 })
 
-app.use(app.router);
-
 
 // development only
 if ('development' == app.get('env')) {
-    app.use(express.errorHandler());
+    app.use(require('errorhandler')());
 }
 
 passport.serializeUser(db.User.serialize);

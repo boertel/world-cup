@@ -80,6 +80,10 @@ header {
   background-color: #fee784;
   color: #997d01;
 }
+.notification.error {
+  background-color: #e14644;
+  color: #651110;
+}
 #content {
   margin: 20px auto;
 }

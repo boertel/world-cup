@@ -6,6 +6,7 @@ Backbone:
 - http://addyosmani.github.io/backbone-fundamentals/#exercise-1-todos---your-first-backbone.js-app
 - http://liquidmedia.org/blog/2011/02/backbone-js-part-3/
 - https://gist.github.com/bergie/2836052
+- http://geeks.bizzabo.com/7-battle-tested-backbonejs-rules-for-amazing-web-apps?utm_source=javascriptweekly&utm_medium=email
 
 Stack:
 - http://developers.soundcloud.com/blog/building-the-next-soundcloud/#comments

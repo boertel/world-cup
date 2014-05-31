@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    section.game
+        h3.title= game.id
+            span.subtle &nbsp;– #{game.time}
+
+        div.scores
+            div.score.win.flag.flag-france= game.score_a
+            div.score.separator –
+            div.score.loss.flag.flag-brazil= game.score_b
+
+        div.actions
+            form(name="submit-score", action="", method="POST")
+                div
+                    div.score
+                        button -
+                        button +
+
+                    div.score
+                        button -
+                        button +
+
+                div
+                    button(type="submit") Save

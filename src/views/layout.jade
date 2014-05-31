@@ -4,14 +4,12 @@ html
         title= title
         link(rel='stylesheet', href='/stylesheets/style.css')
     body
-        header
+        header(style="display: none;")
             div.page-width
                 block header
 
-
-        div.notification
-            div.page-width
-                block notification
+        div#notification
+            block notification
 
         div#content.page-width
             block content
@@ -23,3 +21,32 @@ html
                 li
                     a(href="mailto:support@oertel.fr") support
                 li – 2014
+
+        script(type="text/html", id="bet-template")
+            a(href="#") Back
+            form
+                div
+                    {{ game.competitorA.name }}
+                    input(type="number", name="score_a", value="{{ score_a }}", min=0)
+                div
+                    {{ game.competitorB.name }}
+                    input(type="number", name="score_b", value="{{ score_b }}", min=0)
+                div
+                    button(type="submit") Save
+
+        script(type="text/html", id="game-template")
+            <a href="#/games/{{ id }}">{{ competitorA.name }} {{ score_a }} - {{ score_b }} {{ competitorB.name }}</a> <em>{{ time_human }}</em>
+
+        script(type="text/html", id="notification-template")
+            div.page-width
+                p
+                    {{text}}
+
+        script(src="/js/components/jquery/dist/jquery.min.js")
+        script(src="/js/components/moment/moment.js")
+        script(src="/js/components/handlebars/handlebars.js")
+        script(src="/js/components/underscore/underscore.js")
+        script(src="/js/components/backbone/backbone.js")
+
+        script(src="/js/main.js")
+

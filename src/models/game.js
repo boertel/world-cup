@@ -28,13 +28,20 @@ module.exports = function (sequelize, DataTypes) {
     }, {
         instanceMethods: {
             deadline: function () {
-                return new Date(this.start - 60 * 60000)
+                return new Date(this.time - 60 * 60000)
             },
             lock: function () {
-                return this.deadline() >= new Date()
+                return this.deadline() <= new Date()
             },
             end: function () {
-                return new Date(this.start + 90 * 60000)
+                return new Date(this.time + 90 * 60000)
+            },
+            toJSON: function () {
+                var json = this.values;
+                json.lock = this.lock();
+                json.deadline = this.deadline();
+                json.end = this.end();
+                return json;
             }
         },
         classMethods: {
