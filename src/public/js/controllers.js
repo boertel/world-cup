@@ -34,10 +34,16 @@ app.controller('GameController', ['$scope', '$http', '$routeParams', 'notificati
     };
 }]);
 
-var friends = ['1', '3', '4'];
+var friends = ['1', '2', '4'];
 
 /* ************************************************************************* */
 // Element Controllers
+
+app.controller('UserController', ['$scope', 'user', function ($scope, user) {
+    user.then(function (u) {
+        $scope.user = u;
+    });
+}]);
 
 app.controller('BetsController', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
     $rootScope.$on('gameLoaded', function (evt, args) {
@@ -58,8 +64,8 @@ app.controller('NotificationController', ['$scope', 'notification', function ($s
     $scope.notifications = notification.get();
 }]);
 
-app.controller('LeaderboardController', ['$scope', 'scores', function ($scope, scores) {
-    scores.then(function (bets) {
-        console.log(bets);
+app.controller('ScoreController', ['$scope', 'scores', function ($scope, scores) {
+    scores.then(function (scores) {
+        console.log(scores);
     });
 }]);

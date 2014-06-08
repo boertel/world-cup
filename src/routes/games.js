@@ -33,10 +33,30 @@ module.exports = {
             filters.limit = req.query.limit
         }
         db.Game.findAll(filters).success(function (games) {
-            if (req.params.id) {
-                games = games[0]
-            }
-            res.json(games)
+            var games_ids = games.map(function (game) {
+                return game.id
+            });
+
+            db.Bet.findAll({
+                where: {
+                    user_id: req.user.id,
+                    game_id: games_ids
+                }
+            }).success(function (bets) {
+                var mapping = {};
+                bets.forEach(function (bet) {
+                    mapping[bet.game_id] = bet;
+                });
+
+                if (req.params.id) {
+                    games = games[0]
+                }
+                games = games.map(function (game) {
+                    game.values.bet = mapping[game.id]
+                    return game;
+                });
+                res.json(games)
+            })
         })
     }
 }

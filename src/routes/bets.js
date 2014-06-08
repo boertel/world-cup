@@ -37,12 +37,35 @@ module.exports = {
                 }
             ]
         }).success(function (bets) {
-            var points = 0;
+            var need_update = [],
+                now = 0,
+                before = 0;
             bets.forEach(function (bet) {
-                points += bet.points()
+                var points = bet.points();
+                now += points;
+                if (bet.validated) {
+                    before += points;
+                } else {
+                    need_update.push(bet.id)
+                }
             });
+
+            if (need_update.length > 0) {
+                db.Bet.update(
+                    {validated: true},
+                    {id: need_update}
+                )
+
+                db.User.update(
+                    {points: now},
+                    {id: req.user.id}
+                )
+            }
             res.json({
-                points: points
+                points: {
+                    now: now,
+                    before: before
+                }
             })
         });
     },

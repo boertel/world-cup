@@ -17,6 +17,10 @@ module.exports = function (sequelize, DataTypes) {
                 isInt: true,
                 min: 0
             }
+        },
+        validated: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         }
     }, {
         instanceMethods: {

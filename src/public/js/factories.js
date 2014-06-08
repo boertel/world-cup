@@ -24,9 +24,16 @@ app.factory('scores', ['$http', function ($http) {
     var promise = $http({
         method: 'PUT',
         url: url
-    }).then(function (bets) {
-        return bets;
+    }).then(function (response) {
+        return response.data;
     });
 
+    return promise;
+}]);
+
+app.factory('user', ['$http', function ($http) {
+    var promise = $http.get('/api/v1/users/me').then(function (response) {
+        return response.data;
+    });
     return promise;
 }]);

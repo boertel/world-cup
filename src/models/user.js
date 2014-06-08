@@ -33,6 +33,10 @@ module.exports = function (sequelize, DataTypes) {
             validate: {
                 isUrl: true
             }
+        },
+        points: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0
         }
     }, {
         classMethods: {

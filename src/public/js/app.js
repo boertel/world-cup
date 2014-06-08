@@ -5,6 +5,10 @@ var app = angular.module('content', ['ngRoute'])
                 templateUrl: 'pages/home.html',
                 controller: 'HomeController'
             })
+            .when('/_=_', {
+                templateUrl: 'pages/home.html',
+                controller: 'HomeController'
+            })
             .when('/games/:id', {
                 templateUrl: 'pages/game.html',
                 controller: 'GameController'
