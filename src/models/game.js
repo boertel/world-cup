@@ -28,19 +28,32 @@ module.exports = function (sequelize, DataTypes) {
     }, {
         instanceMethods: {
             deadline: function () {
-                return new Date(this.time - 60 * 60000)
+                return new Date(this.time.getTime() - 60 * 60000)
             },
             lock: function () {
                 return this.deadline() <= new Date()
             },
             end: function () {
-                return new Date(this.time + 90 * 60000)
+                return new Date(this.time.getTime() + 120 * 60000)
+            },
+            status: function () {
+                if (this.end() > new Date()) {
+                    text = 'ended';
+                }
+                if (this.deadline() >= new Date() &&  new Date <= this.end()) {
+                    text = 'ongoing';
+                }
+                if (this.deadline() < new Date()) {
+                    text = 'scheduled';
+                }
+                return text;
             },
             toJSON: function () {
                 var json = this.values;
                 json.lock = this.lock();
                 json.deadline = this.deadline();
                 json.end = this.end();
+                json.status = this.status();
                 return json;
             }
         },

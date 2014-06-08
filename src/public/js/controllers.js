@@ -3,9 +3,12 @@ app.controller('HomeController', ['$scope', '$http', function ($scope, $http) {
         method: 'GET',
         url: '/api/v1/games'
     }).success(function (data) {
-        $scope.games = data;
+        $scope.games = data.map(function (game) {
+            return new Game(game);
+        });
     })
 }]);
+
 
 app.controller('GameController', ['$scope', '$http', '$routeParams', 'notification', '$rootScope',
     function ($scope, $http, $routeParams, notification, $rootScope) {
@@ -16,6 +19,7 @@ app.controller('GameController', ['$scope', '$http', '$routeParams', 'notificati
     }).success(function (data) {
         data.score_a = data.score_a || 0;
         data.score_b = data.score_b || 0;
+        data.game = new Game(data.game);
         $scope.bet = data;
         $rootScope.$emit('gameLoaded', {game: data.game});
     });

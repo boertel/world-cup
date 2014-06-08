@@ -1,5 +1,5 @@
 <div ng-controller="ScoreController"></div>
 
 <div ng-repeat="game in games | orderBy:'number'">
-    <time datetime="{{ game.time }}"></time> <a href="#/games/{{ game.id }}">{{ game.competitorA.name }} - {{ game.competitorB.name }}</a>
+    <span ng-if="game.bet">*</span><time datetime="{{ game.time }}"></time> <a href="#/games/{{ game.id }}">{{ game.competitorA.name }} - {{ game.competitorB.name }}</a>
 </div>
