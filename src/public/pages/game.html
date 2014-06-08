@@ -7,5 +7,11 @@
     {{ bet.game.competitorB.name }}
     <input type="number" name="score_a" ng-model="bet.score_b" min="0" required>
 
-    <button type="submit">Save</button>
+    <button type="submit" ng-if="!bet.game.lock">Save</button>
 </form>
+
+<div ng-controller="BetsController">
+    <div ng-repeat="bet in bets">
+        <a href="{{ bet.user.link }}" target="_blank">{{ bet.user.first_name }} {{ bet.user.last_name }}</a> {{ bet.score_a }} - {{ bet.score_b }}</a>
+    </div>
+</div>

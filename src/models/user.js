@@ -36,6 +36,16 @@ module.exports = function (sequelize, DataTypes) {
         }
     }, {
         classMethods: {
+            attrs: function () {
+                var attributes = [],
+                    not = ['created_at', 'updated_at', 'email'];
+                for (var key in this.attributes) {
+                    if (not.indexOf(key) === -1) {
+                        attributes.push(key);
+                    }
+                }
+                return attributes;
+            },
             associate: function (models) {
                 User.hasMany(models.Bet);
             },

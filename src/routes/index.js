@@ -18,7 +18,7 @@ module.exports = function (app) {
 
     app.get('/api/v1/games/:id/bets', bets.read)
     app.post('/api/v1/games/:id/bets', bets.post)
-    app.put('/api/v1/games/:id/bets', bets.post)
+    app.put('/api/v1/bets', bets.put)
 
     app.get('/api/v1/users/:id', users.profile.read)
     app.get('/api/v1/users/:id/bets', users.bets.read)

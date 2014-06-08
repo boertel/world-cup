@@ -1,3 +1,5 @@
+var config = require('../config');
+
 module.exports = function (sequelize, DataTypes) {
     var Bet = sequelize.define('Bet', {
         score_a: {
@@ -17,10 +19,34 @@ module.exports = function (sequelize, DataTypes) {
             }
         }
     }, {
+        instanceMethods: {
+            perfect: function () {
+                return this.game.score_a === this.score_a &&
+                       this.game.score_b === this.score_b
+            },
+            win: function () {
+                /* Team A won
+                 * Tie
+                 * Team B won
+                 */
+                return (this.game.score_a > this.game.score_b && this.score_a > this.score_b)
+                    || (this.game.score_a === this.game.score_b && this.score_a === this.score_b)
+                    || (this.game.score_a < this.game.score_b && this.score_a < this.score_b)
+            },
+            points: function () {
+                if (this.perfect()) {
+                    return config.POINTS.perfect;
+                }
+                if (this.win()) {
+                    return config.POINTS.win;
+                }
+                return config.POINTS.lost;
+            }
+        },
         classMethods: {
             attrs: function () {
                 var attributes = [],
-                    not = ['created_at', 'updated_at', 'game_id']
+                    not = ['updated_at', 'game_id']
                 for (var key in this.attributes) {
                     if (not.indexOf(key) === -1) {
                         attributes.push(key)

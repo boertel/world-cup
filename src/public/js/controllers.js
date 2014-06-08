@@ -7,7 +7,8 @@ app.controller('HomeController', ['$scope', '$http', function ($scope, $http) {
     })
 }]);
 
-app.controller('GameController', ['$scope', '$http', '$routeParams', 'notification', function ($scope, $http, $routeParams, notification) {
+app.controller('GameController', ['$scope', '$http', '$routeParams', 'notification', '$rootScope',
+    function ($scope, $http, $routeParams, notification, $rootScope) {
     var url = '/api/v1/games/' + $routeParams.id + '/bets';
     $http({
         method: 'GET',
@@ -16,6 +17,7 @@ app.controller('GameController', ['$scope', '$http', '$routeParams', 'notificati
         data.score_a = data.score_a || 0;
         data.score_b = data.score_b || 0;
         $scope.bet = data;
+        $rootScope.$emit('gameLoaded', {game: data.game});
     });
 
     $scope.submit = function (form) {
@@ -32,11 +34,32 @@ app.controller('GameController', ['$scope', '$http', '$routeParams', 'notificati
     };
 }]);
 
+var friends = ['1', '3', '4'];
 
 /* ************************************************************************* */
 // Element Controllers
+
+app.controller('BetsController', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
+    $rootScope.$on('gameLoaded', function (evt, args) {
+        var game = args.game;
+        if (game.lock) {
+            var url = '/api/v1/games/' + game.id + '/bets?friends=' + friends.join(',');
+            $http({
+                method: 'GET',
+                url: url
+            }).success(function (data) {
+                $scope.bets = data;
+            });
+        }
+    });
+}]);
 
 app.controller('NotificationController', ['$scope', 'notification', function ($scope, notification) {
     $scope.notifications = notification.get();
 }]);
 
+app.controller('LeaderboardController', ['$scope', 'scores', function ($scope, scores) {
+    scores.then(function (bets) {
+        console.log(bets);
+    });
+}]);

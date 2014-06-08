@@ -22,6 +22,30 @@ module.exports = {
             }
         });
     },
+    put: function (req, res) {
+        db.Bet.findAll({
+            where: {
+                user_id: req.user.id,
+            },
+            include: [
+                {
+                    model: db.Game,
+                    where: {
+                        score_a: {ne: null},
+                        score_b: {ne: null}
+                    }
+                }
+            ]
+        }).success(function (bets) {
+            var points = 0;
+            bets.forEach(function (bet) {
+                points += bet.points()
+            });
+            res.json({
+                points: points
+            })
+        });
+    },
     read: function (req, res) {
         var game_include = [
             {
@@ -40,9 +64,19 @@ module.exports = {
             }
         ];
 
+        var where = {
+            game_id: req.params.id
+        };
+        if (req.query.friends) {
+            var friends = req.query.friends.split(',');
+            where.user_id = friends;
+        } else {
+            where.user_id = req.user.id;
+        }
+
         var filters = {
             attributes: db.Bet.attrs(),
-            where: {game_id: req.params.id, user_id: req.user.id},
+            where: where,
             include: [
                 {
                     model: db.Game,
@@ -51,24 +85,40 @@ module.exports = {
                 }
             ]
         }
-        db.Bet.find(filters).success(function (bet) {
-            if (!bet) {
-                db.Game.find({
-                    where: {id: req.params.id},
-                    attributes: db.Game.attrs(),
-                    include: game_include
-                }).success(function (game) {
-                    var bet = {
-                        game: game,
-                        score_a: null,
-                        score_b: null,
-                        user_id: req.user.id
-                    };
+
+        if (!req.query.friends) {
+            db.Bet.find(filters).success(function (bet) {
+                if (!bet) {
+                    db.Game.find({
+                        where: {id: req.params.id},
+                        attributes: db.Game.attrs(),
+                        include: game_include
+                    }).success(function (game) {
+                        var bet = {
+                            game: game,
+                            score_a: null,
+                            score_b: null,
+                            user_id: req.user.id,
+                        };
+                        res.json(bet);
+                    })
+                } else {
                     res.json(bet);
-                })
-            } else {
-                res.json(bet);
-            }
-        })
+                }
+            })
+        } else {
+            db.Bet.findAll({
+                attributes: db.Bet.attrs(),
+                where: where,
+                include: [
+                    {
+                        model: db.User,
+                        attributes: db.User.attrs(),
+                    }
+                ]
+            }).success(function (bets) {
+                res.json(bets);
+            });
+        }
     }
 }
