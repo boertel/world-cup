@@ -1,0 +1,11 @@
+<a href="#/">Back</a>
+
+<form name="bet" ng-submit="submit(bet)" novalidate>
+    {{ bet.game.competitorA.name }}
+    <input type="number" name="score_a" ng-model="bet.score_a" min="0" required>
+
+    {{ bet.game.competitorB.name }}
+    <input type="number" name="score_a" ng-model="bet.score_b" min="0" required>
+
+    <button type="submit">Save</button>
+</form>

@@ -3,15 +3,18 @@ html
     head
         title= title
         link(rel='stylesheet', href='/stylesheets/style.css')
-    body
+    body(ng-app="content")
         header(style="display: none;")
             div.page-width
                 block header
 
-        div#notification
-            block notification
+        div#notification(ng-controller="NotificationController")
+            div.notification(ng-repeat="notification in notifications")
+                div.page-width
+                    p
+                        {{ notification.message }}
 
-        div#content.page-width
+        div#content.page-width(ng-view)
             block content
 
         footer.page-width
@@ -22,31 +25,13 @@ html
                     a(href="mailto:support@oertel.fr") support
                 li – 2014
 
-        script(type="text/html", id="bet-template")
-            a(href="#") Back
-            form
-                div
-                    {{ game.competitorA.name }}
-                    input(type="number", name="score_a", value="{{ score_a }}", min=0)
-                div
-                    {{ game.competitorB.name }}
-                    input(type="number", name="score_b", value="{{ score_b }}", min=0)
-                div
-                    button(type="submit") Save
-
-        script(type="text/html", id="game-template")
-            <a href="#/games/{{ id }}">{{ competitorA.name }} {{ score_a }} - {{ score_b }} {{ competitorB.name }}</a> <em>{{ time_human }}</em>
-
-        script(type="text/html", id="notification-template")
-            div.page-width
-                p
-                    {{text}}
 
         script(src="/js/components/jquery/dist/jquery.min.js")
         script(src="/js/components/moment/moment.js")
-        script(src="/js/components/handlebars/handlebars.js")
-        script(src="/js/components/underscore/underscore.js")
-        script(src="/js/components/backbone/backbone.js")
+        script(src="/js/components/angular/angular.min.js")
+        script(src="/js/components/angular-route/angular-route.min.js")
 
-        script(src="/js/main.js")
+        script(src="/js/app.js")
+        script(src="/js/factories.js")
+        script(src="/js/controllers.js")
 

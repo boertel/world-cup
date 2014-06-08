@@ -2,6 +2,7 @@ module.exports = function (sequelize, DataTypes) {
     var Bet = sequelize.define('Bet', {
         score_a: {
             type: DataTypes.INTEGER,
+            defaultValue: 0,
             validate: {
                 isInt: true,
                 min: 0
@@ -9,6 +10,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         score_b: {
             type: DataTypes.INTEGER,
+            defaultValue: 0,
             validate: {
                 isInt: true,
                 min: 0

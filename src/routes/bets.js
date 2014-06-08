@@ -23,6 +23,23 @@ module.exports = {
         });
     },
     read: function (req, res) {
+        var game_include = [
+            {
+                model: db.Group,
+                attributes: db.Group.attrs()
+            },
+            {
+                model: db.Competitor,
+                as: 'competitor_a',
+                attributes: db.Competitor.attrs()
+            },
+            {
+                model: db.Competitor,
+                as: 'competitor_b',
+                attributes: db.Competitor.attrs()
+            }
+        ];
+
         var filters = {
             attributes: db.Bet.attrs(),
             where: {game_id: req.params.id, user_id: req.user.id},
@@ -30,33 +47,28 @@ module.exports = {
                 {
                     model: db.Game,
                     attributes: db.Game.attrs(),
-                    include: [
-                        {
-                            model: db.Group,
-                            attributes: db.Group.attrs()
-                        },
-                        {
-                            model: db.Competitor,
-                            as: 'competitor_a',
-                            attributes: db.Competitor.attrs()
-                        },
-                        {
-                            model: db.Competitor,
-                            as: 'competitor_b',
-                            attributes: db.Competitor.attrs()
-                        }
-                    ]
+                    include: game_include
                 }
             ]
         }
         db.Bet.find(filters).success(function (bet) {
             if (!bet) {
-                var bet = db.Bet.build({
-                    game_id: req.params.id,
-                    user_id: req.user.id
-                });
+                db.Game.find({
+                    where: {id: req.params.id},
+                    attributes: db.Game.attrs(),
+                    include: game_include
+                }).success(function (game) {
+                    var bet = {
+                        game: game,
+                        score_a: null,
+                        score_b: null,
+                        user_id: req.user.id
+                    };
+                    res.json(bet);
+                })
+            } else {
+                res.json(bet);
             }
-            res.json(bet);
         })
     }
 }
