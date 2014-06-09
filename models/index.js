@@ -3,9 +3,7 @@ var fs = require('fs'),
     path = require('path'),
     Sequelize = require('sequelize'),
     lodash = require('lodash'),
-    sequelize = new Sequelize(config.database.name, config.database.user, null, {
-        dialect: config.database.driver,
-        port: 5432,
+    sequelize = new Sequelize(config.database, {
         define: {
             underscored: true,
             freezeTableName: true,
