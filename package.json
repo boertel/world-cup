@@ -32,9 +32,7 @@
     "morgan": "~1.0.0",
     "static-favicon": "~1.0.2",
     "express-session": "~1.0.2",
-    "errorhandler": "~1.0.0"
-  },
-  "devDependencies": {
+    "errorhandler": "~1.0.0",
     "fb": "~0.7.0"
   }
 }
