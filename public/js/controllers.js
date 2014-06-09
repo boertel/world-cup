@@ -38,7 +38,6 @@ app.controller('GameController', ['$scope', '$http', '$routeParams', 'notificati
     };
 }]);
 
-var friends = ['1', '2', '4'];
 
 /* ************************************************************************* */
 // Element Controllers
@@ -60,7 +59,8 @@ app.controller('BetsController', ['$scope', '$http', '$rootScope', function ($sc
     $rootScope.$on('gameLoaded', function (evt, args) {
         var game = args.game;
         if (game.lock) {
-            var url = '/api/v1/games/' + game.id + '/bets?friends=' + friends.join(',');
+            //var url = '/api/v1/games/' + game.id + '/bets?friends=' + window.friends.join(',');
+            var url = '/api/v1/games/' + game.id + '/bets?all=true';
             $http({
                 method: 'GET',
                 url: url
@@ -88,12 +88,17 @@ app.controller('LeaderboardController', ['$scope', '$http', function ($scope, $h
     });
 }]);
 
+window.friends = [];
+
 app.controller('FriendsLeaderboardController', ['$scope', '$q', function ($scope, $q) {
     var deferred = $q.defer();
     window.fbReady.push(function () {
         FB.Event.subscribe('auth.statusChange', function (response) {
             if (response.status === 'connected') {
                 FB.api('/1477567782456567/scores', function (response) {
+                    window.friends = response.data.map(function (friend) {
+                        return friend.user.id;
+                    });
                     deferred.resolve(response.data);
                 })
             }

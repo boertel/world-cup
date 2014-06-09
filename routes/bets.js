@@ -93,6 +93,7 @@ module.exports = {
         if (req.query.friends) {
             var friends = req.query.friends.split(',');
             where.user_id = friends;
+        } else if (req.query.all) {
         } else {
             where.user_id = req.user.id;
         }
@@ -109,7 +110,7 @@ module.exports = {
             ]
         }
 
-        if (!req.query.friends) {
+        if (!req.query.friends && !req.query.all) {
             db.Bet.find(filters).success(function (bet) {
                 if (!bet) {
                     db.Game.find({
