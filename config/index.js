@@ -7,8 +7,9 @@ exports.POINTS = {
 }
 exports.social = {
     facebook: {
-        clientID: "1477567782456567",
-        clientSecret: "566da822e81081ebd07917030807dc44"
+        clientID: '1477567782456567',
+        clientSecret: '566da822e81081ebd07917030807dc44',
+        app_access_token: '1477567782456567|8ROrWZQS-UuNnljuYhiF_vguPd0'
     }
 };
 

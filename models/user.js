@@ -1,5 +1,6 @@
 var request = require('request'),
-    FB = require('fb');
+    FB = require('fb'),
+    config = require('../config');
 
 
 module.exports = function (sequelize, DataTypes) {
@@ -41,19 +42,16 @@ module.exports = function (sequelize, DataTypes) {
     }, {
         instanceMethods: {
             publishScore: function (next) {
-                var that = this;
-                var Social = sequelize.import('./social.js');
-                Social.find({user_id: this.id}).success(function (social) {
-                    var credentials = JSON.parse(social.credentials);
-                    FB.setAccessToken(credentials.access_token);
+                var access_token = config.social.facebook.app_access_token
+                FB.setAccessToken(access_token);
 
-                    var data = {
-                        score: that.points
-                    }
-                    FB.api('/me/scores', 'post', data, function (response) {
-                        return next(response);
-                    })
-                });
+                var uid = this.username,
+                    data = {
+                        score: this.points
+                    };
+                FB.api('/' + uid + '/scores', 'post', data, function (response) {
+                    return next(response);
+                })
             }
         },
         classMethods: {
