@@ -74,7 +74,7 @@ passport.use(new FacebookStrategy({
 
 
 app.get('/auth/facebook', passport.authenticate('facebook', {
-    scope: ['email', 'publish_actions']
+    scope: ['email', 'publish_actions', 'user_games_activity']
 }))
 app.get('/auth/facebook/callback', passport.authenticate('facebook', {
     successRedirect: '/',
