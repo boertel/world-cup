@@ -2,8 +2,11 @@ doctype html
 html
     head
         title= title
+        link(rel='stylesheet', href='/stylesheets/pure-min.css')
         link(rel='stylesheet', href='/stylesheets/style.css')
     body(ng-app="content")
+        div#fb-root
+
         header
             div.page-width
                 block header
@@ -27,4 +30,31 @@ html
         script(src="/js/components/moment/moment.js")
         script(src="/js/components/angular/angular.min.js")
         script(src="/js/components/angular-route/angular-route.min.js")
+
+        script.
+            window.fbReady = [];
+            window.fbAsyncInit = function() {
+                FB.init({
+                    appId      : '1477567782456567',
+                    xfbml      : true
+                });
+
+                window.fbReady.forEach(function (func) {
+                    func();
+                });
+
+                window.fbReady.push = function (func) {
+                    func();
+                };
+            };
+
+            (function(d, s, id){
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) {return;}
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/all.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
+
         block script

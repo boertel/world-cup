@@ -26,5 +26,12 @@ module.exports = {
                 res.json(bets)
             })
         }
+    },
+    points: {
+        post: function (req, res) {
+            req.user.publishScore(function (data) {
+                return res.json(data);
+            });
+        }
     }
 }

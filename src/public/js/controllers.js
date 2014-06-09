@@ -43,10 +43,17 @@ var friends = ['1', '2', '4'];
 /* ************************************************************************* */
 // Element Controllers
 
-app.controller('UserController', ['$scope', 'user', function ($scope, user) {
+app.controller('UserController', ['$scope', 'user', '$http', function ($scope, user, $http) {
     user.then(function (u) {
         $scope.user = u;
     });
+
+    $http({
+        url: '/api/v1/users/me/points',
+        method: 'POST'
+    }).success(function (response) {
+    });
+
 }]);
 
 app.controller('BetsController', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
@@ -71,5 +78,29 @@ app.controller('NotificationController', ['$scope', 'notification', function ($s
 app.controller('ScoreController', ['$scope', 'scores', function ($scope, scores) {
     scores.then(function (scores) {
         console.log(scores);
+    });
+}]);
+
+app.controller('LeaderboardController', ['$scope', '$http', function ($scope, $http) {
+    $http.get('/api/v1/leaderboard').then(function (response) {
+        var users = response.data;
+        $scope.users = users;
+    });
+}]);
+
+app.controller('FriendsLeaderboardController', ['$scope', '$q', function ($scope, $q) {
+    var deferred = $q.defer();
+    window.fbReady.push(function () {
+        FB.Event.subscribe('auth.statusChange', function (response) {
+            if (response.status === 'connected') {
+                FB.api('/me/scores', function (response) {
+                    deferred.resolve(response.data);
+                })
+            }
+        });
+    });
+
+    deferred.promise.then(function (response) {
+        $scope.users = response;
     });
 }]);

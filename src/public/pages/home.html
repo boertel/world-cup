@@ -1,5 +1,24 @@
 <div ng-controller="ScoreController"></div>
 
-<div ng-repeat="game in games | orderBy:'number'">
-    <span ng-if="game.bet">*</span><time datetime="{{ game.time }}"></time> <a href="#/games/{{ game.id }}">{{ game.competitorA.name }} - {{ game.competitorB.name }}</a>
+<div class="pure-g">
+    <div class="pure-u-1">
+        <h2>Games</h2>
+    </div>
+    <div class="pure-u-1" ng-repeat="game in games | orderBy:'number'">
+        <span ng-if="game.bet">*</span><time datetime="{{ game.time }}"></time> <a href="#/games/{{ game.id }}">{{ game.competitorA.name }} - {{ game.competitorB.name }}</a>
+    </div>
+</div>
+
+<div ng-controller="LeaderboardController">
+    <h2>Leaderboard</h2>
+    <ul ng-repeat="user in users">
+        <li>{{ user.points }} - <a href="{{ user.link }}" target="_blank">{{ user.first_name }} {{ user.last_name }}</a></li>
+    </ul>
+</div>
+
+<div ng-controller="FriendsLeaderboardController">
+    <h2>Friends Leaderboard</h2>
+    <ul ng-repeat="user in users">
+        <li>{{ user.score }} - {{ user.user.name }}</li>
+    </ul>
 </div>
