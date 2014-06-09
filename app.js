@@ -33,7 +33,7 @@ app.use(passport.session());
 
 var env = process.env.NODE_ENV || 'development';
 if (env === 'prod') {
-    app.use(raven.middleware.express(config.utils.raven.url));
+    app.use(raven.middleware.express(config.raven.url));
 }
 
 app.use(function (req, res, next) {
