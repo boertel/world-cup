@@ -24,7 +24,7 @@ app.use(require('body-parser')());
 app.use(require('method-override')());
 app.use(require('cookie-parser')());
 app.use(session({
-    store: new RedisStore(config.session.redis),
+    store: new RedisStore(config.redis),
     secret: 'elephan7Bleu'
 }));
 app.use(passport.initialize());

@@ -13,5 +13,6 @@ exports.social = {
 };
 
 exports.database = exports.database || process.env.DATABASE_URL;
+exports.redis.url = exports.redis.url || process.env.REDISCLOUD_URL;
 
 module.exports = exports

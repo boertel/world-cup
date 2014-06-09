@@ -1,17 +1,9 @@
 module.exports = {
-    database: {
-        driver: "postgres",
-        user: "ben",
-        name: "worldcup",
-        logging: true
-    },
-    session: {
-        redis: {
-            host: "localhost",
-            port: "6379",
-            ttl: 1296000,
-            prefix: "sess:"
-        }
+    database: 'postgres://ben@localhost:5432/worldcup',
+    redis: {
+        host: "localhost",
+        port: "6379",
+        ttl: 1296000
     },
     utils: {
         raven: {
