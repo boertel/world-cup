@@ -93,7 +93,7 @@ app.controller('FriendsLeaderboardController', ['$scope', '$q', function ($scope
     window.fbReady.push(function () {
         FB.Event.subscribe('auth.statusChange', function (response) {
             if (response.status === 'connected') {
-                FB.api('/me/scores', function (response) {
+                FB.api('/1477567782456567/scores', function (response) {
                     deferred.resolve(response.data);
                 })
             }
