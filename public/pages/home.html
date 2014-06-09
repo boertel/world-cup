@@ -9,16 +9,18 @@
     </div>
 </div>
 
-<div ng-controller="LeaderboardController">
-    <h2>Leaderboard</h2>
-    <ul ng-repeat="user in users">
-        <li>{{ user.points }} - <a href="{{ user.link }}" target="_blank">{{ user.first_name }} {{ user.last_name }}</a></li>
-    </ul>
-</div>
+<div class="pure-g">
+    <div class="pure-u-1-2" ng-controller="LeaderboardController">
+        <h2>Leaderboard</h2>
+        <ul ng-repeat="user in users">
+            <li>{{ user.points }} - <a href="{{ user.link }}" target="_blank">{{ user.first_name }} {{ user.last_name }}</a></li>
+        </ul>
+    </div>
 
-<div ng-controller="FriendsLeaderboardController">
-    <h2>Friends Leaderboard</h2>
-    <ul ng-repeat="user in users">
-        <li>{{ user.score }} - {{ user.user.name }}</li>
-    </ul>
+    <div class="pure-u-1-2" ng-controller="FriendsLeaderboardController">
+        <h2>Friends Leaderboard</h2>
+        <ul ng-repeat="user in users">
+            <li>{{ user.score }} - <a href="https://www.facebook.com/profile.php?id={{ user.user.id }}" target="_blank">{{ user.user.name }}</li>
+        </ul>
+    </div>
 </div>
