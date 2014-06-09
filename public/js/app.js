@@ -24,3 +24,16 @@ var app = angular.module('content', ['ngRoute'])
             notification.remove()
         });
     });
+
+function requestCallback(response) {
+    console.log(response);
+}
+
+$(document).ready(function () {
+    $(document.body).on('click', '.invite-friends', function () {
+            FB.ui({
+                method: 'apprequests',
+                message: 'Bet on the World Cup 2014 and compete with your friends.'
+            }, requestCallback);
+    });
+});
