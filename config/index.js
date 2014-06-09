@@ -7,9 +7,11 @@ exports.POINTS = {
 }
 exports.social = {
     facebook: {
-        "clientID": "1477567782456567",
-        "clientSecret": "566da822e81081ebd07917030807dc44"
+        clientID: "1477567782456567",
+        clientSecret: "566da822e81081ebd07917030807dc44"
     }
 };
+
+exports.database = exports.database || process.env.DATABASE_URL;
 
 module.exports = exports
