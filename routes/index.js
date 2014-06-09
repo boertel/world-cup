@@ -28,13 +28,15 @@ module.exports = function (app) {
     app.get('/api/v1/leaderboard', leaderboard.read)
 
     // Views
-    app.get('/', function(req, res) {
+    function indexView(req, res) {
         if (!req.isAuthenticated()) {
             res.render('index', { title: 'Express'});
         } else {
             res.redirect('/dashboard')
         }
-    })
+    }
+    app.get('/', indexView)
+    app.post('/', indexView)
 
     app.get('/login', function (req, res) {
         res.redirect('/')
