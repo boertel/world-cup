@@ -18,7 +18,6 @@ module.exports = {
             if (req.params.id === 'me') {
                 user = req.user
             }
-            console.log(req.user)
             var filters = {
                 user: user
             }

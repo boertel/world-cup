@@ -50,7 +50,6 @@ module.exports = function (sequelize, DataTypes) {
                     var data = {
                         score: that.points
                     }
-                    console.log(data);
                     FB.api('/me/scores', 'post', data, function (response) {
                         return next(response);
                     })
