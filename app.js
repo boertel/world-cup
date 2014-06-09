@@ -7,7 +7,8 @@ var passport = require('passport'),
     FacebookStrategy = require('passport-facebook').Strategy,
     config = require('./config'),
     session = require('express-session'),
-    RedisStore = require('connect-redis')(session);
+    RedisStore = require('connect-redis')(session),
+    raven = require('raven');
 
 
 var app = express();
