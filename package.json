@@ -6,6 +6,9 @@
     "start": "NODE_ENV=dev node app.js",
     "test": "NODE_ENV=test make test"
   },
+  "engines": {
+    "node": "0.10.x"
+  },
   "dependencies": {
     "express": "4.x",
     "jade": "*",
@@ -19,7 +22,6 @@
     "should": "~3.2.0-beta1",
     "mocha": "~1.18.2",
     "supertest": "~0.10.0",
-    "assert": "~1.1.1",
     "moment-timezone": "0.0.3",
     "connect-redis": "2.x",
     "connect": "*",
