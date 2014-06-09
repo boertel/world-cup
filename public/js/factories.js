@@ -13,9 +13,14 @@ app.factory('notification', function () {
         return notifications;
     }
 
+    function remove() {
+        return notifications.pop();
+    }
+
     return {
         notify: notify,
-        get: get
+        get: get,
+        remove: remove
     }
 });
 

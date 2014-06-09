@@ -8,6 +8,7 @@ var fs = require('fs'),
             underscored: true,
             freezeTableName: true,
         },
+        native: true,
         logging: false
     }),
     db = {}

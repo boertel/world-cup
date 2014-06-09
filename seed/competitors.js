@@ -41,5 +41,7 @@ module.exports = function (next) {
         {name: 'Algeria'},
         {name: 'Russia'},
         {name: 'Korea Republic'}
-    ]).success(next)
+    ]).success(next).error(function (err) {
+        console.log(err);
+    });
 }

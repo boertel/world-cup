@@ -13,7 +13,7 @@ var app = angular.module('content', ['ngRoute'])
                 templateUrl: 'pages/game.html',
                 controller: 'GameController'
             })
-    }]).run(function ($rootScope, $route, $window, $location) {
+    }]).run(function ($rootScope, $route, $window, $location, notification) {
         $rootScope.$on('$routeChangeError', function (e, curr, prev) {
         });
 
@@ -21,5 +21,6 @@ var app = angular.module('content', ['ngRoute'])
         });
 
         $rootScope.$on('$routeChangeSuccess', function (e, curr, prev) {
+            notification.remove()
         });
     });

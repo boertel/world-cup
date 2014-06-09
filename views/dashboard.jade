@@ -19,6 +19,10 @@ block header
                 span.score 69
 
 block notification
+    div#notification(ng-controller="NotificationController")
+        div.notification(ng-repeat="notification in notifications")
+            div.page-width
+                p {{ notification.message }}
 
 block content
 

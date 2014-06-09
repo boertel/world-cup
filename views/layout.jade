@@ -11,10 +11,7 @@ html
             div.page-width
                 block header
 
-        div#notification(ng-controller="NotificationController")
-            div.notification(ng-repeat="notification in notifications")
-                div.page-width
-                    p {{ notification.message }}
+        block notification
 
         div#content.page-width(ng-view)
             block content
