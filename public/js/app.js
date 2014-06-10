@@ -36,4 +36,11 @@ $(document).ready(function () {
                 message: 'Bet on the World Cup 2014 and compete with your friends.'
             }, requestCallback);
     });
+
+    $(document.body).on('click', '.game', function () {
+        var href = $(this).data('href');
+        if (href) {
+            document.location = href;
+        }
+    });
 });

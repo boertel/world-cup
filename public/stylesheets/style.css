@@ -20,7 +20,7 @@ h2.title:before,
 h3.title:before,
 h4.title:before,
 h5.title:before {
-  color: #d0d0d0;
+  color: #f6f6f6;
   content: "#";
   padding-right: 0.3em;
 }
@@ -46,8 +46,11 @@ ul {
 .right {
   float: right;
 }
+.center {
+  text-align: center;
+}
 .subtle {
-  color: #d0d0d0;
+  color: #f6f6f6;
 }
 .win {
   color: #4eb11e;
@@ -116,25 +119,31 @@ div.group {
   margin-left: 1.5em;
 }
 div.game {
-  overflow: hidden;
-  width: 100%;
-  margin-bottom: 0.6em;
-  margin-left: 1.5em;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+div.game.saved {
+  border-left: 4px solid #4758a9;
+}
+div.game:hover {
+  cursor: pointer;
+  background-color: #f6f6f6;
+}
+div.game .flag {
+  line-height: 10px;
+}
+div.game .flag img {
+  width: 50%;
 }
 div.game > div {
-  float: left;
+  line-height: 30px;
 }
-div.game .date {
-  width: 30%;
-  color: #d0d0d0;
+.right img {
+  float: right;
+  margin-left: 10px;
 }
-div.game .team {
-  width: 30%;
-  text-align: center;
-}
-div.game .score {
-  width: 10%;
-  text-align: center;
+.left img {
+  margin-right: 10px;
 }
 .point {
   display: inline-block;
@@ -153,7 +162,7 @@ div.game .score {
   background-color: #e14644;
 }
 .point.future {
-  background-color: #d0d0d0;
+  background-color: #f6f6f6;
 }
 div.scores {
   overflow: hidden;
@@ -169,27 +178,6 @@ div.scores div.score:first-of-type {
 }
 div.scores div.score:last-of-type {
   text-align: left;
-}
-.flag {
-  position: relative;
-}
-.flag:after {
-  position: absolute;
-  content: "";
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  opacity: 0.3;
-  background-repeat: no-repeat;
-  background-position: left center;
-}
-.flag.flag-france:after {
-  background-image: url("../images/flags/france.png");
-}
-.flag.flag-brazil:after {
-  background-image: url("../images/flags/brazil.png");
-  background-position: right center;
 }
 form.bet {
   margin-top: 20px;
@@ -225,7 +213,7 @@ div.users > div {
   float: left;
 }
 footer {
-  border-top: 1px solid #d0d0d0;
+  border-top: 1px solid #f6f6f6;
   text-align: center;
 }
 footer li {
