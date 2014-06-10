@@ -12,4 +12,6 @@ function Game(data) {
     };
     var now = new Date();
     this.daysLeft = this.moment.time.diff(now, 'days');
+
+    this.timeHuman = this.moment.time.local().format('LLLL')
 }

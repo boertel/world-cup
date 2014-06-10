@@ -191,6 +191,33 @@ div.scores div.score:last-of-type {
   background-image: url("../images/flags/brazil.png");
   background-position: right center;
 }
+form.bet {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #f6f6f6;
+}
+form.bet .flags > div {
+  text-align: center;
+}
+form.bet input {
+  margin: 10px auto 0 auto !important;
+  width: 60%;
+  text-align: center;
+  font-size: 36px;
+}
+form.bet label,
+form.bet .versus {
+  font-size: 16px;
+  text-align: center;
+}
+form.bet .submit {
+  margin-top: 20px;
+  text-align: center;
+}
+.help {
+  margin-top: 40px;
+}
 div.users {
   overflow: hidden;
 }

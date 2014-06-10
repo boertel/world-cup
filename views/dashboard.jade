@@ -2,21 +2,7 @@ extends layout
 
 block header
     div(ng-controller="UserController")
-        p Welcome {{ user.first_name }}
-    div.header-leaderboard(style="display: none;")
-        ul
-            li
-                span.rank 1.
-                span.name Neil McCauley
-                span.score 90
-            li.me
-                span.rank 2.
-                span.name #{user.first_name}
-                span.score 87
-            li
-                span.rank 3.
-                span.name Michael Cheritto
-                span.score 69
+        h3 World Cup 2014 | Hi {{ user.first_name }}!
 
 block notification
     div#notification(ng-controller="NotificationController")
