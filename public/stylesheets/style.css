@@ -86,6 +86,9 @@ div.game {
 div.game.saved {
   border-left: 4px solid #4758a9;
 }
+div.game.separator {
+  border-top: 1px solid #ddd;
+}
 div.game:hover {
   cursor: pointer;
   background-color: #f6f6f6;

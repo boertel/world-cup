@@ -1,14 +1,18 @@
 app.filter('groupBy', ['$parse', function ($parse) {
     return function (list, group_by) {
-        var filtered = {},
+        var filtered = [],
+            previous,
             getter = $parse(group_by);
 
         angular.forEach(list, function (each) {
             var group_key = getter(each);
-            filtered[group_key] = filtered[group_key] || [];
-            filtered[group_key].push(each);
+
+            if (previous != group_key) {
+                previous = group_key;
+                each.separator = true;
+            }
+            filtered.push(each);
         });
-        console.log(filtered);
 
         return filtered;
     };

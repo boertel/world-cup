@@ -6,7 +6,7 @@
     </div>
 </div>
 
-<div class="pure-g game" ng-repeat="game in games | orderBy:'number'" data-href="#/games/{{ game.id }}" ng-class="{saved:game.bet}">
+<div class="pure-g game" ng-repeat="game in games | orderBy:'number' | groupBy:'day'" data-href="#/games/{{ game.id }}" ng-class="{saved:game.bet, separator:game.separator}">
     <div class="pure-u-1-8 date">
        <time datetime="{{ game.time }}"></time>
     </div>
