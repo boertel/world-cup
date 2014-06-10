@@ -75,26 +75,35 @@ module.exports = function (sequelize, DataTypes) {
                 User.find({where: {id: id}}).complete(done)
             },
             authenticate: function (accessToken, refreshToken, profile, done) {
+                profile.emails = undefined;
                 var find = {username: profile.id},
                     create = {
                         first_name: profile.name.givenName,
                         last_name: profile.name.familyName,
-                        email: profile.emails[0].value,
+                        email: '',
                         gender: profile.gender,
                         timezone: profile._json.timezone,
                         link: profile._json.link
+                    };
+
+                if (profile.emails) {
+                    if  (profile.emails.length > 0) {
+                        create.email = profile.emails[0].value;
                     }
+                }
                 User.findOrCreate(find, create).success(function (user, created) {
                     var db = require('../models')
                     db.Social.findOrCreate({provider: 'facebook', uid: find.username, user_id: user.id}, {
                         credentials: JSON.stringify({access_token: accessToken})}).success(function (social, created) {
                             social.setUser(user) // FIXME check incomplete
-                            var url = 'https://graph.facebook.com/me/picture?redirect=false&access_token=' + accessToken
-                            request.get(url, function (error, response, body) {
-                                var json = JSON.parse(body);
-                                    user.picture = json.data.url
-                                    user.save()
-                            })
+                            if (!user.picture) {
+                                var url = 'https://graph.facebook.com/me/picture?redirect=false&access_token=' + accessToken
+                                request.get(url, function (error, response, body) {
+                                    var json = JSON.parse(body);
+                                        user.picture = json.data.url
+                                        user.save()
+                                })
+                            }
                             done(null, user)
                         }).error(function (err) {
                             done(err)
