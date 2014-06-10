@@ -51,18 +51,6 @@ ul
 .center
     text-align: center
 
-.subtle
-    color: colors.subtle
-
-.win
-    color: colors.win
-
-.loss
-    color: colors.loss
-
-.tie
-    color: colors.tie
-
 
 .page-width
     max-width: 645px
@@ -94,38 +82,10 @@ header
     margin: 20px auto
 
 
-.header-leaderboard
-    text-align: left
-
-    .rank
-        margin-right: 0.4em
-
-    .score:before
-        content: "–"
-        margin: 0 0.3em
-
-
-    ul
-        li:not(.me)
-            opacity: 0.7
-        li.me
-            font-size: 1.7em
-            margin: 0.3em 0
-
-            span.rank
-                font-size: 4.5em
-                line-height: 0.7em
-
-div.progress
-    text-align: center
-
-div.group
-    margin-bottom: 2em
-    margin-left: 1.5em
-
 div.game
     margin-bottom: 20px
-    padding: 10px
+    padding: 20px 10px
+    height: 80px;
 
     &.saved
         border-left: 4px solid colors.saved
@@ -135,56 +95,18 @@ div.game
         background-color: colors.subtle
 
     .flag
-        line-height: 10px
 
         img
             width: 50%
-    > div
-        line-height: 30px
 
-.right
-    img
-        float: right
-        margin-left: 10px
+        &.right
+            img
+                float: right
+                margin-left: 10px
 
-.left
-    img
-        margin-right: 10px
-
-.point
-    display: inline-block
-    margin-right: 0.3em
-    border-radius: 10px
-    width: 10px
-    height: 10px
-
-    &.win
-        background-color: colors.win
-
-    &.tie
-        background-color: colors.tie
-
-    &.loss
-        background-color: colors.loss
-
-    &.future
-        background-color: colors.subtle
-
-
-div.scores
-    overflow: hidden
-    div.score
-        width: 33.3%
-        float: left
-        text-align: center
-        font-size: 5em
-
-        &:first-of-type
-            text-align: right
-
-        &:last-of-type
-            text-align: left
-
+        &.left
+            img
+                margin-right: 10px
 
 
 form.bet
@@ -212,12 +134,6 @@ form.bet
 
 .help
     margin-top: 40px
-
-div.users
-    overflow: hidden
-
-    > div
-        float: left
 
 footer
     border-top: 1px solid colors.subtle
