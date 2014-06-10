@@ -12,10 +12,7 @@ module.exports = function (sequelize, DataTypes) {
             }
         },
         email: {
-            type: DataTypes.STRING,
-            validate: {
-                isEmail: true
-            }
+            type: DataTypes.STRING
         },
         first_name: DataTypes.STRING,
         last_name: DataTypes.STRING,
@@ -75,7 +72,6 @@ module.exports = function (sequelize, DataTypes) {
                 User.find({where: {id: id}}).complete(done)
             },
             authenticate: function (accessToken, refreshToken, profile, done) {
-                profile.emails = undefined;
                 var find = {username: profile.id},
                     create = {
                         first_name: profile.name.givenName,
