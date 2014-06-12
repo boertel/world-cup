@@ -141,6 +141,12 @@ module.exports = {
                     }
                 ]
             }).success(function (bets) {
+                bets = bets.map(function (bet) {
+                    if (req.user.id === bet.user_id) {
+                        bet.values.me = true;
+                    }
+                    return bet;
+                })
                 res.json(bets);
             });
         }

@@ -149,8 +149,11 @@ form.bet .submit {
   margin-bottom: 20px;
 }
 .bet-row {
-  padding: 15px 0;
+  padding: 0 15px 10px 15px;
   overflow: hidden;
+}
+.bet-row.me {
+  font-weight: bold;
 }
 .help {
   margin-top: 40px;
