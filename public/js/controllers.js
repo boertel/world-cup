@@ -65,7 +65,18 @@ app.controller('BetsController', ['$scope', '$http', '$rootScope', function ($sc
                 method: 'GET',
                 url: url
             }).success(function (data) {
-                $scope.bets = data;
+                $scope.competitorA = data.filter(function (bet) {
+                    return bet.score_a > bet.score_b;
+                });
+
+                $scope.competitorB = data.filter(function (bet) {
+                    return bet.score_a < bet.score_b;
+                });
+
+                $scope.tie = data.filter(function (bet) {
+                    return bet.score_a == bet.score_b;
+                });
+                console.log($scope);
             });
         }
     });
