@@ -76,7 +76,6 @@ app.controller('BetsController', ['$scope', '$http', '$rootScope', function ($sc
                 $scope.tie = data.filter(function (bet) {
                     return bet.score_a == bet.score_b;
                 });
-                console.log($scope);
             });
         }
     });

@@ -28,7 +28,7 @@ module.exports = function (sequelize, DataTypes) {
     }, {
         instanceMethods: {
             deadline: function () {
-                return new Date(this.time.getTime() - 60 * 60000)
+                return new Date(this.time.getTime() - 15 * 60000)
             },
             lock: function () {
                 return this.deadline() <= new Date()
