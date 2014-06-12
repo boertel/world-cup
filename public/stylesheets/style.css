@@ -148,6 +148,10 @@ form.bet .submit {
 .bets-title {
   margin-bottom: 20px;
 }
+.bet-row {
+  padding: 15px 0;
+  overflow: hidden;
+}
 .help {
   margin-top: 40px;
 }
