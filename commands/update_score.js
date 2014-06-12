@@ -24,26 +24,28 @@ db.Bet.findAll({
         console.log("bet: ", bet.id);
         var points = bet.user.points + bet.points();
 
-        db.User.update(
-            {points: points},
-            {id: bet.user.id}
-        ).success(function () {
-           bet.user.publishScore(function (response) {
-               if (response) {
-                   db.Bet.update(
-                        {validated: true},
-                        {id: bet.id}
-                    ).success(function () {
-                        console.log("bet saved (" + bet.id + ")");
-                    }).error(function (err) {
-                        console.log('[bet:update]', err);
-                    });
-               } else {
-                   console.log('[fb:scores', response);
-               }
+        db.User.find({where : {id: bet.user.id}}).success(function (user) {
+            user.points = points;
+            user.save(['points']).success(function () {
+                user.publishScore(function (response) {
+                    if (response) {
+                        db.Bet.update(
+                            {validated: true},
+                            {id: bet.id}
+                        ).success(function () {
+                            console.log("bet saved (" + bet.id + ")");
+                        }).error(function (err) {
+                            console.log('[bet:update]', err);
+                        });
+                   } else {
+                       console.log('[fb:scores', response);
+                   }
+               });
+           }).error(function (err) {
+               console.log('[user:save]', err);
            });
         }).error(function (err) {
-            console.log('[user:update]', err);
+            console.log('[user:find]', err);
         })
 
     });
