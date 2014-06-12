@@ -116,6 +116,9 @@ div.game .flag.right img {
 div.game .flag.left img {
   margin-right: 10px;
 }
+.leaderboard {
+  padding: 0 10px;
+}
 form.bet {
   margin-top: 20px;
   margin-bottom: 20px;

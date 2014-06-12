@@ -49,6 +49,11 @@ module.exports = function (sequelize, DataTypes) {
                 FB.api('/' + uid + '/scores', 'post', data, function (response) {
                     return next(response);
                 })
+            },
+            toJSON: function () {
+                var json = this.values;
+                json.name = this.first_name + ' ' + this.last_name;
+                return json;
             }
         },
         classMethods: {

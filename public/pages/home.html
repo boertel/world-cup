@@ -1,5 +1,3 @@
-<div ng-controller="ScoreController"></div>
-
 <div class="pure-g">
     <div class="pure-u-1">
         <h2>Matches</h2>
@@ -30,17 +28,17 @@
 </div>
 
 <div class="pure-g">
-    <div class="pure-u-1-2" ng-controller="LeaderboardController">
+    <div class="pure-u-1-2 leaderboard" ng-controller="LeaderboardController">
         <h2>Leaderboard</h2>
         <ul ng-repeat="user in users">
-            <li>{{ user.points }} - <a href="{{ user.link }}" target="_blank">{{ user.first_name }} {{ user.last_name }}</a></li>
+            <li>{{ user.rank }}. <a href="{{ user.link }}" target="_blank">{{ user.name }}</a><div class="right">{{ user.points }}</div></li>
         </ul>
     </div>
 
-    <div class="pure-u-1-2" ng-controller="FriendsLeaderboardController">
+    <div class="pure-u-1-2 leaderboard" ng-controller="FriendsLeaderboardController">
         <h2>Friends Leaderboard</h2>
         <ul ng-repeat="user in users">
-            <li>{{ user.score }} - <a href="https://www.facebook.com/profile.php?id={{ user.user.id }}" target="_blank">{{ user.user.name }}</li>
+            <li>{{ user.rank }}. <a href="{{ user.link }}" target="_blank">{{ user.name }}</a><div class="right">{{ user.points }}</div></li>
         </ul>
     </div>
 </div>

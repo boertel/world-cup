@@ -46,13 +46,6 @@ app.controller('UserController', ['$scope', 'user', '$http', function ($scope, u
     user.then(function (u) {
         $scope.user = u;
     });
-
-    $http({
-        url: '/api/v1/users/me/points',
-        method: 'POST'
-    }).success(function (response) {
-    });
-
 }]);
 
 function sortScore(a, b) {
@@ -96,9 +89,22 @@ app.controller('ScoreController', ['$scope', 'scores', function ($scope, scores)
     });
 }]);
 
+function formatLeaderboardUser(data) {
+    var previous, rank = 0,
+        users = data.map(function (user) {
+            if (previous === undefined || user.points !== previous) {
+                rank += 1;
+                previous = user.points;
+            }
+            user.rank = rank;
+            return user;
+        });
+    return users;
+}
+
 app.controller('LeaderboardController', ['$scope', '$http', function ($scope, $http) {
     $http.get('/api/v1/leaderboard').then(function (response) {
-        var users = response.data;
+        var users = formatLeaderboardUser(response.data);
         $scope.users = users;
     });
 }]);
@@ -114,7 +120,16 @@ app.controller('FriendsLeaderboardController', ['$scope', '$q', function ($scope
                     window.friends = response.data.map(function (friend) {
                         return friend.user.id;
                     });
-                    deferred.resolve(response.data);
+
+                    var data = response.data.map(function (score) {
+                        var user = {
+                            points: parseInt(score.score, 10),
+                            link: 'https://www.facebook.com/profile.php?id=' + score.user.id,
+                            name: score.user.name
+                        };
+                        return user;
+                    });
+                    deferred.resolve(formatLeaderboardUser(data));
                 })
             }
         });
