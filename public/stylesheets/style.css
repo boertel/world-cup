@@ -149,11 +149,17 @@ form.bet .submit {
   margin-bottom: 20px;
 }
 .bet-row {
-  padding: 0 15px 10px 15px;
+  padding: 5px 15px 5px 15px;
   overflow: hidden;
 }
 .bet-row.me {
   font-weight: bold;
+}
+.bet-row.perfect {
+  background-color: #b7dfa4;
+}
+.bet-row.won {
+  background-color: #daeed1;
 }
 .help {
   margin-top: 40px;

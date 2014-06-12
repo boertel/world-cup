@@ -41,7 +41,13 @@ module.exports = {
                 where: {
                     user_id: req.user.id,
                     game_id: games_ids
-                }
+                },
+                include: [
+                    {
+                        model: db.Game,
+                        attributes: db.Game.attrs()
+                    }
+                ]
             }).success(function (bets) {
                 var mapping = {};
                 bets.forEach(function (bet) {

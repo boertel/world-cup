@@ -138,6 +138,10 @@ module.exports = {
                     {
                         model: db.User,
                         attributes: db.User.attrs(),
+                    },
+                    {
+                        model: db.Game,
+                        attributes: db.Game.attrs(),
                     }
                 ]
             }).success(function (bets) {

@@ -38,6 +38,10 @@ module.exports = function (sequelize, DataTypes) {
                     || (this.game.score_a < this.game.score_b && this.score_a < this.score_b)
             },
             points: function () {
+                if (this.game.score_a === null || this.game.score_b === null ||
+                    this.score_a === null || this.score_b === null) {
+                    return;
+                }
                 if (this.perfect()) {
                     return config.POINTS.perfect;
                 }
@@ -45,6 +49,11 @@ module.exports = function (sequelize, DataTypes) {
                     return config.POINTS.win;
                 }
                 return config.POINTS.lost;
+            },
+            toJSON: function () {
+                var json = this.values;
+                json.points = this.points();
+                return json;
             }
         },
         classMethods: {

@@ -40,7 +40,7 @@ module.exports = function (sequelize, DataTypes) {
                 if (this.end() > new Date()) {
                     text = 'ended';
                 }
-                if (this.deadline() >= new Date() &&  new Date <= this.end()) {
+                if (this.deadline() >= new Date() && new Date <= this.end()) {
                     text = 'ongoing';
                 }
                 if (this.deadline() < new Date()) {

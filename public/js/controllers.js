@@ -3,8 +3,8 @@ app.controller('HomeController', ['$scope', '$http', function ($scope, $http) {
         method: 'GET',
         url: '/api/v1/games'
     }).success(function (data) {
-        $scope.games = data.map(function (game) {
-            return new Game(game);
+        $scope.games = data.map(function (g) {
+            return new Game(g);
         });
     })
 }]);
@@ -69,6 +69,7 @@ app.controller('BetsController', ['$scope', '$http', '$rootScope', function ($sc
                 method: 'GET',
                 url: url
             }).success(function (data) {
+
                 $scope.competitorA = data.filter(function (bet) {
                     return bet.score_a > bet.score_b;
                 }).sort(sortScore);
