@@ -55,6 +55,10 @@ app.controller('UserController', ['$scope', 'user', '$http', function ($scope, u
 
 }]);
 
+function sortScore(a, b) {
+    return (a.score_a + a.score_b) - (b.score_a + b.score_b);
+}
+
 app.controller('BetsController', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
     $rootScope.$on('gameLoaded', function (evt, args) {
         var game = args.game;
@@ -67,15 +71,15 @@ app.controller('BetsController', ['$scope', '$http', '$rootScope', function ($sc
             }).success(function (data) {
                 $scope.competitorA = data.filter(function (bet) {
                     return bet.score_a > bet.score_b;
-                });
+                }).sort(sortScore);
 
                 $scope.competitorB = data.filter(function (bet) {
                     return bet.score_a < bet.score_b;
-                });
+                }).sort(sortScore);
 
                 $scope.tie = data.filter(function (bet) {
                     return bet.score_a == bet.score_b;
-                });
+                }).sort(sortScore);
             });
         }
     });
