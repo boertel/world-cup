@@ -17,6 +17,10 @@ exports.raven = {
     url: "https://d121e324c60f455e86d9ffe47b048304:2883319b17c643df92dd5a0b6ddbce90@app.getsentry.com/118"
 }
 
+exports.notification = {
+    secret: process.env.NOTIFICATION_SECRET
+}
+
 exports.database = exports.database || process.env.DATABASE_URL;
 exports.redis.url = exports.redis.url || process.env.REDISCLOUD_URL;
 

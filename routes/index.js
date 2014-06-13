@@ -4,6 +4,7 @@ var competitors = require('./competitors.js'),
     users = require('./users.js'),
     bets = require('./bets.js'),
     leaderboard = require('./leaderboard.js'),
+    notifications = require('./notifications.js'),
     db = require('../models')
 
 module.exports = function (app) {
@@ -27,10 +28,12 @@ module.exports = function (app) {
 
     app.get('/api/v1/leaderboard', leaderboard.read)
 
+    app.get('/api/v1/notifications', notifications.read)
+
     // Views
     function indexView(req, res) {
         if (!req.isAuthenticated()) {
-            res.render('index', { title: 'Express'});
+            res.render('index');
         } else {
             res.redirect('/dashboard')
         }

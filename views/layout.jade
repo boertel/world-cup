@@ -2,7 +2,10 @@ doctype html
 html
     head
         title World Cup 2014
-        link(rel='shortcut icon', type='image/png', href='/images/favicon.png')
+        if debug
+            link(rel='shortcut icon', type='image/png', href='/images/favicon-dev.png')
+        else
+            link(rel='shortcut icon', type='image/png', href='/images/favicon.png')
         link(rel='stylesheet', href='/stylesheets/pure-min.css')
         link(rel='stylesheet', href='/stylesheets/grids-responsive-min.css')
         link(rel='stylesheet', href='/stylesheets/style.css')

@@ -24,6 +24,7 @@ app.use(require('serve-static')(path.join(__dirname, 'public')));
 app.use(require('body-parser')());
 app.use(require('method-override')());
 app.use(require('cookie-parser')());
+app.enable("trust proxy");
 app.use(session({
     store: new RedisStore(config.redis),
     secret: 'elephan7Bleu'
@@ -41,6 +42,7 @@ app.use(function (req, res, next) {
     if (req.isAuthenticated()) {
         res.locals.user = req.user
     }
+    res.locals.debug = (app.get('env') === 'development');
     next()
 })
 
@@ -54,7 +56,6 @@ app.param('user', function (req, res, next, id) {
         })
     }
 })
-
 
 // development only
 if ('development' == app.get('env')) {
