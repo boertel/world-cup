@@ -95,7 +95,7 @@ div.game {
   border-left-width: 4px;
 }
 div.game.saved {
-  border-color: #4758a9;
+  border-color: #8191da;
 }
 div.game.win {
   border-color: #daeed1;
@@ -125,6 +125,16 @@ div.game .flag.right img {
 }
 div.game .flag.left img {
   margin-right: 10px;
+}
+div.game .game-score {
+  font-size: 150%;
+  padding-top: 5px;
+}
+div.game .game-score.hidden {
+  visibility: hidden;
+}
+div.game .bet-score {
+  color: #9e9e9e;
 }
 .leaderboard {
   padding: 0 10px;

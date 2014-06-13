@@ -12,7 +12,6 @@ app.controller('OldGamesController', ['$scope', 'games', function ($scope, games
 app.controller('GamesController', ['$scope', 'games', function ($scope, games) {
     games.get.then(function (data) {
         $scope.games = data.filter(function (game) {
-            console.log(game.bet.id, game.bet.isWin());
             return game.daysLeft > -2;
         });
     });
