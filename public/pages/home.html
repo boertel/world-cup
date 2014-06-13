@@ -25,7 +25,7 @@
 </div>
 
 <script type="text/ng-template" id="widget-leaderboard.html">
-    <li>{{ user.rank }}. <a href="{{ user.link }}" target="_blank">{{ user.name }}</a><div class="right">{{ user.points }}</div></li>
+    <li ng-class="{me: user.me}">{{ user.rank }}. <a href="{{ user.link }}" target="_blank">{{ user.name }}</a><div class="right">{{ user.points }}</div></li>
 </script>
 
 <script type="text/ng-template" id="widget-games.html">
