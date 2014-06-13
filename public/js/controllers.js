@@ -124,7 +124,9 @@ app.controller('LeaderboardController', ['$scope', '$http', function ($scope, $h
 window.friends = [];
 
 app.controller('FriendsLeaderboardController', ['$scope', 'friends', function ($scope, friends) {
+    $scope.waiting = true;
     friends.then(function (response) {
+        $scope.waiting = false;
         $scope.users = response;
     });
 }]);

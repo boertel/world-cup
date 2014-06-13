@@ -19,6 +19,7 @@
 
     <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-2 leaderboard" ng-controller="FriendsLeaderboardController">
         <h2>Friends Leaderboard</h2>
+        <div class="ajax-loader" ng-if="waiting"></div>
         <ul ng-repeat="user in users" widget-leaderboard></ul>
     </div>
 </div>
