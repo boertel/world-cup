@@ -13,6 +13,7 @@ function Game(data) {
         end: moment.utc(this.end),
         deadline: moment.utc(this.deadline)
     };
+    this.local = this.moment.time.local().toDate();
     var now = new Date();
     this.daysLeft = this.moment.time.local().diff(now, 'days');
     this.day = this.moment.time.format('YYYY-MM-DD');

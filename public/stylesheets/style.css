@@ -92,6 +92,13 @@ header {
 .btn-facebook:hover {
   color: #fff;
 }
+.separator {
+  border-top: 1px solid #ddd;
+}
+.separator .date {
+  margin: 10px 0;
+  font-size: 125%;
+}
 div.game {
   margin-bottom: 20px;
   padding: 20px 10px;
@@ -113,15 +120,9 @@ div.game.perfect {
 div.game.lost {
   border-color: ;
 }
-div.game.separator {
-  border-top: 1px solid #ddd;
-}
 div.game:hover {
   cursor: pointer;
   background-color: #f6f6f6;
-}
-div.game .date {
-  margin-right: 10px;
 }
 div.game .flag {
   width: 40px;

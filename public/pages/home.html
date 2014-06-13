@@ -29,28 +29,30 @@
 </script>
 
 <script type="text/ng-template" id="widget-games.html">
-    <div class="pure-g game" ng-repeat="game in games | orderBy:'time' | groupBy:'day'" data-href="#/games/{{ game.id }}" ng-class="{saved:game.bet.id, separator:game.separator, win:game.bet.isWin(), perfect:game.bet.isPerfect(), lost:game.bet.isLost()}">
-        <div class="pure-u-1-8 date">
-           <time datetime="{{ game.time }}"></time>
+    <div ng-repeat="game in games | orderBy:'time' | groupBy:'day'">
+        <div class="pure-g" ng-class="{separator:game.separator}">
+            <div class="pure-u-1 date" ng-if="game.separator">{{ game.local|date: 'EEEE dd MMMM' }}</div>
         </div>
-        <div class="pure-u-1-4">
-            <div class="left flag">
-                <img ng-src="images/flags/competitor-{{ game.competitorA.id }}.png">
+        <div class="pure-g game" data-href="#/games/{{ game.id }}" ng-class="{saved:game.bet.id, win:game.bet.isWin(), perfect:game.bet.isPerfect(), lost:game.bet.isLost()}">
+            <div class="pure-u-1-4">
+                <div class="left flag">
+                    <img ng-src="images/flags/competitor-{{ game.competitorA.id }}.png">
+                </div>
+                <div class="left">
+                    {{ game.competitorA.name }}
+                </div>
             </div>
-            <div class="left">
-                {{ game.competitorA.name }}
+            <div class="pure-u-1-4 center scores">
+                <div class="bet-score">{{ game.bet.score_a }} - {{ game.bet.score_b }}</div>
+                <div class="game-score" ng-class="{hidden: !game.hasScore}">{{ game.score_a }} - {{ game.score_b }}</div>
             </div>
-        </div>
-        <div class="pure-u-1-4 center scores">
-            <div class="bet-score">{{ game.bet.score_a }} - {{ game.bet.score_b }}</div>
-            <div class="game-score" ng-class="{hidden: !game.hasScore}">{{ game.score_a }} - {{ game.score_b }}</div>
-        </div>
-        <div class="pure-u-1-4">
-            <div class="right flag">
-                <img ng-src="images/flags/competitor-{{ game.competitorB.id }}.png">
-            </div>
-            <div class="right">
-                {{ game.competitorB.name }}
+            <div class="pure-u-1-4">
+                <div class="right flag">
+                    <img ng-src="images/flags/competitor-{{ game.competitorB.id }}.png">
+                </div>
+                <div class="right">
+                    {{ game.competitorB.name }}
+                </div>
             </div>
         </div>
     </div>
