@@ -118,11 +118,17 @@ div.game.perfect {
   border-color: #ffe557;
 }
 div.game.lost {
-  border-color: ;
+  border-color: #f00;
 }
 div.game:hover {
   cursor: pointer;
   background-color: #f6f6f6;
+}
+div.game .subtitle > div {
+  padding-bottom: 5px;
+}
+div.game .subtitle .group {
+  color: #9e9e9e;
 }
 div.game .flag {
   width: 40px;

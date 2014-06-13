@@ -5,7 +5,7 @@ colors = {
     subtle: #f6f6f6,
     perfect: #FFE557,
     win: #DAEED1,
-    loss: #FF0000
+    lost: #FF0000
 }
 
 *
@@ -130,6 +130,12 @@ div.game
     &:hover
         cursor: pointer
         background-color: colors.subtle
+
+    .subtitle
+        > div
+            padding-bottom: 5px
+        .group
+            color: #9e9e9e
 
     .flag
         width: 40px
