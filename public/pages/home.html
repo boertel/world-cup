@@ -33,7 +33,8 @@
         <div class="pure-g" ng-class="{separator:game.separator}">
             <div class="pure-u-1 date" ng-if="game.separator">{{ game.local|date: 'EEEE dd MMMM' }}</div>
         </div>
-        <div class="pure-g game" data-href="#/games/{{ game.id }}" ng-class="{saved:game.bet.id, win:game.bet.isWin(), perfect:game.bet.isPerfect(), lost:game.bet.isLost()}">
+        <div class="pure-g game" title="{{ game.local|date: 'short' }}" data-href="#/games/{{ game.id }}" ng-class="{saved:game.bet.id, win:game.bet.isWin(), perfect:game.bet.isPerfect(), lost:game.bet.isLost()}">
+            <div class="pure-u-1-8">{{ game.group.name }}</div>
             <div class="pure-u-1-4">
                 <div class="left flag">
                     <img ng-src="images/flags/competitor-{{ game.competitorA.id }}.png">
