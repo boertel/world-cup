@@ -21,7 +21,8 @@
             <input type="number" name="score_a" ng-model="bet.score_a" id="score_a" min="0" ng-disabled="bet.game.lock" required>
         </div>
         <div class="pure-u-1-3 versus">
-            vs.
+            <span ng-if="bet.game.hasScore">{{ bet.game.score_a }} - {{ bet.game.score_b }}</span>
+            <span ng-if="!bet.game.hasScore">vs.</span>
         </div>
         <div class="pure-u-1-3">
             <label for="score_b">{{ bet.game.competitorB.name }}</label>
