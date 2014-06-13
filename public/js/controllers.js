@@ -123,31 +123,8 @@ app.controller('LeaderboardController', ['$scope', '$http', function ($scope, $h
 
 window.friends = [];
 
-app.controller('FriendsLeaderboardController', ['$scope', '$q', function ($scope, $q) {
-    var deferred = $q.defer();
-    window.fbReady.push(function () {
-        FB.Event.subscribe('auth.statusChange', function (response) {
-            if (response.status === 'connected') {
-                FB.api('/1477567782456567/scores', function (response) {
-                    window.friends = response.data.map(function (friend) {
-                        return friend.user.id;
-                    });
-
-                    var data = response.data.map(function (score) {
-                        var user = {
-                            points: parseInt(score.score, 10),
-                            link: 'https://www.facebook.com/profile.php?id=' + score.user.id,
-                            name: score.user.name
-                        };
-                        return user;
-                    });
-                    deferred.resolve(formatLeaderboardUser(data));
-                });
-            }
-        });
-    });
-
-    deferred.promise.then(function (response) {
+app.controller('FriendsLeaderboardController', ['$scope', 'friends', function ($scope, friends) {
+    friends.then(function (response) {
         $scope.users = response;
     });
 }]);
