@@ -55,7 +55,7 @@ ul
 
 .page-width
     max-width: 645px
-    padding: 0 20px
+    padding: 0 10px
     margin: auto
 
 header
@@ -99,6 +99,7 @@ div.game
     border: 0
     border-style: solid
     border-left-width: 4px
+    border-color: transparent
 
     &.saved
         border-color: colors.saved
@@ -123,18 +124,18 @@ div.game
         margin-right: 10px
 
     .flag
+        width: 40px
 
         img
-            width: 50%
+            width: 100%
 
         &.right
+            margin-left: 10px
             img
                 float: right
-                margin-left: 10px
 
         &.left
-            img
-                margin-right: 10px
+            margin-right: 10px
 
     .game-score
         font-size: 150%
@@ -176,6 +177,9 @@ form.bet
     margin-bottom: 40px
     padding-bottom: 20px
     border-bottom: 1px solid colors.subtle
+
+    > div
+        margin-bottom: 30px
 
 .bets-title
     margin-bottom: 20px

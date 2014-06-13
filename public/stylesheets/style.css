@@ -52,7 +52,7 @@ ul {
 }
 .page-width {
   max-width: 645px;
-  padding: 0 20px;
+  padding: 0 10px;
   margin: auto;
 }
 header {
@@ -93,6 +93,7 @@ div.game {
   border: 0;
   border-style: solid;
   border-left-width: 4px;
+  border-color: transparent;
 }
 div.game.saved {
   border-color: #8191da;
@@ -116,14 +117,19 @@ div.game:hover {
 div.game .date {
   margin-right: 10px;
 }
+div.game .flag {
+  width: 40px;
+}
 div.game .flag img {
-  width: 50%;
+  width: 100%;
+}
+div.game .flag.right {
+  margin-left: 10px;
 }
 div.game .flag.right img {
   float: right;
-  margin-left: 10px;
 }
-div.game .flag.left img {
+div.game .flag.left {
   margin-right: 10px;
 }
 div.game .game-score {
@@ -167,6 +173,9 @@ form.bet .submit {
   margin-bottom: 40px;
   padding-bottom: 20px;
   border-bottom: 1px solid #f6f6f6;
+}
+.bets > div {
+  margin-bottom: 30px;
 }
 .bets-title {
   margin-bottom: 20px;
