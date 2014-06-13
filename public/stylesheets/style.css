@@ -95,13 +95,13 @@ div.game {
   border-left-width: 4px;
 }
 div.game.saved {
-  border-color: #8191da;
+  border-color: #4758a9;
 }
 div.game.win {
   border-color: #daeed1;
 }
 div.game.perfect {
-  border-color: #daeed1;
+  border-color: #ffd700;
 }
 div.game.lost {
   border-color: ;
@@ -169,7 +169,7 @@ form.bet .submit {
   font-weight: bold;
 }
 .bet-row.perfect {
-  background-color: #daeed1;
+  background-color: #ffd700;
 }
 .bet-row.won {
   background-color: #daeed1;
