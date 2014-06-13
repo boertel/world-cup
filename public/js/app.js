@@ -12,7 +12,7 @@ var app = angular.module('content', ['ngRoute'])
             .when('/games/:id', {
                 templateUrl: 'pages/game.html',
                 controller: 'GameController'
-            })
+            });
     }]).run(function ($rootScope, $route, $window, $location, notification) {
         $rootScope.$on('$routeChangeError', function (e, curr, prev) {
         });
@@ -21,7 +21,7 @@ var app = angular.module('content', ['ngRoute'])
         });
 
         $rootScope.$on('$routeChangeSuccess', function (e, curr, prev) {
-            notification.remove()
+            notification.remove();
         });
     });
 
@@ -37,10 +37,13 @@ $(document).ready(function () {
             }, requestCallback);
     });
 
-    $(document.body).on('click', '.game', function () {
-        var href = $(this).data('href');
+    function gotoHref() {
+       var href = $(this).data('href');
         if (href) {
             document.location = href;
         }
-    });
+    }
+
+    $(document.body).on('click', '.game', gotoHref);
+    $(document.body).on('touchstart', '.game', gotoHref);
 });
