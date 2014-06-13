@@ -114,7 +114,7 @@ header {
   background-color: #ffe557;
 }
 .little-score.lost {
-  background-color: #f00;
+  background-color: #ff7979;
 }
 .showPast .game.past {
   display: block !important;
@@ -141,7 +141,7 @@ div.game.perfect {
   border-color: #ffe557;
 }
 div.game.lost {
-  border-color: #f00;
+  border-color: #ff7979;
 }
 div.game:hover {
   cursor: pointer;
@@ -183,6 +183,9 @@ div.game .bet-score {
 }
 .leaderboard .me {
   font-weight: bold;
+}
+.leaderboard li {
+  margin: 8px 0;
 }
 form.bet {
   margin-top: 20px;

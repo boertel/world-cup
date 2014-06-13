@@ -115,12 +115,18 @@ app.controller('LeaderboardController', ['$scope', '$http', function ($scope, $h
     });
 }]);
 
-window.friends = [];
-
-app.controller('FriendsLeaderboardController', ['$scope', 'friends', function ($scope, friends) {
+app.controller('FriendsLeaderboardController', ['$scope', 'friends', 'user', function ($scope, friends, user) {
     $scope.waiting = true;
     friends.then(function (response) {
         $scope.waiting = false;
-        $scope.users = response;
+        user.then(function (u) {
+            response = response.map(function (friend) {
+                if (u.username === friend.username) {
+                    friend.me = true;
+                }
+                return friend;
+            });
+            $scope.users = response;
+        });
     });
 }]);
