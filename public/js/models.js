@@ -19,3 +19,22 @@ function Game(data) {
 
     this.timeHuman = this.moment.time.local().format('LLLL');
 }
+
+function Bet(data) {
+    for (var key in data) {
+        this[key] = data[key];
+    }
+}
+
+Bet.prototype.isPerfect = function () {
+    return this.points === 50;
+};
+
+Bet.prototype.isWin = function () {
+    return this.points === 20;
+};
+
+Bet.prototype.isLost = function () {
+    return this.points === 0;
+};
+

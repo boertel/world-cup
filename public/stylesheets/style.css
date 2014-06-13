@@ -68,14 +68,8 @@ header {
   color: #4eb11e;
   background: #b7e696;
 }
-.notification.warning {
-  background-color: #fee784;
-  color: #997d01;
-}
-.notification.error {
-  background-color: #e14644;
-  color: #651110;
-}
+.notification.warning,
+.notification.error,
 #content {
   margin: 20px auto;
 }
@@ -96,9 +90,21 @@ div.game {
   margin-bottom: 20px;
   padding: 20px 10px;
   height: 80px;
+  border: 0;
+  border-style: solid;
+  border-left-width: 4px;
 }
 div.game.saved {
-  border-left: 4px solid #4758a9;
+  border-color: #8191da;
+}
+div.game.win {
+  border-color: #daeed1;
+}
+div.game.perfect {
+  border-color: #daeed1;
+}
+div.game.lost {
+  border-color: ;
 }
 div.game.separator {
   border-top: 1px solid #ddd;
@@ -163,7 +169,7 @@ form.bet .submit {
   font-weight: bold;
 }
 .bet-row.perfect {
-  background-color: #b7dfa4;
+  background-color: #daeed1;
 }
 .bet-row.won {
   background-color: #daeed1;

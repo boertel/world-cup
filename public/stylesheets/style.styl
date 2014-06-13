@@ -1,11 +1,11 @@
 colors = {
     primary: #4eb11e,
     secondary: #b7e696,
-    saved: #4758A9
+    saved: #8191DA,
     subtle: #f6f6f6,
-    win: #4eb11e,
-    tie: #fee784,
-    loss: #e14644
+    perfect: #DAEED1,
+    win: #DAEED1,
+    loss: #FF0000
 }
 
 *
@@ -72,12 +72,8 @@ header
     background: colors.secondary
 
 .notification.warning
-    background-color: colors.tie
-    color: darken(colors.tie, 60%)
 
 .notification.error
-    background-color: colors.loss
-    color: darken(colors.loss, 60%)
 
 #content
     margin: 20px auto
@@ -99,10 +95,22 @@ header
 div.game
     margin-bottom: 20px
     padding: 20px 10px
-    height: 80px;
+    height: 80px
+    border: 0
+    border-style: solid
+    border-left-width: 4px
 
     &.saved
-        border-left: 4px solid colors.saved
+        border-color: colors.saved
+
+    &.win
+        border-color: colors.win
+
+    &.perfect
+        border-color: colors.perfect
+
+    &.lost
+        border-color: colors.lost
 
     &.separator
         border-top: 1px solid #DDDDDD
@@ -170,10 +178,10 @@ form.bet
         font-weight: bold
 
     &.perfect
-        background-color: #B7DFA4
+        background-color: colors.perfect
 
     &.won
-        background-color: #DAEED1
+        background-color: colors.win
 
 .help
     margin-top: 40px

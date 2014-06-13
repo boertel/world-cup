@@ -21,7 +21,7 @@ app.factory('notification', function () {
         notify: notify,
         get: get,
         remove: remove
-    }
+    };
 });
 
 app.factory('scores', ['$http', function ($http) {
@@ -46,6 +46,7 @@ app.factory('user', ['$http', function ($http) {
 app.factory('games', ['$http', function ($http) {
     var promise = $http.get('/api/v1/games').then(function (response) {
         var games = response.data.map(function (game) {
+            game.bet = new Bet(game.bet);
             return new Game(game);
         });
         return games;
@@ -55,7 +56,7 @@ app.factory('games', ['$http', function ($http) {
         promise.then(function (games) {
             games.forEach(function (game) {
                 if (game.id === bet.game_id) {
-                    game.bet = game.bet || {};
+                    game.bet = game.bet || new Bet({});
                     angular.extend(game.bet, bet);
                 }
             });

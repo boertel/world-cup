@@ -5,15 +5,16 @@ app.controller('OldGamesController', ['$scope', 'games', function ($scope, games
     games.get.then(function (data) {
         $scope.games = data.filter(function (game) {
             return game.daysLeft <= -2;
-        })
+        });
     });
 }]);
 
 app.controller('GamesController', ['$scope', 'games', function ($scope, games) {
     games.get.then(function (data) {
         $scope.games = data.filter(function (game) {
+            console.log(game.bet.id, game.bet.isWin());
             return game.daysLeft > -2;
-        })
+        });
     });
 }]);
 
@@ -28,7 +29,7 @@ app.controller('GameController', ['$scope', '$http', '$routeParams', 'notificati
         data.score_a = data.score_a || 0;
         data.score_b = data.score_b || 0;
         data.game = new Game(data.game);
-        $scope.bet = data;
+        $scope.bet = new Bet(data);
         $rootScope.$emit('gameLoaded', {game: data.game});
     });
 
@@ -41,8 +42,8 @@ app.controller('GameController', ['$scope', '$http', '$routeParams', 'notificati
                 score_b: $scope.bet.score_b
             }
         }).success(function (data) {
-            games.updateBet(data);
-            notification.notify("Your bet has been saved.")
+            games.updateBet(new Bet(data));
+            notification.notify("Your bet has been saved.");
         });
     };
 }]);
@@ -71,6 +72,9 @@ app.controller('BetsController', ['$scope', '$http', '$rootScope', function ($sc
                 method: 'GET',
                 url: url
             }).success(function (data) {
+                data = data.map(function (d) {
+                    return new Bet(d);
+                });
 
                 $scope.competitorA = data.filter(function (bet) {
                     return bet.score_a > bet.score_b;
@@ -139,7 +143,7 @@ app.controller('FriendsLeaderboardController', ['$scope', '$q', function ($scope
                         return user;
                     });
                     deferred.resolve(formatLeaderboardUser(data));
-                })
+                });
             }
         });
     });
