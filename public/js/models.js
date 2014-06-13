@@ -17,5 +17,5 @@ function Game(data) {
     this.daysLeft = this.moment.time.local().diff(now, 'days');
     this.day = this.moment.time.format('YYYY-MM-DD');
 
-    this.timeHuman = this.moment.time.local().format('LLLL')
+    this.timeHuman = this.moment.time.local().format('LLLL');
 }

@@ -28,6 +28,7 @@ section {
   margin-bottom: 1.5em;
 }
 a {
+  cursor: pointer;
   color: #2996cc;
   text-decoration: none;
 }

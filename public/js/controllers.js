@@ -1,12 +1,20 @@
 app.controller('HomeController', ['$scope', '$http', function ($scope, $http) {
-    $http({
-        method: 'GET',
-        url: '/api/v1/games'
-    }).success(function (data) {
-        $scope.games = data.map(function (g) {
-            return new Game(g);
-        });
-    })
+}]);
+
+app.controller('OldGamesController', ['$scope', 'games', function ($scope, games) {
+    games.then(function (data) {
+        $scope.games = data.filter(function (game) {
+            return game.daysLeft <= -2;
+        })
+    });
+}]);
+
+app.controller('GamesController', ['$scope', 'games', function ($scope, games) {
+    games.then(function (data) {
+        $scope.games = data.filter(function (game) {
+            return game.daysLeft > -2;
+        })
+    });
 }]);
 
 

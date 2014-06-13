@@ -42,3 +42,13 @@ app.factory('user', ['$http', function ($http) {
     });
     return promise;
 }]);
+
+app.factory('games', ['$http', function ($http) {
+    var promise = $http.get('/api/v1/games').then(function (response) {
+        var games = response.data.map(function (game) {
+            return new Game(game);
+        });
+        return games;
+    });
+    return promise;
+}]);
