@@ -45,5 +45,4 @@ $(document).ready(function () {
     }
 
     $(document.body).on('click', '.game', gotoHref);
-    $(document.body).on('touchstart', '.game', gotoHref);
 });
