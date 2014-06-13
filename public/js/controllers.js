@@ -1,19 +1,13 @@
 app.controller('HomeController', ['$scope', '$http', function ($scope, $http) {
 }]);
 
-app.controller('OldGamesController', ['$scope', 'games', function ($scope, games) {
-    games.get.then(function (data) {
-        $scope.games = data.filter(function (game) {
-            return game.daysLeft <= -2;
-        });
-    });
-}]);
-
 app.controller('GamesController', ['$scope', 'games', function ($scope, games) {
+    $scope.showPast = function (period) {
+        $('.past.period-' + period).toggleClass('past');
+    };
+
     games.get.then(function (data) {
-        $scope.games = data.filter(function (game) {
-            return game.daysLeft > -2;
-        });
+        $scope.games = data;
     });
 }]);
 

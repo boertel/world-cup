@@ -95,9 +95,29 @@ header {
 .separator {
   border-top: 1px solid #ddd;
 }
+.separator.hover {
+  cursor: pointer;
+}
 .separator .date {
   margin: 10px 0;
   font-size: 125%;
+}
+.little-score {
+  width: 6px;
+  height: 18px;
+  display: inline-block;
+}
+.little-score.win {
+  background-color: #daeed1;
+}
+.little-score.perfect {
+  background-color: #ffe557;
+}
+.little-score.lost {
+  background-color: #f00;
+}
+.showPast .game.past {
+  display: block !important;
 }
 div.game {
   margin-bottom: 20px;
@@ -107,6 +127,9 @@ div.game {
   border-style: solid;
   border-left-width: 4px;
   border-color: transparent;
+}
+div.game.past {
+  display: none;
 }
 div.game.saved {
   border-color: #8191da;

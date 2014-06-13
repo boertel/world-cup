@@ -102,9 +102,29 @@ header
 .separator
     border-top: 1px solid #DDDDDD
 
+    &.hover
+        cursor: pointer
+
     .date
         margin: 10px 0
         font-size: 125%
+
+.little-score
+    width: 6px
+    height: 18px
+    display: inline-block
+
+    &.win
+        background-color: colors.win
+
+    &.perfect
+        background-color: colors.perfect
+
+    &.lost
+        background-color: colors.lost
+
+.showPast .game.past
+    display: block !important
 
 div.game
     margin-bottom: 20px
@@ -114,6 +134,9 @@ div.game
     border-style: solid
     border-left-width: 4px
     border-color: transparent
+
+    &.past
+        display: none
 
     &.saved
         border-color: colors.saved

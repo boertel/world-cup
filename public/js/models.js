@@ -14,12 +14,14 @@ function Game(data) {
         deadline: moment.utc(this.deadline)
     };
     this.local = this.moment.time.local().toDate();
-    var now = new Date();
-    this.daysLeft = this.moment.time.local().diff(now, 'days');
     this.day = this.moment.time.format('YYYY-MM-DD');
-
-    this.timeHuman = this.moment.time.local().format('LLLL');
 }
+
+Game.prototype.past = function () {
+    var now = new Date();
+    return this.moment.time.local().diff(now, 'days') <= -2;
+};
+
 
 function Bet(data) {
     for (var key in data) {
@@ -37,5 +39,19 @@ Bet.prototype.isWin = function () {
 
 Bet.prototype.isLost = function () {
     return this.points === 0;
+};
+
+Bet.prototype.cssClass = function () {
+    var classes = [];
+    if (this.isPerfect()) {
+        classes.push('perfect');
+    }
+    if (this.isWin()) {
+        classes.push('win');
+    }
+    if (this.isLost()) {
+        classes.push('lost');
+    }
+    return classes.join(', ');
 };
 
