@@ -2,7 +2,7 @@ app.controller('HomeController', ['$scope', '$http', function ($scope, $http) {
 }]);
 
 app.controller('OldGamesController', ['$scope', 'games', function ($scope, games) {
-    games.then(function (data) {
+    games.get.then(function (data) {
         $scope.games = data.filter(function (game) {
             return game.daysLeft <= -2;
         })
@@ -10,7 +10,7 @@ app.controller('OldGamesController', ['$scope', 'games', function ($scope, games
 }]);
 
 app.controller('GamesController', ['$scope', 'games', function ($scope, games) {
-    games.then(function (data) {
+    games.get.then(function (data) {
         $scope.games = data.filter(function (game) {
             return game.daysLeft > -2;
         })
@@ -18,8 +18,8 @@ app.controller('GamesController', ['$scope', 'games', function ($scope, games) {
 }]);
 
 
-app.controller('GameController', ['$scope', '$http', '$routeParams', 'notification', '$rootScope',
-    function ($scope, $http, $routeParams, notification, $rootScope) {
+app.controller('GameController', ['$scope', '$http', '$routeParams', 'notification', '$rootScope', 'games',
+    function ($scope, $http, $routeParams, notification, $rootScope, games) {
     var url = '/api/v1/games/' + $routeParams.id + '/bets';
     $http({
         method: 'GET',
@@ -41,6 +41,7 @@ app.controller('GameController', ['$scope', '$http', '$routeParams', 'notificati
                 score_b: $scope.bet.score_b
             }
         }).success(function (data) {
+            games.updateBet(data);
             notification.notify("Your bet has been saved.")
         });
     };

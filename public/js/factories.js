@@ -50,5 +50,20 @@ app.factory('games', ['$http', function ($http) {
         });
         return games;
     });
-    return promise;
+
+    function updateBet(bet) {
+        promise.then(function (games) {
+            games.forEach(function (game) {
+                if (game.id === bet.game_id) {
+                    game.bet = game.bet || {};
+                    angular.extend(game.bet, bet);
+                }
+            });
+        });
+    }
+
+    return {
+        get: promise,
+        updateBet: updateBet
+    }
 }]);
