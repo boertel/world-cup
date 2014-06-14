@@ -3,7 +3,7 @@ app.controller('HomeController', ['$scope', '$http', function ($scope, $http) {
 
 app.controller('GamesController', ['$scope', 'games', function ($scope, games) {
     $scope.showPast = function (period) {
-        $('.past.period-' + period).toggleClass('past');
+        $('.game.period-' + period).toggleClass('past');
     };
 
     games.get.then(function (data) {
