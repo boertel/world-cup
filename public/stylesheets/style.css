@@ -108,7 +108,7 @@ header {
   display: inline-block;
 }
 .little-score.win {
-  background-color: #daeed1;
+  background-color: #baddab;
 }
 .little-score.perfect {
   background-color: #ffe557;
@@ -121,8 +121,7 @@ header {
 }
 div.game {
   margin-bottom: 20px;
-  padding: 20px 10px;
-  height: 80px;
+  padding: 20px 10px 15px 10px;
   border: 0;
   border-style: solid;
   border-left-width: 4px;
@@ -135,7 +134,7 @@ div.game.saved {
   border-color: #8191da;
 }
 div.game.win {
-  border-color: #daeed1;
+  border-color: #baddab;
 }
 div.game.perfect {
   border-color: #ffe557;
@@ -234,7 +233,7 @@ form.bet .submit {
   background-color: #ffe557;
 }
 .bet-row.won {
-  background-color: #daeed1;
+  background-color: #baddab;
 }
 .help {
   margin-top: 40px;
