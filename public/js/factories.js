@@ -5,7 +5,8 @@ app.factory('notification', function () {
         type = type || 'success';
         notifications.push({
             message: message,
-            type: type
+            type: type,
+            jump: 0
         });
     }
 
@@ -14,7 +15,11 @@ app.factory('notification', function () {
     }
 
     function remove() {
-        return notifications.pop();
+        var notif = notifications.pop();
+        if (notif.jump === 0) {
+            notifications.push(notif);
+        }
+        notif.jump += 1;
     }
 
     return {

@@ -30,8 +30,8 @@ app.controller('GamesController', ['$scope', 'games', function ($scope, games) {
 }]);
 
 
-app.controller('GameController', ['$scope', '$http', '$routeParams', 'notification', '$rootScope', 'games',
-    function ($scope, $http, $routeParams, notification, $rootScope, games) {
+app.controller('GameController', ['$scope', '$http', '$routeParams', 'notification', '$rootScope', 'games', '$location',
+    function ($scope, $http, $routeParams, notification, $rootScope, games, $location) {
     var url = '/api/v1/games/' + $routeParams.id + '/bets';
     $http({
         method: 'GET',
@@ -54,6 +54,7 @@ app.controller('GameController', ['$scope', '$http', '$routeParams', 'notificati
             }
         }).success(function (data) {
             games.updateBet(new Bet(data));
+            $location.url('/#game-' + $scope.bet.game.id);
             notification.notify("Your bet has been saved.");
         });
     };
