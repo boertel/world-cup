@@ -19,7 +19,9 @@ app.controller('GamesController', ['$scope', 'games', function ($scope, games) {
             days.push({
                 day: moment(key).toDate(),
                 dayCss: key,
-                games: periodsDict[key]
+                games: periodsDict[key].sort(function (a, b) {
+                    return a.moment.time.unix() - b.moment.time.unix();
+                })
             });
         }
         console.log(days);
