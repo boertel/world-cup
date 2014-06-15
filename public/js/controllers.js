@@ -51,7 +51,15 @@ app.controller('UserController', ['$scope', 'user', '$http', function ($scope, u
     });
 }]);
 
-function sortScore(a, b) {
+function sortScoreA(a, b) {
+    return (a.score_a * 2 + a.score_b) - (b.score_a * 2 + b.score_b);
+}
+
+function sortScoreB(a, b) {
+    return (a.score_a + a.score_b * 2) - (b.score_a + b.score_b * 2);
+}
+
+function sortScoreTie(a, b) {
     return (a.score_a + a.score_b) - (b.score_a + b.score_b);
 }
 
@@ -71,15 +79,15 @@ app.controller('BetsController', ['$scope', '$http', '$rootScope', function ($sc
 
                 $scope.competitorA = data.filter(function (bet) {
                     return bet.score_a > bet.score_b;
-                }).sort(sortScore);
+                }).sort(sortScoreA);
 
                 $scope.competitorB = data.filter(function (bet) {
                     return bet.score_a < bet.score_b;
-                }).sort(sortScore);
+                }).sort(sortScoreB);
 
                 $scope.tie = data.filter(function (bet) {
                     return bet.score_a == bet.score_b;
-                }).sort(sortScore);
+                }).sort(sortScoreTie);
             });
         }
     });
