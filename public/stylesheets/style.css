@@ -155,7 +155,7 @@ div.game {
   border: 0;
   border-style: solid;
   border-left-width: 4px;
-  border-color: transparent;
+  border-color: #ddd;
 }
 div.game.past {
   display: none;
@@ -206,6 +206,12 @@ div.game .game-score.hidden {
 }
 div.game .bet-score {
   color: #9e9e9e;
+}
+.legend {
+  margin-top: 3em;
+}
+.legend ul {
+  margin-left: 2em;
 }
 .leaderboard {
   padding: 0 10px;
