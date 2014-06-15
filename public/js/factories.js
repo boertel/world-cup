@@ -72,23 +72,30 @@ app.factory('games', ['$http', function ($http) {
 
 app.factory('friends', ['$q', function ($q) {
     var deferred = $q.defer();
-    window.fbReady.push(function () {
-        FB.Event.subscribe('auth.statusChange', function (response) {
-            if (response.status === 'connected') {
-                FB.api('/1477567782456567/scores', function (response) {
-                    var data = response.data.map(function (score) {
-                        var user = {
-                            points: parseInt(score.score, 10),
-                            link: 'https://www.facebook.com/profile.php?id=' + score.user.id,
-                            name: score.user.name,
-                            username: score.user.id
-                        };
-                        return user;
-                    });
-                    deferred.resolve(formatLeaderboardUser(data));
-                });
-            }
+    function getScores () {
+        FB.api('/1477567782456567/scores', function (response) {
+            var data = response.data.map(function (score) {
+                var user = {
+                    points: parseInt(score.score, 10),
+                    link: 'https://www.facebook.com/profile.php?id=' + score.user.id,
+                    name: score.user.name,
+                    username: score.user.id
+                };
+                return user;
+            });
+            deferred.resolve(formatLeaderboardUser(data));
         });
+    }
+    window.fbReady.push(function () {
+        if (!FB.getUserID()) {
+            FB.Event.subscribe('auth.statusChange', function (response) {
+                if (response.status === 'connected') {
+                    getScores();
+                }
+            });
+        } else {
+            getScores();
+        }
     });
 
     return deferred.promise;
