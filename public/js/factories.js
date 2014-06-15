@@ -16,10 +16,12 @@ app.factory('notification', function () {
 
     function remove() {
         var notif = notifications.pop();
-        if (notif.jump === 0) {
-            notifications.push(notif);
+        if (notif) {
+            if (notif.jump === 0) {
+                notifications.push(notif);
+            }
+            notif.jump += 1;
         }
-        notif.jump += 1;
     }
 
     return {
