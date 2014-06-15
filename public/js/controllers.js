@@ -24,7 +24,6 @@ app.controller('GamesController', ['$scope', 'games', function ($scope, games) {
                 })
             });
         }
-        console.log(days);
 
         $scope.days = days;
     });
@@ -64,10 +63,14 @@ app.controller('GameController', ['$scope', '$http', '$routeParams', 'notificati
 /* ************************************************************************* */
 // Element Controllers
 
-app.controller('UserController', ['$scope', 'user', '$http', function ($scope, user, $http) {
+app.controller('UserController', ['$scope', 'user', '$http', '$location', function ($scope, user, $http, $location) {
     user.then(function (u) {
         $scope.user = u;
     });
+
+    $scope.isActive = function (route) {
+        return route === $location.path();
+    };
 }]);
 
 function sortScoreA(a, b) {

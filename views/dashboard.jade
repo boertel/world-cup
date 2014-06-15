@@ -2,7 +2,16 @@ extends layout
 
 block header
     div(ng-controller="UserController")
-        h3 World Cup 2014 | Hi {{ user.first_name }}!
+            div.pure-menu.pure-menu-open.pure-menu-horizontal
+                a.pure-menu-heading(href="#/") World Cup 2014
+                ul
+                    li
+                        a(href="#/", ng-class="{'pure-menu-selected':isActive('/')}") Matches
+                    li
+                        a(href="#/leaderboard", ng-class="{'pure-menu-selected':isActive('/leaderboard')}") Leaderboard
+                span.pure-menu-heading.right
+                    img.avatar(ng-src="{{ user.picture }}")
+                span.pure-menu-heading.right.profile-points {{ user.points }} points
 
 block notification
     div#notification(ng-controller="NotificationController")

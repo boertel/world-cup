@@ -9,7 +9,7 @@ colors = {
 }
 
 *
-    box-sizing: border-box;
+    box-sizing: border-box
 
 body
     font-size: 14px
@@ -65,12 +65,33 @@ ul
     margin: 0 auto
 
 header
-    text-align: center
     background: colors.primary
     color: colors.secondary
-    padding: 20px 0 25px
+    padding: 10px 0
     width: 100%
     color: #fff
+
+.pure-menu.pure-menu-open, .pure-menu.pure-menu-horizontal li .pure-menu-children
+    background: none
+
+.pure-menu .pure-menu-heading, .pure-menu a, .pure-menu .pure-menu-can-have-children>li:after
+    color: #fff
+
+.pure-menu li a:hover, .pure-menu li a:focus
+    background: darken(colors.primary, 20%)
+
+.pure-menu-selected
+    background: darken(colors.primary, 10%)
+
+.profile-points
+    margin-top: 2px !important
+
+.avatar
+    width: 33px
+    height: 33px
+    margin-top: -5px
+    border-radius: 3px
+
 
 .notification
     padding: 10px

@@ -62,12 +62,36 @@ ul {
   margin: 0 auto;
 }
 header {
-  text-align: center;
   background: #4eb11e;
   color: #b7e696;
-  padding: 20px 0 25px;
+  padding: 10px 0;
   width: 100%;
   color: #fff;
+}
+.pure-menu.pure-menu-open,
+.pure-menu.pure-menu-horizontal li .pure-menu-children {
+  background: none;
+}
+.pure-menu .pure-menu-heading,
+.pure-menu a,
+.pure-menu .pure-menu-can-have-children>li:after {
+  color: #fff;
+}
+.pure-menu li a:hover,
+.pure-menu li a:focus {
+  background: #3e8e18;
+}
+.pure-menu-selected {
+  background: #469f1b;
+}
+.profile-points {
+  margin-top: 2px !important;
+}
+.avatar {
+  width: 33px;
+  height: 33px;
+  margin-top: -5px;
+  border-radius: 3px;
 }
 .notification {
   padding: 10px;
@@ -95,7 +119,7 @@ header {
 .games-group {
   border-bottom: 1px solid #ddd;
 }
-.separator.hover {
+.separator {
   cursor: pointer;
 }
 .separator .date {

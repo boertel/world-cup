@@ -9,6 +9,9 @@ var app = angular.module('content', ['ngRoute'])
                 templateUrl: 'pages/home.html',
                 controller: 'HomeController'
             })
+            .when('/leaderboard', {
+                templateUrl: 'pages/leaderboard.html'
+            })
             .when('/games/:id', {
                 templateUrl: 'pages/game.html',
                 controller: 'GameController'
