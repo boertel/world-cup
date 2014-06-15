@@ -22,6 +22,7 @@ app.controller('GamesController', ['$scope', 'games', function ($scope, games) {
                 games: periodsDict[key]
             });
         }
+        console.log(days);
 
         $scope.days = days;
     });

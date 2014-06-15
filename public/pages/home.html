@@ -24,7 +24,7 @@
         <div class="pure-g separator" ng-click="showPast(day.dayCss)">
             <div class="pure-u-1 date">
                 {{ day.day|date: 'EEEE dd MMMM' }}
-                <span ng-repeat="game in day.games" class="little-score {{ game.bet.cssClass() }}"></span>
+                <span ng-repeat="game in day.games" class="little-score {{ game.bet.cssClass() }}" ng-class="{saved:game.bet.id}"></span>
             </div>
         </div>
         <div ng-repeat="game in day.games">
