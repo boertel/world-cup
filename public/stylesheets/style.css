@@ -138,7 +138,7 @@ header {
   background-color: #8191da;
 }
 .little-score.win {
-  background-color: #baddab;
+  background-color: #9eca8c;
 }
 .little-score.perfect {
   background-color: #ffe557;
@@ -162,28 +162,24 @@ div.game.past {
 }
 div.game.saved {
   border-color: #8191da;
-  background-color: rgba(129,145,218,0.08);
 }
 div.game.saved:hover {
   background-color: rgba(129,145,218,0.25);
 }
 div.game.win {
-  border-color: #baddab;
-  background-color: rgba(186,221,171,0.08);
+  border-color: #9eca8c;
 }
 div.game.win:hover {
-  background-color: rgba(186,221,171,0.25);
+  background-color: rgba(158,202,140,0.25);
 }
 div.game.perfect {
   border-color: #ffe557;
-  background-color: rgba(255,229,87,0.08);
 }
 div.game.perfect:hover {
   background-color: rgba(255,229,87,0.25);
 }
 div.game.lost {
   border-color: #ff7979;
-  background-color: rgba(255,121,121,0.08);
 }
 div.game.lost:hover {
   background-color: rgba(255,121,121,0.25);
@@ -285,7 +281,7 @@ form.bet .submit {
   background-color: #ffe557;
 }
 .bet-row.won {
-  background-color: #baddab;
+  background-color: #9eca8c;
 }
 .help {
   margin-top: 40px;
