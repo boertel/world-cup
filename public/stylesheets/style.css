@@ -92,8 +92,8 @@ header {
 .btn-facebook:hover {
   color: #fff;
 }
-.separator {
-  border-top: 1px solid #ddd;
+.games-group {
+  border-bottom: 1px solid #ddd;
 }
 .separator.hover {
   cursor: pointer;
@@ -104,7 +104,8 @@ header {
 }
 .little-score {
   width: 6px;
-  height: 18px;
+  height: 13px;
+  margin-top: 4px;
   display: inline-block;
 }
 .little-score.win {

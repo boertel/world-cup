@@ -7,7 +7,23 @@ app.controller('GamesController', ['$scope', 'games', function ($scope, games) {
     };
 
     games.get.then(function (data) {
-        $scope.games = data;
+        var days = [],
+            periodsDict = {};
+
+        data.forEach(function (d) {
+            periodsDict[d.day] = periodsDict[d.day] || [];
+            periodsDict[d.day].push(d);
+        });
+
+        for (var key in periodsDict) {
+            days.push({
+                day: moment(key).toDate(),
+                dayCss: key,
+                games: periodsDict[key]
+            });
+        }
+
+        $scope.days = days;
     });
 }]);
 
