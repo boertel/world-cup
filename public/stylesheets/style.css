@@ -267,6 +267,9 @@ form.bet .submit {
 .bets > div {
   margin-bottom: 30px;
 }
+.bets.friends .not-friend {
+  display: none;
+}
 .bets-title {
   margin-bottom: 20px;
 }
