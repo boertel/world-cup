@@ -286,6 +286,15 @@ form.bet .submit {
 .help {
   margin-top: 40px;
 }
+.line {
+  margin: 2em 0;
+}
+.placeholder {
+  border: 4px dashed #ddd;
+}
+.placeholder p {
+  padding: 2em;
+}
 footer {
   border-top: 1px solid #f6f6f6;
   text-align: center;

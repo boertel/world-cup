@@ -33,7 +33,13 @@ module.exports = {
                     where: {
                         score_a: {ne: null},
                         score_b: {ne: null}
-                    }
+                    },
+                    include: [
+                        {
+                            model: db.Competitor,
+                            attributes: db.Competitor.attrs()
+                        }
+                    ]
                 }
             ]
         }).success(function (bets) {

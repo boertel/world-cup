@@ -12,6 +12,10 @@ var app = angular.module('content', ['ngRoute'])
             .when('/leaderboard', {
                 templateUrl: 'pages/leaderboard.html'
             })
+            .when('/user/:id', {
+                templateUrl: 'pages/user.html',
+                controller: 'ProfileController'
+            })
             .when('/games/:id', {
                 templateUrl: 'pages/game.html',
                 controller: 'GameController'

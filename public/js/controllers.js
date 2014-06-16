@@ -61,6 +61,18 @@ app.controller('GameController', ['$scope', '$http', '$routeParams', 'notificati
 }]);
 
 
+app.controller('ProfileController', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
+    $http({
+        method: 'GET',
+        url: '/api/v1/users/' + $routeParams.id + '/bets',
+    }).success(function (data) {
+        $scope.bets = data.map(function (d) {
+            return new Bet(d);
+        });
+    });
+}]);
+
+
 /* ************************************************************************* */
 // Element Controllers
 
@@ -90,8 +102,8 @@ app.controller('BetsController', ['$scope', '$http', '$rootScope', function ($sc
     $rootScope.$on('gameLoaded', function (evt, args) {
         var game = args.game;
         if (game.lock) {
-            //var url = '/api/v1/games/' + game.id + '/bets?friends=' + window.friends.join(',');
-            var url = '/api/v1/games/' + game.id + '/bets?all=true';
+            var url = '/api/v1/games/' + game.id + '/bets?friends=' + window.friends.join(',');
+            //var url = '/api/v1/games/' + game.id + '/bets?all=true';
             $http({
                 method: 'GET',
                 url: url

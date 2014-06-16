@@ -15,11 +15,23 @@ module.exports = {
     },
     bets: {
         read: function (req, res) {
+            var user_id = req.user.id;
             if (req.params.id === 'me') {
-                user = req.user
+                user_id = req.user.id
             }
             var filters = {
-                user: user
+                where: {
+                    user_id: user_id
+                },
+                include: [
+                    {
+                        model: db.Game,
+                        where: {
+                            score_a: {ne: null},
+                            score_b: {ne: null}
+                        }
+                    }
+                ]
             }
             db.Bet.findAll(filters).success(function (bets) {
                 res.json(bets)
