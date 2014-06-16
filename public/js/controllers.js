@@ -21,7 +21,8 @@ app.controller('GamesController', ['$scope', 'games', function ($scope, games) {
                 dayCss: key,
                 games: periodsDict[key].sort(function (a, b) {
                     return a.moment.time.unix() - b.moment.time.unix();
-                })
+                }),
+                past: moment(key).diff(new Date(), 'day') <= -2
             });
         }
 

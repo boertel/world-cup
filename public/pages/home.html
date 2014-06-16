@@ -36,7 +36,7 @@
              class="pure-g game period-{{ game.day }} {{ game.bet.cssClass() }}"
              title="{{ game.local|date: 'short' }}"
              data-href="#/games/{{ game.id }}"
-             ng-class="{saved:game.bet.id, past:game.past()}"
+             ng-class="{saved:game.bet.id, past:day.past}"
              ng-repeat="game in day.games">
             <div class="pure-u-1 pure-u-md-1-8 pure-u-lg-1-8">
                 <div class="pure-g subtitle">
