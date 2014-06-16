@@ -135,13 +135,14 @@ app.controller('ScoreController', ['$scope', 'scores', function ($scope, scores)
 }]);
 
 function formatLeaderboardUser(data) {
-    var previous, rank = 0,
+    var previous, rank = 0, i = 1,
         users = data.map(function (user) {
             if (previous === undefined || user.points !== previous) {
-                rank += 1;
+                rank = i;
                 previous = user.points;
             }
             user.rank = rank;
+            i += 1;
             return user;
         });
     return users;
