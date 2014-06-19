@@ -36,38 +36,6 @@
                 </div>
             </div>
         </div>
-        <div id="game-{{ game.id }}"
-             class="pure-g game period-{{ game.day }} {{ game.bet.cssClass() }}"
-             title="{{ game.local|date: 'short' }}"
-             data-href="#/games/{{ game.id }}"
-             ng-class="{saved:game.bet.id, past:day.past}"
-             ng-repeat="game in day.games">
-            <div class="pure-u-1 pure-u-md-1-8 pure-u-lg-1-8">
-                <div class="pure-g subtitle">
-                    <div class="pure-u-1-4 pure-u-md-1 pure-u-lg-1">at {{ game.local|date:'HH:mm' }}</div>
-                    <div class="pure-u-1-2 pure-u-md-1 pure-u-lg-1 group">{{ game.group.name }}</div>
-                </div>
-            </div>
-            <div class="pure-u-1-3 pure-u-md-1-4 pure-u-lg-1-4">
-                <div class="left flag">
-                    <img ng-src="images/flags/competitor-{{ game.competitorA.id }}.png">
-                </div>
-                <div class="left">
-                    {{ game.competitorA.name }}
-                </div>
-            </div>
-            <div class="pure-u-1-3 pure-u-md-1-3 pure-u-lg-1-3 center scores">
-                <div class="bet-score">{{ game.bet.score_a }} - {{ game.bet.score_b }}</div>
-                <div class="game-score" ng-class="{hidden: !game.hasScore}">{{ game.score_a }} - {{ game.score_b }}</div>
-            </div>
-            <div class="pure-u-1-3 pure-u-md-1-4 pure-u-lg-1-4">
-                <div class="right flag">
-                    <img ng-src="images/flags/competitor-{{ game.competitorB.id }}.png">
-                </div>
-                <div class="right">
-                    {{ game.competitorB.name }}
-                </div>
-            </div>
-        </div>
+        <div ng-repeat="game in day.games" widget-game></div>
     </div>
 </script>

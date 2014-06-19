@@ -19,12 +19,8 @@
 
 <div class="pure-g">
     <div class="pure-u-1 line">
-        <span class="little-score {{ bet.cssClass() }}" title="{{ bet.game.competiorA.name - bet.game.competitorB.name }}" ng-repeat="bet in bets"></span>
+        <span class="little-score big {{ bet.cssClass() }}" ng-click="showGame(bet)" title="{{ bet.game.competitorA.name }} - {{ bet.game.competitorB.name }}" ng-repeat="bet in bets"></span>
     </div>
 </div>
 
-<div class="pure-g">
-    <div class="pure-u-1 placeholder center">
-        <p>Hover over a little colored box to see the details of the game.</p>
-    </div>
-</div>
+<div widget-game></div>

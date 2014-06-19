@@ -139,6 +139,11 @@ header {
   display: inline-block;
   background-color: #ddd;
 }
+.little-score.big {
+  width: 10px;
+  height: 20px;
+  cursor: pointer;
+}
 .little-score.saved {
   background-color: #8191da;
 }

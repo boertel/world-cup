@@ -29,7 +29,23 @@ module.exports = {
                         where: {
                             score_a: {ne: null},
                             score_b: {ne: null}
-                        }
+                        },
+                        include: [
+                            {
+                                model: db.Group,
+                                attributes: db.Group.attrs()
+                            },
+                            {
+                                model: db.Competitor,
+                                as: 'competitor_a',
+                                attributes: db.Competitor.attrs()
+                            },
+                            {
+                                model: db.Competitor,
+                                as: 'competitor_b',
+                                attributes: db.Competitor.attrs()
+                            }
+                        ]
                     }
                 ]
             }

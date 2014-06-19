@@ -63,6 +63,13 @@ app.controller('GameController', ['$scope', '$http', '$routeParams', 'notificati
 
 
 app.controller('ProfileController', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
+    $scope.showGame = function (bet) {
+        var bet = bet,
+            game = new Game(bet.game);
+        delete bet.game;
+        game.bet = bet;
+        $scope.game = game;
+    };
     $http({
         method: 'GET',
         url: '/api/v1/users/' + $routeParams.id + '/bets',
