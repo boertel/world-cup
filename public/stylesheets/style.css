@@ -123,8 +123,13 @@ header {
   cursor: pointer;
 }
 .separator .date {
+  float: left;
   margin: 10px 0;
   font-size: 125%;
+}
+.separator .bet-summary {
+  float: right;
+  width: 40px;
 }
 .little-score {
   width: 6px;
@@ -266,6 +271,12 @@ form.bet .submit {
 }
 .bets > div {
   margin-bottom: 30px;
+}
+.bets.friends .not-friend {
+  display: none;
+}
+h2 .selected {
+  font-weight: bold;
 }
 .bets-title {
   margin-bottom: 20px;

@@ -21,7 +21,8 @@ app.controller('GamesController', ['$scope', 'games', function ($scope, games) {
                 dayCss: key,
                 games: periodsDict[key].sort(function (a, b) {
                     return a.moment.time.unix() - b.moment.time.unix();
-                })
+                }),
+                past: moment(key).diff(new Date(), 'day') <= -2
             });
         }
 
@@ -98,31 +99,39 @@ function sortScoreTie(a, b) {
     return (a.score_a + a.score_b) - (b.score_a + b.score_b);
 }
 
-app.controller('BetsController', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
+app.controller('BetsController', ['$scope', '$http', '$rootScope', 'friends', function ($scope, $http, $rootScope, friends) {
+    $scope.scope = 'all';
     $rootScope.$on('gameLoaded', function (evt, args) {
         var game = args.game;
         if (game.lock) {
-            var url = '/api/v1/games/' + game.id + '/bets?friends=' + window.friends.join(',');
-            //var url = '/api/v1/games/' + game.id + '/bets?all=true';
+            var url = '/api/v1/games/' + game.id + '/bets?all=true';
             $http({
                 method: 'GET',
                 url: url
             }).success(function (data) {
-                data = data.map(function (d) {
-                    return new Bet(d);
+                friends.then(function (friendslist) {
+                    var friendslist = friendslist.map(function (f) {
+                        return f.username;
+                    });
+                    data = data.map(function (d) {
+                        if (friendslist.indexOf(d.user.username) !== -1) {
+                            d.friend = true;
+                        }
+                        return new Bet(d);
+                    });
+
+                    $scope.competitorA = data.filter(function (bet) {
+                        return bet.score_a > bet.score_b;
+                    }).sort(sortScoreA);
+
+                    $scope.competitorB = data.filter(function (bet) {
+                        return bet.score_a < bet.score_b;
+                    }).sort(sortScoreB);
+
+                    $scope.tie = data.filter(function (bet) {
+                        return bet.score_a == bet.score_b;
+                    }).sort(sortScoreTie);
                 });
-
-                $scope.competitorA = data.filter(function (bet) {
-                    return bet.score_a > bet.score_b;
-                }).sort(sortScoreA);
-
-                $scope.competitorB = data.filter(function (bet) {
-                    return bet.score_a < bet.score_b;
-                }).sort(sortScoreB);
-
-                $scope.tie = data.filter(function (bet) {
-                    return bet.score_a == bet.score_b;
-                }).sort(sortScoreTie);
             });
         }
     });
@@ -139,13 +148,14 @@ app.controller('ScoreController', ['$scope', 'scores', function ($scope, scores)
 }]);
 
 function formatLeaderboardUser(data) {
-    var previous, rank = 0,
+    var previous, rank = 0, i = 1,
         users = data.map(function (user) {
             if (previous === undefined || user.points !== previous) {
-                rank += 1;
+                rank = i;
                 previous = user.points;
             }
             user.rank = rank;
+            i += 1;
             return user;
         });
     return users;

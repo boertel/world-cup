@@ -17,11 +17,6 @@ function Game(data) {
     this.day = this.moment.time.format('YYYY-MM-DD');
 }
 
-Game.prototype.past = function () {
-    var now = new Date();
-    return this.moment.time.local().diff(now, 'days') <= -2;
-};
-
 
 function Bet(data) {
     for (var key in data) {
