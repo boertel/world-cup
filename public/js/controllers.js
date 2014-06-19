@@ -66,7 +66,6 @@ app.controller('ProfileController', ['$scope', '$http', '$routeParams', function
     $scope.showGame = function (bet) {
         var bet = bet,
             game = new Game(bet.game);
-        delete bet.game;
         game.bet = bet;
         $scope.game = game;
     };
