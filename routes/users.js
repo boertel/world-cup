@@ -18,7 +18,7 @@ module.exports = {
     },
     bets: {
         read: function (req, res) {
-            var user_id = req.user.id;
+            var user_id = req.params.id;
             if (req.params.id === 'me') {
                 user_id = req.user.id
             }
