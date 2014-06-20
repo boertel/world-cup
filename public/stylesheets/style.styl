@@ -87,10 +87,12 @@ header
     margin-top: 2px !important
 
 .avatar
-    width: 33px
-    height: 33px
-    margin-top: -5px
-    border-radius: 3px
+    padding-left: 0
+    img
+        width: 33px
+        height: 33px
+        margin-top: -5px
+        border-radius: 3px
 
 
 .notification
@@ -309,13 +311,20 @@ h2
 .help
     margin-top: 40px
 
+.stats
+    text-align: center
 
-.profile-picture {
+@media screen and (min-width: 48em)
+    .stats
+        text-align: right
+
+
+.profile-picture
     border-radius: 6px
     margin-bottom: 1em
-}
+
 .line
-    margin: 2em 0
+    margin: 1em 0 2em 0
 
 .placeholder
     border: 4px dashed #DDDDDD

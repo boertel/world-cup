@@ -88,6 +88,9 @@ header {
   margin-top: 2px !important;
 }
 .avatar {
+  padding-left: 0;
+}
+.avatar img {
   width: 33px;
   height: 33px;
   margin-top: -5px;
@@ -170,6 +173,7 @@ div.game {
   border-style: solid;
   border-left-width: 4px;
   border-color: #ddd;
+  cursor: pointer;
 }
 div.game.past {
   display: none;
@@ -306,12 +310,20 @@ h2 .selected {
 .help {
   margin-top: 40px;
 }
+.stats {
+  text-align: center;
+}
+@media screen and (min-width: 48em) {
+  .stats {
+    text-align: right;
+  }
+}
 .profile-picture {
   border-radius: 6px;
   margin-bottom: 1em;
 }
 .line {
-  margin: 2em 0;
+  margin: 1em 0 2em 0;
 }
 .placeholder {
   border: 4px dashed #ddd;

@@ -68,6 +68,12 @@ app.controller('GameController', ['$scope', '$http', '$routeParams', 'notificati
 
 app.controller('ProfileController', ['$scope', '$http', '$routeParams', 'user', function ($scope, $http, $routeParams, user) {
     $scope.game = false;
+    $scope.number = {
+        perfect: 0,
+        win: 0,
+        lost: 0
+    };
+
     $scope.showGame = function (bet) {
         var bet = bet,
             game = new Game(bet.game);
@@ -80,13 +86,13 @@ app.controller('ProfileController', ['$scope', '$http', '$routeParams', 'user', 
         url: '/api/v1/users/' + $routeParams.id + '/bets',
     }).success(function (data) {
         $scope.bets = data.map(function (d) {
-            return new Bet(d);
+            var bet = new Bet(d);
+            $scope.number[bet.type()] += 1;
+            return bet;
         });
-        $scope.$apply();
     });
 
     user.get($routeParams.id).then(function (user) {
-        console.log(user, $routeParams.id);
         $scope.user = user;
     });
 }]);

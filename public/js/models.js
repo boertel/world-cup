@@ -25,28 +25,31 @@ function Bet(data) {
 }
 
 Bet.prototype.isPerfect = function () {
-    return this.points === 50;
+    return this.type() === 'perfect';
 };
 
 Bet.prototype.isWin = function () {
-    return this.points === 20;
+    return this.type() === 'win';
 };
 
 Bet.prototype.isLost = function () {
-    return this.points === 0;
+    return this.type() === 'lost';
+};
+
+Bet.prototype.type = function () {
+    switch (this.points) {
+        case 50:
+            return 'perfect';
+        case 20:
+            return 'win';
+        case 0:
+            return 'lost';
+    }
 };
 
 Bet.prototype.cssClass = function () {
     var classes = [];
-    if (this.isPerfect()) {
-        classes.push('perfect');
-    }
-    if (this.isWin()) {
-        classes.push('win');
-    }
-    if (this.isLost()) {
-        classes.push('lost');
-    }
+    classes.push(this.type());
     return classes.join(', ');
 };
 

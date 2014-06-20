@@ -9,8 +9,8 @@ block header
                         a(href="#/", ng-class="{'pure-menu-selected':isActive('/')}") Matches
                     li
                         a(href="#/leaderboard", ng-class="{'pure-menu-selected':isActive('/leaderboard')}") Leaderboard
-                a.pure-menu-heading.right(href="#/user/me")
-                    img.avatar(ng-src="{{ user.picture }}")
+                a.pure-menu-heading.right.avatar(href="#/user/me")
+                    img(ng-src="{{ user.picture }}")
                 a.pure-menu-heading.right.profile-points(href="#/user/me") {{ user.points }} points
 
 block notification

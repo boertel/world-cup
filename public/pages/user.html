@@ -7,8 +7,11 @@
             <a href="{{ user.link }}" target="_blank">{{ user.first_name }} {{ user.last_name }}</a>
         </div>
     </div>
-    <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-2">
-        <h1 class="center">{{ user.points }} points</h1>
+    <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-2 stats">
+        <h1>{{ user.points }} points</h1>
+        <ul>
+            <li>{{ number.perfect }} perfects, {{ number.win }} wins and {{ number.lost }} losts.</li>
+        </ul>
     </div>
 </div>
 
@@ -29,4 +32,3 @@
     <div widget-game></div>
 </div>
 
-<div widget-legend></div>
