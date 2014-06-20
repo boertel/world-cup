@@ -62,13 +62,15 @@ app.controller('GameController', ['$scope', '$http', '$routeParams', 'notificati
 }]);
 
 
-app.controller('ProfileController', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
+app.controller('ProfileController', ['$scope', '$http', '$routeParams', 'user', function ($scope, $http, $routeParams, user) {
+    $scope.game = false;
     $scope.showGame = function (bet) {
         var bet = bet,
             game = new Game(bet.game);
         game.bet = bet;
         $scope.game = game;
     };
+
     $http({
         method: 'GET',
         url: '/api/v1/users/' + $routeParams.id + '/bets',
@@ -77,6 +79,11 @@ app.controller('ProfileController', ['$scope', '$http', '$routeParams', function
             return new Bet(d);
         });
     });
+
+    user.get($routeParams.id).then(function (user) {
+        console.log(user, $routeParams.id);
+        $scope.user = user;
+    });
 }]);
 
 
@@ -84,7 +91,7 @@ app.controller('ProfileController', ['$scope', '$http', '$routeParams', function
 // Element Controllers
 
 app.controller('UserController', ['$scope', 'user', '$http', '$location', function ($scope, user, $http, $location) {
-    user.then(function (u) {
+    user.get('me').then(function (u) {
         $scope.user = u;
     });
 
@@ -178,7 +185,7 @@ app.controller('FriendsLeaderboardController', ['$scope', 'friends', 'user', fun
     $scope.waiting = true;
     friends.then(function (response) {
         $scope.waiting = false;
-        user.then(function (u) {
+        user.get('me').then(function (u) {
             response = response.map(function (friend) {
                 if (u.username === friend.username) {
                     friend.me = true;

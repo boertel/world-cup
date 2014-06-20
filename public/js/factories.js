@@ -44,10 +44,21 @@ app.factory('scores', ['$http', function ($http) {
 }]);
 
 app.factory('user', ['$http', function ($http) {
-    var promise = $http.get('/api/v1/users/me').then(function (response) {
-        return response.data;
-    });
-    return promise;
+    var url = '/api/v1/users/',
+        users = {};
+
+    function get(id) {
+        if (users[id] === undefined) {
+            users[id] = $http.get(url + id).then(function (response) {
+                return response.data;
+            });
+        }
+        return users[id];
+    }
+
+    return {
+        get: get
+    };
 }]);
 
 app.factory('games', ['$http', function ($http) {

@@ -8,7 +8,10 @@ module.exports = {
             if (user_id === 'me') {
                 user_id = req.user.id
             }
-            db.User.find({where: {id: user_id}}).success(function (user) {
+            db.User.find({
+                where: {id: user_id},
+                attributes: db.User.attrs()
+            }).success(function (user) {
                 res.json(user)
             })
         }

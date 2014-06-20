@@ -143,6 +143,7 @@ header {
   width: 10px;
   height: 20px;
   cursor: pointer;
+  margin-right: 3px;
 }
 .little-score.saved {
   background-color: #8191da;
@@ -301,6 +302,10 @@ h2 .selected {
 }
 .help {
   margin-top: 40px;
+}
+.profile-picture {
+  border-radius: 6px;
+  margin-bottom: 1em;
 }
 .line {
   margin: 2em 0;

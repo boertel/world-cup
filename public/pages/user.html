@@ -1,19 +1,14 @@
-<div class="pure-g" ng-controller="UserController">
-    <div class="pure-u-1 pure-u-md-1-3 pure-u-lg-1-3">
-        <h3>{{ user.points }} points</h3>
-        <h3>#{{ user.rank }}</h3>
-    </div>
-    <div class="pure-u-1 pure-u-md-1-3 pure-u-lg-1-3">
+<div class="pure-g">
+    <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-2">
         <div class="center">
-            <img ng-src="{{ user.picture }}">
+            <img ng-src="{{ user.picture }}" class="profile-picture">
         </div>
         <div class="center">
             <a href="{{ user.link }}" target="_blank">{{ user.first_name }} {{ user.last_name }}</a>
         </div>
     </div>
-    <div class="pure-u-1 pure-u-md-1-3 pure-u-lg-1-3">
-        <div></div>
-        <div></div>
+    <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-2">
+        <h1 class="center">{{ user.points }} points</h1>
     </div>
 </div>
 
@@ -23,4 +18,13 @@
     </div>
 </div>
 
-<div widget-game></div>
+<div ng-show="!game">
+    <div class="pure-g">
+        <div class="pure-u-1 placeholder">
+            <p class="center">Hover over the little rectangles to see the details of matches.</p>
+        </div>
+    </div>
+</div>
+<div ng-show="game">
+    <div widget-game></div>
+</div>
