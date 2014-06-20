@@ -1,4 +1,4 @@
-app.controller('HomeController', ['$scope', '$http', function ($scope, $http) {
+app.controller('HomeController', ['$scope', 'notification', function ($scope, notification) {
 }]);
 
 app.controller('GamesController', ['$scope', 'games', function ($scope, games) {
@@ -82,6 +82,7 @@ app.controller('ProfileController', ['$scope', '$http', '$routeParams', 'user', 
         $scope.bets = data.map(function (d) {
             return new Bet(d);
         });
+        $scope.$apply();
     });
 
     user.get($routeParams.id).then(function (user) {

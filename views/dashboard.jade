@@ -9,13 +9,13 @@ block header
                         a(href="#/", ng-class="{'pure-menu-selected':isActive('/')}") Matches
                     li
                         a(href="#/leaderboard", ng-class="{'pure-menu-selected':isActive('/leaderboard')}") Leaderboard
-                span.pure-menu-heading.right
+                a.pure-menu-heading.right(href="#/user/me")
                     img.avatar(ng-src="{{ user.picture }}")
-                span.pure-menu-heading.right.profile-points {{ user.points }} points
+                a.pure-menu-heading.right.profile-points(href="#/user/me") {{ user.points }} points
 
 block notification
     div#notification(ng-controller="NotificationController")
-        div.notification(ng-repeat="notification in notifications")
+        div.notification(ng-repeat="notification in notifications", class="{{ notification.type }}")
             div.page-width
                 p {{ notification.message }}
 
@@ -55,6 +55,31 @@ block script
                 </div>
             </div>
         </div>
+
+    script(type="text/ng-template", id="widget-legend.html").
+        <div class="pure-g legend">
+            <div class="pure-u-1">
+                <em>Legend:</em>
+                <ul>
+                    <li>
+                        <span class="little-score"></span>: You didn't bet on this game
+                    </li>
+                    <li>
+                        <span class="little-score saved"></span>: You did bet on this game
+                    </li>
+                    <li>
+                        <span class="little-score lost"></span>: 0 points
+                    </li>
+                    <li>
+                        <span class="little-score win"></span>: +20 points
+                    </li>
+                    <li>
+                        <span class="little-score perfect"></span>: +50 points
+                    </li>
+                </ul>
+            </div>
+        </div>
+
     script(src="/js/models.js")
     script(src="/js/app.js")
     script(src="/js/filters.js")

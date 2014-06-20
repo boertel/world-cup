@@ -17,6 +17,7 @@ app.directive('time', function () {
 var directives = [
     'games',
     'game',
+    'legend',
     'leaderboard',
 ];
 

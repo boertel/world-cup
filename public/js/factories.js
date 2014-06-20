@@ -97,7 +97,8 @@ app.factory('friends', ['$q', function ($q) {
                     points: parseInt(score.score, 10),
                     link: 'https://www.facebook.com/profile.php?id=' + score.user.id,
                     name: score.user.name,
-                    username: score.user.id
+                    username: score.user.id,
+                    id: 'fb_' + score.user.id
                 };
                 return user;
             });
