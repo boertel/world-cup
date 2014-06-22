@@ -87,8 +87,11 @@ app.controller('ProfileController', ['$scope', '$http', '$routeParams', 'user', 
     }).success(function (data) {
         $scope.bets = data.map(function (d) {
             var bet = new Bet(d);
+            bet.game = new Game(bet.game);
             $scope.number[bet.type()] += 1;
             return bet;
+        }).sort(function (a, b) {
+            return a.game.moment.time.unix() - b.game.moment.time.unix();
         });
     });
 
