@@ -86,11 +86,18 @@ header
     background: darken(colors.primary, 10%)
 
 .profile-points
-    margin-top: 2px !important
+    display: none !important
+
+    @media screen and (min-width: 35.5em)
+        display: inline-block !important
+        margin-top: 2px !important
 
 .avatar
+    display: none !important
     padding-left: 0 !important
     padding-bottom: 0 !important
+    @media screen and (min-width: 35.5em)
+        display: inline-block !important
     img
         width: 30px
         height: 30px

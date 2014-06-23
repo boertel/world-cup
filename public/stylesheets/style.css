@@ -87,11 +87,23 @@ header {
   background: #469f1b;
 }
 .profile-points {
-  margin-top: 2px !important;
+  display: none !important;
+}
+@media screen and (min-width: 35.5em) {
+  .profile-points {
+    display: inline-block !important;
+    margin-top: 2px !important;
+  }
 }
 .avatar {
+  display: none !important;
   padding-left: 0 !important;
   padding-bottom: 0 !important;
+}
+@media screen and (min-width: 35.5em) {
+  .avatar {
+    display: inline-block !important;
+  }
 }
 .avatar img {
   width: 30px;
@@ -139,6 +151,12 @@ header {
 .separator .bet-summary {
   float: right;
   width: 40px;
+}
+#today:before {
+  display: block;
+  content: "";
+  height: 50px;
+  margin: -50px 0 0;
 }
 .little-score {
   width: 6px;
