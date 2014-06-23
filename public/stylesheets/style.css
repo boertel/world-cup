@@ -152,12 +152,6 @@ header {
   float: right;
   width: 40px;
 }
-#today:before {
-  display: block;
-  content: "";
-  height: 50px;
-  margin: -50px 0 0;
-}
 .little-score {
   width: 6px;
   height: 13px;
