@@ -19,6 +19,10 @@ var app = angular.module('content', ['ngRoute'])
             .when('/games/:id', {
                 templateUrl: 'pages/game.html',
                 controller: 'GameController'
+            })
+            .when('/competitor/:id', {
+                templateUrl: 'pages/competitor.html',
+                controller: 'CompetitorController'
             });
     }]).run(function ($rootScope, $route, $window, $location, notification) {
         $rootScope.$on('$routeChangeError', function (e, curr, prev) {

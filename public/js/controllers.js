@@ -30,6 +30,20 @@ app.controller('GamesController', ['$scope', 'games', function ($scope, games) {
     });
 }]);
 
+app.controller('CompetitorController', ['$scope', '$http', '$routeParams',
+   function ($scope, $http, $routeParams) {
+        $http({
+            method: 'GET',
+            url: '/api/v1/competitors/' + $routeParams.id + '/games',
+        }).success(function (data) {
+            var games = data.map(function (game) {
+                game.bet = new Bet(game.bet);
+                return new Game(game);
+            });
+            $scope.games = games;
+        });
+   }
+]);
 
 app.controller('GameController', ['$scope', '$http', '$routeParams', 'notification', '$rootScope', 'games', '$location',
     function ($scope, $http, $routeParams, notification, $rootScope, games, $location) {
