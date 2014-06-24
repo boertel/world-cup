@@ -47,7 +47,7 @@ app.use(function (req, res, next) {
     if (req.isAuthenticated()) {
         res.locals.user = req.user
     }
-    res.locals.debug = (app.get('env') === 'development');
+    res.locals.debug = (app.get('env') === 'development' || app.get('env') === 'dev');
     next()
 })
 
