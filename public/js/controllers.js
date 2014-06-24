@@ -6,8 +6,9 @@ app.controller('GamesController', ['$scope', 'games', function ($scope, games) {
         $('.game.period-' + period).toggleClass('past');
     };
 
-    games.get.then(function (data) {
-        var days = [],
+    games.get().then(function (data) {
+        var group = [],
+            second = [],
             periodsDict = {};
 
         data.forEach(function (d) {
@@ -16,17 +17,30 @@ app.controller('GamesController', ['$scope', 'games', function ($scope, games) {
         });
 
         for (var key in periodsDict) {
-            days.push({
+            var day = {
                 day: moment(key).toDate(),
                 dayCss: key,
                 games: periodsDict[key].sort(function (a, b) {
                     return a.moment.time.unix() - b.moment.time.unix();
                 }),
                 past: moment(key).diff(new Date(), 'day') <= -2
-            });
+            };
+
+            if (moment(key).diff(moment('2014-06-28')) > 0) {
+                second.push(day);
+            } else {
+                group.push(day);
+            }
         }
 
-        $scope.days = days;
+        $scope.stage = {
+            group: {
+                days: group
+            },
+            second: {
+                days: second
+            }
+        };
     });
 }]);
 

@@ -62,13 +62,16 @@ app.factory('user', ['$http', function ($http) {
 }]);
 
 app.factory('games', ['$http', function ($http) {
-    var promise = $http.get('/api/v1/games').then(function (response) {
-        var games = response.data.map(function (game) {
-            game.bet = new Bet(game.bet);
-            return new Game(game);
+    function get(filters) {
+        var promise = $http.get('/api/v1/games').then(function (response) {
+            var games = response.data.map(function (game) {
+                game.bet = new Bet(game.bet);
+                return new Game(game);
+            });
+            return games;
         });
-        return games;
-    });
+        return promise
+    }
 
     function updateBet(bet) {
         promise.then(function (games) {
@@ -82,7 +85,7 @@ app.factory('games', ['$http', function ($http) {
     }
 
     return {
-        get: promise,
+        get: get,
         updateBet: updateBet
     }
 }]);
