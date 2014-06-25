@@ -70,6 +70,8 @@ header
     padding: 10px 0
     width: 100%
     color: #fff
+    position: fixed
+    top: 0
 
 .pure-menu.pure-menu-open, .pure-menu.pure-menu-horizontal li .pure-menu-children
     background: none
@@ -84,14 +86,28 @@ header
     background: darken(colors.primary, 10%)
 
 .profile-points
-    margin-top: 2px !important
+    display: none !important
+
+    @media screen and (min-width: 35.5em)
+        display: inline-block !important
+        margin-top: 2px !important
 
 .avatar
-    width: 33px
-    height: 33px
-    margin-top: -5px
-    border-radius: 3px
+    display: none !important
+    padding-left: 0 !important
+    padding-right: 0 !important
+    padding-bottom: 0 !important
+    @media screen and (min-width: 35.5em)
+        display: inline-block !important
+    img
+        width: 30px
+        height: 30px
+        margin-top: -5px
+        border-radius: 3px
 
+
+#notification
+    margin-top: 53px
 
 .notification
     padding: 10px
@@ -99,11 +115,13 @@ header
     background: colors.secondary
 
 .notification.warning
+    background-color: lighten(colors.saved, 70%)
+    color: colors.saved
 
 .notification.error
 
 #content
-    margin: 20px auto
+    margin: 80px auto 20px auto
 
 
 .cta
@@ -119,6 +137,21 @@ header
     &:hover
         color: #fff
 
+.filters
+    padding-bottom: 0.6em
+    margin: 0 auto 1em auto
+
+    li
+        display: inline-block
+        padding-right: 1em
+
+    .selected
+        font-weight: bold
+
+    .disabled
+        color: #DDDDDD
+        pointer-events: none
+        cursor: default
 
 .games-group
     border-bottom: 1px solid #DDDDDD
@@ -147,6 +180,7 @@ header
         width: 10px
         height: 20px
         cursor: pointer
+        margin-right: 3px
 
     &.saved
         background-color: colors.saved
@@ -170,6 +204,7 @@ div.game
     border-style: solid
     border-left-width: 4px
     border-color: #DDDDDD
+    cursor: pointer
 
     &.past
         display: none
@@ -305,9 +340,20 @@ h2
 .help
     margin-top: 40px
 
+.stats
+    text-align: center
+
+@media screen and (min-width: 48em)
+    .stats
+        text-align: right
+
+
+.profile-picture
+    border-radius: 6px
+    margin-bottom: 1em
 
 .line
-    margin: 2em 0
+    margin: 1em 0 2em 0
 
 .placeholder
     border: 4px dashed #DDDDDD

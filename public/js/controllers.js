@@ -1,4 +1,17 @@
-app.controller('HomeController', ['$scope', '$http', function ($scope, $http) {
+app.controller('HomeController', ['$scope', 'notification', function ($scope, notification) {
+    $scope.scope = 'group';
+}]);
+
+app.controller('SixteenController', ['$scope', 'games', function ($scope, games) {
+    $scope.showPast = function (period) {
+        $('.game.period-' + period).toggleClass('past');
+    };
+
+    games.groupByDay().then(function (data) {
+        $scope.days = data.filter(function (d) {
+            return moment(d.day).diff(moment('2014-06-28')) >= 0;
+        });
+    });
 }]);
 
 app.controller('GamesController', ['$scope', 'games', function ($scope, games) {
@@ -6,27 +19,10 @@ app.controller('GamesController', ['$scope', 'games', function ($scope, games) {
         $('.game.period-' + period).toggleClass('past');
     };
 
-    games.get.then(function (data) {
-        var days = [],
-            periodsDict = {};
-
-        data.forEach(function (d) {
-            periodsDict[d.day] = periodsDict[d.day] || [];
-            periodsDict[d.day].push(d);
+    games.groupByDay().then(function (data) {
+        $scope.days = data.filter(function (d) {
+            return moment(d.day).diff(moment('2014-06-28')) < 0;
         });
-
-        for (var key in periodsDict) {
-            days.push({
-                day: moment(key).toDate(),
-                dayCss: key,
-                games: periodsDict[key].sort(function (a, b) {
-                    return a.moment.time.unix() - b.moment.time.unix();
-                }),
-                past: moment(key).diff(new Date(), 'day') <= -2
-            });
-        }
-
-        $scope.days = days;
     });
 }]);
 
@@ -45,8 +41,8 @@ app.controller('CompetitorController', ['$scope', '$http', '$routeParams',
    }
 ]);
 
-app.controller('GameController', ['$scope', '$http', '$routeParams', 'notification', '$rootScope', 'games', '$location',
-    function ($scope, $http, $routeParams, notification, $rootScope, games, $location) {
+app.controller('GameController', ['$scope', '$http', '$routeParams', 'notification', '$rootScope', 'games', '$location', '$window',
+    function ($scope, $http, $routeParams, notification, $rootScope, games, $location, $window) {
     var url = '/api/v1/games/' + $routeParams.id + '/bets';
     $http({
         method: 'GET',
@@ -73,24 +69,44 @@ app.controller('GameController', ['$scope', '$http', '$routeParams', 'notificati
             notification.notify("Your bet has been saved.");
         });
     };
+
+    $scope.back = function () {
+        $window.history.back();
+    };
 }]);
 
 
-app.controller('ProfileController', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
+app.controller('ProfileController', ['$scope', '$http', '$routeParams', 'user', function ($scope, $http, $routeParams, user) {
+    $scope.game = false;
+    $scope.number = {
+        perfect: 0,
+        win: 0,
+        lost: 0
+    };
+
     $scope.showGame = function (bet) {
         var bet = bet,
             game = new Game(bet.game);
-        delete bet.game;
         game.bet = bet;
         $scope.game = game;
     };
+
     $http({
         method: 'GET',
         url: '/api/v1/users/' + $routeParams.id + '/bets',
     }).success(function (data) {
         $scope.bets = data.map(function (d) {
-            return new Bet(d);
+            var bet = new Bet(d);
+            bet.game = new Game(bet.game);
+            $scope.number[bet.type()] += 1;
+            return bet;
+        }).sort(function (a, b) {
+            return a.game.moment.time.unix() - b.game.moment.time.unix();
         });
+    });
+
+    user.get($routeParams.id).then(function (user) {
+        $scope.user = user;
     });
 }]);
 
@@ -99,7 +115,7 @@ app.controller('ProfileController', ['$scope', '$http', '$routeParams', function
 // Element Controllers
 
 app.controller('UserController', ['$scope', 'user', '$http', '$location', function ($scope, user, $http, $location) {
-    user.then(function (u) {
+    user.get('me').then(function (u) {
         $scope.user = u;
     });
 
@@ -193,7 +209,7 @@ app.controller('FriendsLeaderboardController', ['$scope', 'friends', 'user', fun
     $scope.waiting = true;
     friends.then(function (response) {
         $scope.waiting = false;
-        user.then(function (u) {
+        user.get('me').then(function (u) {
             response = response.map(function (friend) {
                 if (u.username === friend.username) {
                     friend.me = true;

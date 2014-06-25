@@ -44,10 +44,21 @@ app.factory('scores', ['$http', function ($http) {
 }]);
 
 app.factory('user', ['$http', function ($http) {
-    var promise = $http.get('/api/v1/users/me').then(function (response) {
-        return response.data;
-    });
-    return promise;
+    var url = '/api/v1/users/',
+        users = {};
+
+    function get(id) {
+        if (users[id] === undefined) {
+            users[id] = $http.get(url + id).then(function (response) {
+                return response.data;
+            });
+        }
+        return users[id];
+    }
+
+    return {
+        get: get
+    };
 }]);
 
 app.factory('games', ['$http', function ($http) {
@@ -58,6 +69,36 @@ app.factory('games', ['$http', function ($http) {
         });
         return games;
     });
+
+    function get(filters) {
+        return promise
+    }
+
+    function groupByDay() {
+        var group = [],
+            periodsDict = {};
+
+        return promise.then(function (data) {
+            data.forEach(function (d) {
+                periodsDict[d.day] = periodsDict[d.day] || [];
+                periodsDict[d.day].push(d);
+            });
+
+            for (var key in periodsDict) {
+                var day = {
+                    day: moment(key).toDate(),
+                    dayCss: key,
+                    games: periodsDict[key].sort(function (a, b) {
+                        return a.moment.time.unix() - b.moment.time.unix();
+                    }),
+                    past: moment(key).diff(new Date(), 'day') <= -2
+                };
+                group.push(day);
+            }
+
+            return group;
+        });
+    }
 
     function updateBet(bet) {
         promise.then(function (games) {
@@ -71,8 +112,9 @@ app.factory('games', ['$http', function ($http) {
     }
 
     return {
-        get: promise,
-        updateBet: updateBet
+        get: get,
+        updateBet: updateBet,
+        groupByDay: groupByDay
     }
 }]);
 
@@ -86,7 +128,8 @@ app.factory('friends', ['$q', function ($q) {
                     points: parseInt(score.score, 10),
                     link: 'https://www.facebook.com/profile.php?id=' + score.user.id,
                     name: score.user.name,
-                    username: score.user.id
+                    username: score.user.id,
+                    id: 'fb_' + score.user.id
                 };
                 return user;
             });

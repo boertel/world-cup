@@ -1,28 +1,19 @@
-<div ng-controller="GamesController" widget-games></div>
-
-<div class="pure-g legend">
-    <div class="pure-u-1">
-        <em>Legend:</em>
-        <ul>
-            <li>
-                <span class="little-score"></span>: You didn't bet on this game
-            </li>
-            <li>
-                <span class="little-score saved"></span>: You did bet on this game
-            </li>
-            <li>
-                <span class="little-score lost"></span>: 0 points
-            </li>
-            <li>
-                <span class="little-score win"></span>: +20 points
-            </li>
-            <li>
-                <span class="little-score perfect"></span>: +50 points
-            </li>
+<div class="pure-g">
+    <div class="pure-u-1 center">
+        <ul class="filters">
+            <li><a ng-click="scope='group'" ng-class="{selected: scope === 'group'}">Group stage</a></li>
+            <li><a ng-click="scope='sixteen'" ng-class="{selected: scope === 'sixteen'}">Round of 16</a></li>
+            <li><a ng-click="scope='quarter'" class="disabled" ng-class="{selected: scope === 'quarter'}">Quarter Finals</a></li>
+            <li><a ng-click="scope='semi'" class="disabled" ng-class="{selected: scope === 'semi'}">Semi Finals</a></li>
+            <li><a ng-click="scope='final'" class="disabled" ng-class="{selected: scope === 'final'}">Final</a></li>
         </ul>
     </div>
 </div>
 
+<div ng-controller="GamesController" widget-games ng-show="scope === 'group'"></div>
+<div ng-controller="SixteenController" widget-games ng-show="scope === 'sixteen'"></div>
+
+<div widget-legend></div>
 
 <script type="text/ng-template" id="widget-games.html">
     <div ng-repeat="day in days" class="games-group">

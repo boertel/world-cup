@@ -67,6 +67,8 @@ header {
   padding: 10px 0;
   width: 100%;
   color: #fff;
+  position: fixed;
+  top: 0;
 }
 .pure-menu.pure-menu-open,
 .pure-menu.pure-menu-horizontal li .pure-menu-children {
@@ -85,23 +87,46 @@ header {
   background: #469f1b;
 }
 .profile-points {
-  margin-top: 2px !important;
+  display: none !important;
+}
+@media screen and (min-width: 35.5em) {
+  .profile-points {
+    display: inline-block !important;
+    margin-top: 2px !important;
+  }
 }
 .avatar {
-  width: 33px;
-  height: 33px;
+  display: none !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  padding-bottom: 0 !important;
+}
+@media screen and (min-width: 35.5em) {
+  .avatar {
+    display: inline-block !important;
+  }
+}
+.avatar img {
+  width: 30px;
+  height: 30px;
   margin-top: -5px;
   border-radius: 3px;
+}
+#notification {
+  margin-top: 53px;
 }
 .notification {
   padding: 10px;
   color: #4eb11e;
   background: #b7e696;
 }
-.notification.warning,
+.notification.warning {
+  background-color: #d9def4;
+  color: #8191da;
+}
 .notification.error,
 #content {
-  margin: 20px auto;
+  margin: 80px auto 20px auto;
 }
 .cta {
   margin: 60px 0;
@@ -115,6 +140,22 @@ header {
 }
 .btn-facebook:hover {
   color: #fff;
+}
+.filters {
+  padding-bottom: 0.6em;
+  margin: 0 auto 1em auto;
+}
+.filters li {
+  display: inline-block;
+  padding-right: 1em;
+}
+.filters .selected {
+  font-weight: bold;
+}
+.filters .disabled {
+  color: #ddd;
+  pointer-events: none;
+  cursor: default;
 }
 .games-group {
   border-bottom: 1px solid #ddd;
@@ -143,6 +184,7 @@ header {
   width: 10px;
   height: 20px;
   cursor: pointer;
+  margin-right: 3px;
 }
 .little-score.saved {
   background-color: #8191da;
@@ -166,6 +208,7 @@ div.game {
   border-style: solid;
   border-left-width: 4px;
   border-color: #ddd;
+  cursor: pointer;
 }
 div.game.past {
   display: none;
@@ -302,8 +345,20 @@ h2 .selected {
 .help {
   margin-top: 40px;
 }
+.stats {
+  text-align: center;
+}
+@media screen and (min-width: 48em) {
+  .stats {
+    text-align: right;
+  }
+}
+.profile-picture {
+  border-radius: 6px;
+  margin-bottom: 1em;
+}
 .line {
-  margin: 2em 0;
+  margin: 1em 0 2em 0;
 }
 .placeholder {
   border: 4px dashed #ddd;

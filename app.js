@@ -13,6 +13,10 @@ var passport = require('passport'),
 
 var app = express();
 
+function static(dirname, age) {
+    return require('serve-static')(path.join(__dirname, dirname), {maxAge: age});
+}
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
@@ -20,7 +24,8 @@ app.set('view engine', 'jade');
 //app.use(require('static-favicon')(__dirname + '/public/favicon.ico'));
 app.use(require('morgan')('dev'));
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
-app.use(require('serve-static')(path.join(__dirname, 'public')));
+app.use(static('public'));
+app.use(static('public/cached', 86400000));
 app.use(require('body-parser')());
 app.use(require('method-override')());
 app.use(require('cookie-parser')());
@@ -42,7 +47,7 @@ app.use(function (req, res, next) {
     if (req.isAuthenticated()) {
         res.locals.user = req.user
     }
-    res.locals.debug = (app.get('env') === 'development');
+    res.locals.debug = (app.get('env') === 'development' || app.get('env') === 'dev');
     next()
 })
 
