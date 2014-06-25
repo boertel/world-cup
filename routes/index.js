@@ -11,6 +11,7 @@ module.exports = function (app) {
 
     app.get('/api/v1/competitors', competitors.read)
     app.get('/api/v1/competitors/:id', competitors.read)
+    app.get('/api/v1/competitors/:id/games', competitors.games.read)
 
     app.get('/api/v1/groups', groups.read)
     app.get('/api/v1/groups/:id', groups.read)
