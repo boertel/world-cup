@@ -19,34 +19,48 @@ db.Bet.findAll({
         }
     ]
 }).success(function (bets) {
-    console.log("number of bets to process: ", bets.length);
-    bets.forEach(function (bet) {
-        console.log("bet: ", bet.id);
-        var points = bet.user.points + bet.points();
+    console.log("Bets: ", bets.length);
+    var users = {};
 
-        db.User.find({where : {id: bet.user.id}}).success(function (user) {
-            user.points = points;
+    bets.forEach(function (bet) {
+        if (!users[bet.user.id]) {
+            users[bet.user.id] = {
+                points: 0,
+                bets: []
+            }
+        }
+        users[bet.user.id].points += bet.points();
+        users[bet.user.id].bets.push(bet.id);
+    });
+
+    console.log('Users: ', Object.keys(users).length);
+    console.log('---------------------------------');
+    for (var user_id in users) {
+        db.User.find({where : {id: user_id}}).success(function (user) {
+            var points = users[user.id].points;
+            user.points += points;
             user.save(['points']).success(function () {
                 user.publishScore(function (response) {
                     if (response) {
-                        db.Bet.update(
-                            {validated: true},
-                            {id: bet.id}
-                        ).success(function () {
-                            console.log("bet saved (" + bet.id + ")");
-                        }).error(function (err) {
-                            console.log('[bet:update]', err);
-                        });
-                   } else {
-                       console.log('[fb:scores', response);
-                   }
-               });
-           }).error(function (err) {
-               console.log('[user:save]', err);
-           });
+                        console.log(user.points + '\t\t' +  user.first_name + ' ' + user.last_name);
+                    } else {
+                        console.log('[fb:scores', response);
+                    }
+                });
+            }).error(function (err) {
+                console.log('[user:save]', err);
+            });
         }).error(function (err) {
             console.log('[user:find]', err);
-        })
+        });
+    }
 
+    db.Bet.update(
+        {validated: true},
+        {id: bets.map(function (d) { return d.id; })}
+    ).success(function () {
+        console.log('bets saved');
+    }).error(function (err) {
+        console.log('[bets:save]', err);
     });
 });
