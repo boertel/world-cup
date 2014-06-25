@@ -37,6 +37,10 @@ app.controller('CompetitorController', ['$scope', '$http', '$routeParams',
                 return new Game(game);
             });
             $scope.games = games;
+
+            $scope.competitor = games[0].competitorA.id == $routeParams.id ? games[0].competitorA : games[0].competitorB;
+            var name = $scope.competitor.name;
+            $scope.competitor.possessive = name[name.length - 1] === 's' ? name + "'" : name + "'s";
         });
    }
 ]);
