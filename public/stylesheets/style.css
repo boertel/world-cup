@@ -112,6 +112,9 @@ header {
   margin-top: -5px;
   border-radius: 3px;
 }
+#notification {
+  margin-top: 53px;
+}
 .notification {
   padding: 10px;
   color: #4eb11e;
@@ -137,6 +140,22 @@ header {
 }
 .btn-facebook:hover {
   color: #fff;
+}
+.filters {
+  padding-bottom: 0.6em;
+  margin: 0 auto 1em auto;
+}
+.filters li {
+  display: inline-block;
+  padding-right: 1em;
+}
+.filters .selected {
+  font-weight: bold;
+}
+.filters .disabled {
+  color: #ddd;
+  pointer-events: none;
+  cursor: default;
 }
 .games-group {
   border-bottom: 1px solid #ddd;

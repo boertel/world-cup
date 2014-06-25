@@ -9,6 +9,11 @@ module.exports = function (next) {
         {name: 'Group E'},
         {name: 'Group F'},
         {name: 'Group G'},
-        {name: 'Group H'}
+        {name: 'Group H'},
+        {name: 'Round of 16'},
+        {name: 'Quarter Finals'},
+        {name: 'Semi Finals'},
+        {name: 'Play-off for third place'},
+        {name: 'Final'}
     ]).success(next)
 }

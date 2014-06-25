@@ -1,4 +1,17 @@
 app.controller('HomeController', ['$scope', 'notification', function ($scope, notification) {
+    $scope.scope = 'group';
+}]);
+
+app.controller('SixteenController', ['$scope', 'games', function ($scope, games) {
+    $scope.showPast = function (period) {
+        $('.game.period-' + period).toggleClass('past');
+    };
+
+    games.groupByDay().then(function (data) {
+        $scope.days = data.filter(function (d) {
+            return moment(d.day).diff(moment('2014-06-28')) >= 0;
+        });
+    });
 }]);
 
 app.controller('GamesController', ['$scope', 'games', function ($scope, games) {
@@ -6,41 +19,10 @@ app.controller('GamesController', ['$scope', 'games', function ($scope, games) {
         $('.game.period-' + period).toggleClass('past');
     };
 
-    games.get().then(function (data) {
-        var group = [],
-            second = [],
-            periodsDict = {};
-
-        data.forEach(function (d) {
-            periodsDict[d.day] = periodsDict[d.day] || [];
-            periodsDict[d.day].push(d);
+    games.groupByDay().then(function (data) {
+        $scope.days = data.filter(function (d) {
+            return moment(d.day).diff(moment('2014-06-28')) < 0;
         });
-
-        for (var key in periodsDict) {
-            var day = {
-                day: moment(key).toDate(),
-                dayCss: key,
-                games: periodsDict[key].sort(function (a, b) {
-                    return a.moment.time.unix() - b.moment.time.unix();
-                }),
-                past: moment(key).diff(new Date(), 'day') <= -2
-            };
-
-            if (moment(key).diff(moment('2014-06-28')) > 0) {
-                second.push(day);
-            } else {
-                group.push(day);
-            }
-        }
-
-        $scope.stage = {
-            group: {
-                days: group
-            },
-            second: {
-                days: second
-            }
-        };
     });
 }]);
 

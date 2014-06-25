@@ -1,9 +1,17 @@
-<ul>
-    <li><a ng-click="">Group stage</a></li>
-    <li><a ng-click="">Second stage</a></li>
-</ul>
+<div class="pure-g">
+    <div class="pure-u-1 center">
+        <ul class="filters">
+            <li><a ng-click="scope='group'" ng-class="{selected: scope === 'group'}">Group stage</a></li>
+            <li><a ng-click="scope='sixteen'" ng-class="{selected: scope === 'sixteen'}">Round of 16</a></li>
+            <li><a ng-click="scope='quarter'" class="disabled" ng-class="{selected: scope === 'quarter'}">Quarter Finals</a></li>
+            <li><a ng-click="scope='semi'" class="disabled" ng-class="{selected: scope === 'semi'}">Semi Finals</a></li>
+            <li><a ng-click="scope='final'" class="disabled" ng-class="{selected: scope === 'final'}">Final</a></li>
+        </ul>
+    </div>
+</div>
 
-<div ng-controller="GamesController" widget-games></div>
+<div ng-controller="GamesController" widget-games ng-show="scope === 'group'"></div>
+<div ng-controller="SixteenController" widget-games ng-show="scope === 'sixteen'"></div>
 
 <div widget-legend></div>
 

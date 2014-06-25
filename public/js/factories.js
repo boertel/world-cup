@@ -62,15 +62,42 @@ app.factory('user', ['$http', function ($http) {
 }]);
 
 app.factory('games', ['$http', function ($http) {
-    function get(filters) {
-        var promise = $http.get('/api/v1/games').then(function (response) {
-            var games = response.data.map(function (game) {
-                game.bet = new Bet(game.bet);
-                return new Game(game);
-            });
-            return games;
+    var promise = $http.get('/api/v1/games').then(function (response) {
+        var games = response.data.map(function (game) {
+            game.bet = new Bet(game.bet);
+            return new Game(game);
         });
+        return games;
+    });
+
+    function get(filters) {
         return promise
+    }
+
+    function groupByDay() {
+        var group = [],
+            periodsDict = {};
+
+        return promise.then(function (data) {
+            data.forEach(function (d) {
+                periodsDict[d.day] = periodsDict[d.day] || [];
+                periodsDict[d.day].push(d);
+            });
+
+            for (var key in periodsDict) {
+                var day = {
+                    day: moment(key).toDate(),
+                    dayCss: key,
+                    games: periodsDict[key].sort(function (a, b) {
+                        return a.moment.time.unix() - b.moment.time.unix();
+                    }),
+                    past: moment(key).diff(new Date(), 'day') <= -2
+                };
+                group.push(day);
+            }
+
+            return group;
+        });
     }
 
     function updateBet(bet) {
@@ -86,7 +113,8 @@ app.factory('games', ['$http', function ($http) {
 
     return {
         get: get,
-        updateBet: updateBet
+        updateBet: updateBet,
+        groupByDay: groupByDay
     }
 }]);
 
