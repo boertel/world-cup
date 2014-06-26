@@ -3,7 +3,13 @@ exports = require('./' + (process.env.NODE_ENV || 'dev') + '.js')
 exports.POINTS = {
     perfect: 50,
     win: 20,
-    lost: 0
+    lost: 0,
+}
+
+exports.SECOND_POINTS = {
+    perfect: 150,
+    win: 100,
+    lost: 0,
 }
 exports.social = {
     facebook: {
