@@ -233,6 +233,9 @@ function formatLeaderboardUser(data) {
 app.controller('LeaderboardController', ['$scope', '$http', function ($scope, $http) {
     $http.get('/api/v1/leaderboard').then(function (response) {
         var users = formatLeaderboardUser(response.data);
+        users.forEach(function (user) {
+            user.link = '#/user/' + user.id;
+        });
         $scope.users = users;
     });
 }]);
