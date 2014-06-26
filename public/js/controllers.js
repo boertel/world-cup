@@ -1,5 +1,33 @@
+var stages = {
+    sixteen: {
+        start: '2014-06-28 16:00',
+        end: '2014-07-01 23:00'
+    },
+    quarter: {
+        start: '2014-07-04 16:00',
+        end: '2014-07-05 23:00'
+    },
+    semi: {
+        start: '2014-07-08 16:00',
+        end: '2014-07-09 23:00'
+    },
+    'final': {
+        start: '2014-07-12 16:00',
+        end: '2014-07-13 23:00'
+    }
+};
+
+for (var key in stages) {
+    var stage = stages[key];
+
+    if (moment.utc(stage.start).diff(moment.utc(new Date()), 'days') <= 2) {
+        defaultScope = key;
+    }
+
+}
+
 app.controller('HomeController', ['$scope', 'notification', function ($scope, notification) {
-    $scope.scope = 'group';
+    $scope.scope = defaultScope;
 }]);
 
 app.controller('SixteenController', ['$scope', 'games', function ($scope, games) {

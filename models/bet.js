@@ -39,7 +39,6 @@ module.exports = function (sequelize, DataTypes) {
             },
             points: function () {
                 var gamePoints = this.game.points();
-                console.log(gamePoints);
                 if (!this.game) {
                     return
                 }
