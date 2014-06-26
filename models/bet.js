@@ -38,10 +38,10 @@ module.exports = function (sequelize, DataTypes) {
                     || (this.game.score_a < this.game.score_b && this.score_a < this.score_b)
             },
             points: function () {
-                var gamePoints = this.game.points();
                 if (!this.game) {
                     return
                 }
+                var gamePoints = this.game.points();
                 if (this.game.score_a === null || this.game.score_b === null ||
                     this.score_a === null || this.score_b === null) {
                     return;
