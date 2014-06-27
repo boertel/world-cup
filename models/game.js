@@ -77,7 +77,7 @@ module.exports = function (sequelize, DataTypes) {
         classMethods: {
             attrs: function () {
                 var attributes = [],
-                    not = ['created_at', 'updated_at', 'competitor_a_id', 'competitor_b_id', 'group_id']
+                    not = ['created_at', 'updated_at', 'competitor_a_id', 'competitor_b_id']
                 for (var key in this.attributes) {
                     if (not.indexOf(key) === -1) {
                         attributes.push(key)
