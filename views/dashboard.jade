@@ -17,7 +17,7 @@ block notification
     div#notification(ng-controller="NotificationController")
         div.notification(ng-repeat="notification in notifications", class="{{ notification.type }}")
             div.page-width
-                p {{ notification.message }}
+                p(ng-bind-html="notification.message") {{ notification.message }}
 
 block content
 
