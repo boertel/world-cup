@@ -38,6 +38,10 @@ Bet.prototype.isLost = function () {
 
 Bet.prototype.type = function () {
     switch (this.points) {
+        case 150:
+            return 'perfect';
+        case 100:
+            return 'win';
         case 50:
             return 'perfect';
         case 20:
