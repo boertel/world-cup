@@ -28,7 +28,7 @@ for (var key in stages) {
 
 app.controller('HomeController', ['$scope', 'notification', function ($scope, notification) {
     $scope.scope = defaultScope;
-    notification.notify('The result of a match is the score at the end of the <strong>120th</strong> minute to keep the extra time interesting. Also the points value has been updated, it\'s <strong>150</strong> for a perfect and <strong>100</strong> points for a win.<br><br><center>Thanks for playing and Good Luck!</center>', 'warning');
+    notification.notify('The result of a match is the score at the end of the <strong>120th</strong> minute to keep the extra time interesting. Also the points value has been updated, it\'s <strong>150</strong> for a perfect and <strong>100</strong> points for a win.<br><br><center>Thanks for playing and Good Luck!</center>', 'info');
 }]);
 
 app.controller('SixteenController', ['$scope', 'games', function ($scope, games) {
