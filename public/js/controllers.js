@@ -31,15 +31,30 @@ app.controller('HomeController', ['$scope', 'notification', function ($scope, no
     notification.notify('The result of a match is the score at the end of the <strong>120th</strong> minute to keep the extra time interesting. Also the points value has been updated, it\'s <strong>150</strong> for a perfect and <strong>100</strong> points for a win.<br><br><center>Thanks for playing and Good Luck!</center>', 'info');
 }]);
 
+function filterStage(timerange) {
+    return function (d) {
+        var m = moment(d.day);
+        return m.diff(moment(timerange.start), 'days') >= 0 && m.diff(moment(timerange.end), 'days') < 0;
+    }
+}
+
 app.controller('SixteenController', ['$scope', 'games', function ($scope, games) {
     $scope.showPast = function (period) {
         $('.game.period-' + period).toggleClass('past');
     };
 
     games.groupByDay().then(function (data) {
-        $scope.days = data.filter(function (d) {
-            return moment(d.day).diff(moment('2014-06-28')) >= 0;
-        });
+        $scope.days = data.filter(filterStage(stages.sixteen));
+    });
+}]);
+
+app.controller('QuarterController', ['$scope', 'games', function ($scope, games) {
+    $scope.showPast = function (period) {
+        $('.game.period-' + period).toggleClass('past');
+    };
+
+    games.groupByDay().then(function (data) {
+        $scope.days = data.filter(filterStage(stages.quarter));
     });
 }]);
 
