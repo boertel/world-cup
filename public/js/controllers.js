@@ -102,8 +102,6 @@ app.controller('GameController', ['$scope', '$http', '$routeParams', 'notificati
         $rootScope.$emit('gameLoaded', {game: data.game});
     });
 
-    notification.notify('The result of a match is the score at the end of the <strong>120th</strong> minute to keep the extra time interesting. Also the points value has been updated, it\'s <strong>150</strong> for a perfect and <strong>100</strong> points for a win.<br><br><center>Thanks for playing and Good Luck!</center>', 'info');
-
     $scope.submit = function (form) {
         $http({
             method: 'POST',
