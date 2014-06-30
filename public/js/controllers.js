@@ -1,7 +1,7 @@
 var stages = {
     sixteen: {
         start: '2014-06-28 16:00',
-        end: '2014-07-01 23:00'
+        end: '2014-07-03 23:00'
     },
     quarter: {
         start: '2014-07-04 16:00',
@@ -28,7 +28,6 @@ for (var key in stages) {
 
 app.controller('HomeController', ['$scope', 'notification', function ($scope, notification) {
     $scope.scope = defaultScope;
-    notification.notify('The result of a match is the score at the end of the <strong>120th</strong> minute to keep the extra time interesting. Also the points value has been updated, it\'s <strong>150</strong> for a perfect and <strong>100</strong> points for a win.<br><br><center>Thanks for playing and Good Luck!</center>', 'info');
 }]);
 
 function filterStage(timerange) {
@@ -102,6 +101,8 @@ app.controller('GameController', ['$scope', '$http', '$routeParams', 'notificati
         $scope.bet = new Bet(data);
         $rootScope.$emit('gameLoaded', {game: data.game});
     });
+
+    notification.notify('The result of a match is the score at the end of the <strong>120th</strong> minute to keep the extra time interesting. Also the points value has been updated, it\'s <strong>150</strong> for a perfect and <strong>100</strong> points for a win.<br><br><center>Thanks for playing and Good Luck!</center>', 'info');
 
     $scope.submit = function (form) {
         $http({
