@@ -5,7 +5,7 @@ var stages = {
     },
     quarter: {
         start: '2014-07-04 16:00',
-        end: '2014-07-05 23:00'
+        end: '2014-07-06 23:00'
     },
     semi: {
         start: '2014-07-08 16:00',
@@ -20,7 +20,7 @@ var stages = {
 for (var key in stages) {
     var stage = stages[key];
 
-    if (moment.utc(stage.start).diff(moment.utc(new Date()), 'days') <= 2) {
+    if (moment.utc(stage.start).diff(moment.utc(new Date()), 'days') <= 1) {
         defaultScope = key;
     }
 
