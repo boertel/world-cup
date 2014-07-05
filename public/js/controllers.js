@@ -9,7 +9,7 @@ var stages = {
     },
     semi: {
         start: '2014-07-08 16:00',
-        end: '2014-07-09 23:00'
+        end: '2014-07-10 23:00'
     },
     'final': {
         start: '2014-07-12 16:00',
@@ -54,6 +54,26 @@ app.controller('QuarterController', ['$scope', 'games', function ($scope, games)
 
     games.groupByDay().then(function (data) {
         $scope.days = data.filter(filterStage(stages.quarter));
+    });
+}]);
+
+app.controller('SemiController', ['$scope', 'games', function ($scope, games) {
+    $scope.showPast = function (period) {
+        $('.game.period-' + period).toggleClass('past');
+    };
+
+    games.groupByDay().then(function (data) {
+        $scope.days = data.filter(filterStage(stages.semi));
+    });
+}]);
+
+app.controller('FinalController', ['$scope', 'games', function ($scope, games) {
+    $scope.showPast = function (period) {
+        $('.game.period-' + period).toggleClass('past');
+    };
+
+    games.groupByDay().then(function (data) {
+        $scope.days = data.filter(filterStage(stages['final']));
     });
 }]);
 
