@@ -20,6 +20,7 @@ db.Bet.findAll({
         output.push({
             user_id: bet.user.id,
             game_id: bet.game.id,
+            group_id: bet.game.group_id,
             points: bet.points(),
             time: bet.game.time.toISOString()
         });
