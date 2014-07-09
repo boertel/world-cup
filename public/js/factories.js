@@ -1,12 +1,12 @@
-app.factory('notification', function () {
+app.factory('notification', ['$sce', function ($sce) {
     var notifications = [];
 
-    function notify(message, type) {
+    function notify(message, type, jump) {
         type = type || 'success';
         notifications.push({
-            message: message,
+            message: $sce.trustAsHtml(message),
             type: type,
-            jump: 0
+            jump: jump || 0
         });
     }
 
@@ -29,7 +29,7 @@ app.factory('notification', function () {
         get: get,
         remove: remove
     };
-});
+}]);
 
 app.factory('scores', ['$http', function ($http) {
     var url = '/api/v1/bets';
