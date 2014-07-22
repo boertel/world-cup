@@ -177,6 +177,9 @@ app.controller('ProfileController', ['$scope', '$http', '$routeParams', 'user', 
     });
 }]);
 
+app.controller('EndController', ['$scope', function ($scope) {
+}]);
+
 
 /* ************************************************************************* */
 // Element Controllers
@@ -251,26 +254,10 @@ app.controller('ScoreController', ['$scope', 'scores', function ($scope, scores)
     });
 }]);
 
-function formatLeaderboardUser(data) {
-    var previous, rank = 0, i = 1,
-        users = data.map(function (user) {
-            if (previous === undefined || user.points !== previous) {
-                rank = i;
-                previous = user.points;
-            }
-            user.rank = rank;
-            i += 1;
-            return user;
-        });
-    return users;
-}
 
-app.controller('LeaderboardController', ['$scope', '$http', function ($scope, $http) {
-    $http.get('/api/v1/leaderboard').then(function (response) {
-        var users = formatLeaderboardUser(response.data);
-        users.forEach(function (user) {
-            user.link = '#/user/' + user.id;
-        });
+
+app.controller('LeaderboardController', ['$scope', 'leaderboard', function ($scope, leaderboard) {
+    leaderboard.then(function (users) {
         $scope.users = users;
     });
 }]);
@@ -288,5 +275,11 @@ app.controller('FriendsLeaderboardController', ['$scope', 'friends', 'user', fun
             });
             $scope.users = response;
         });
+    });
+}]);
+
+app.controller('PodiumController', ['$scope', 'leaderboard', function ($scope, leaderboard) {
+    leaderboard.then(function (users) {
+        $scope.users = users;
     });
 }]);

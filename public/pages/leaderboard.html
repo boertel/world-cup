@@ -10,7 +10,3 @@
         <ul widget-leaderboard></ul>
     </div>
 </div>
-
-<script type="text/ng-template" id="widget-leaderboard.html">
-    <li ng-repeat="user in users" ng-class="{me: user.me}">{{ user.rank }}. <a href="{{ user.link }}">{{ user.name }}</a><div class="right">{{ user.points }}</div></li>
-</script>

@@ -150,3 +150,29 @@ app.factory('friends', ['$q', function ($q) {
 
     return deferred.promise;
 }]);
+
+app.factory('leaderboard', ['$http', function ($http) {
+    function formatLeaderboardUser(data) {
+        var previous, rank = 0, i = 1,
+            users = data.map(function (user) {
+                if (previous === undefined || user.points !== previous) {
+                    rank = i;
+                    previous = user.points;
+                }
+                user.rank = rank;
+                i += 1;
+                return user;
+            });
+        return users;
+    }
+
+    var promise = $http.get('/api/v1/leaderboard').then(function (response) {
+        var users = formatLeaderboardUser(response.data);
+        users.forEach(function (user) {
+            user.link = '#/user/' + user.id;
+        });
+        return users;
+    });
+
+    return promise;
+}]);

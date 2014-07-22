@@ -20,6 +20,10 @@ var app = angular.module('content', ['ngRoute'])
                 templateUrl: 'pages/game.html',
                 controller: 'GameController'
             })
+            .when('/end', {
+                templateUrl: 'pages/end.html',
+                controller: 'EndController'
+            })
             .when('/competitor/:id', {
                 templateUrl: 'pages/competitor.html',
                 controller: 'CompetitorController'
