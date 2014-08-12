@@ -1,20 +1,15 @@
 <div class="pure-g">
     <div class="pure-u-1 center">
         <ul class="filters">
-            <li><a ng-click="scope='group'" ng-class="{selected: scope === 'group'}">Group stage</a></li>
-            <li><a ng-click="scope='sixteen'" ng-class="{selected: scope === 'sixteen'}">Round of 16</a></li>
-            <li><a ng-click="scope='quarter'" class="" ng-class="{selected: scope === 'quarter'}">Quarter Finals</a></li>
-            <li><a ng-click="scope='semi'" ng-class="{selected: scope === 'semi'}">Semi Finals</a></li>
-            <li><a ng-click="scope='final'" ng-class="{selected: scope === 'final'}">Final</a></li>
+            <li><a ng-click="week=1" ng-class="{selected: week === 1}">Week 1</a></li>
+            <li><a ng-click="week=2" ng-class="{selected: week === 2}">Week 2</a></li>
+            <li><a ng-click="week=3" ng-class="{selected: week === 3}">Week 3</a></li>
+            <li><a ng-click="week=4" ng-class="{selected: week === 4}">Week 4</a></li>
         </ul>
     </div>
 </div>
 
-<div ng-controller="GamesController" widget-games ng-show="scope === 'group'"></div>
-<div ng-controller="SixteenController" widget-games ng-show="scope === 'sixteen'"></div>
-<div ng-controller="QuarterController" widget-games ng-show="scope === 'quarter'"></div>
-<div ng-controller="SemiController" widget-games ng-show="scope === 'semi'"></div>
-<div ng-controller="FinalController" widget-games ng-show="scope === 'final'"></div>
+<div ng-controller="GamesController" widget-games ng-show="week === 1"></div>
 
 <div widget-legend></div>
 

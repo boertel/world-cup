@@ -1,5 +1,5 @@
 module.exports = {
-    database: 'postgres://ben@localhost:5432/worldcup',
+    database: 'postgres://ben@localhost:5432/premierleague',
     redis: {
         host: "localhost",
         port: "6379",

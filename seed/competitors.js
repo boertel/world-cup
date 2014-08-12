@@ -2,45 +2,26 @@ var Competitor = require('../models').Competitor
 
 module.exports = function (next) {
     return Competitor.bulkCreate([
-        {name: 'Brazil'},
-        {name: 'Croatia'},
-        {name: 'Mexico'},
-        {name: 'Cameroon'},
-
-        {name: 'Spain'},
-        {name: 'Netherlands'},
-        {name: 'Chile'},
-        {name: 'Australia'},
-
-        {name: 'Colombia'},
-        {name: 'Greece'},
-        {name: 'Côte d\'Ivoire'},
-        {name: 'Japan'},
-
-        {name: 'Uruguay'},
-        {name: 'Costa Rica'},
-        {name: 'England'},
-        {name: 'Italy'},
-
-        {name: 'Switzerland'},
-        {name: 'Ecuador'},
-        {name: 'France'},
-        {name: 'Honduras'},
-
-        {name: 'Argentina'},
-        {name: 'Bosnia and Herzegovina'},
-        {name: 'Iran'},
-        {name: 'Nigeria'},
-
-        {name: 'Germany'},
-        {name: 'Portugal'},
-        {name: 'Ghana'},
-        {name: 'USA'},
-
-        {name: 'Belgium'},
-        {name: 'Algeria'},
-        {name: 'Russia'},
-        {name: 'Korea Republic'}
+        {name: 'Arsenal'},
+        {name: 'Aston Villa'},
+        {name: 'Burnley'},
+        {name: 'Chelsea'},
+        {name: 'Crystal Palace'},
+        {name: 'Everton'},
+        {name: 'Hull City'},
+        {name: 'Leceister City'},
+        {name: 'Liverpool'},
+        {name: 'Manchester City'},
+        {name: 'Manchester United'},
+        {name: 'Newcastle United'},
+        {name: 'Queens Park Rangers'},
+        {name: 'Southampton'},
+        {name: 'Tottenham Hotspur'},
+        {name: 'Stoke City'},
+        {name: 'Sunderland'},
+        {name: 'Swansea City'},
+        {name: 'West Bromwich Albion'},
+        {name: 'West Ham United'},
     ]).success(next).error(function (err) {
         console.log(err);
     });
