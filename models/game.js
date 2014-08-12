@@ -39,19 +39,12 @@ module.exports = function (sequelize, DataTypes) {
                 return new Date(this.time.getTime() + 120 * 60000)
             },
             points: function () {
-                if (this.group_id < 9) {
-                    return {
-                        perfect: config.POINTS.perfect,
-                        win: config.POINTS.win,
-                        lost: config.POINTS.lost
-                    }
-                } else {
-                    return {
-                        perfect: config.SECOND_POINTS.perfect,
-                        win: config.SECOND_POINTS.win,
-                        lost: config.SECOND_POINTS.lost,
-                    }
+                return {
+                    perfect: config.POINTS.perfect,
+                    win: config.POINTS.win,
+                    lost: config.POINTS.lost
                 }
+
             },
             status: function () {
                 if (this.end() > new Date()) {

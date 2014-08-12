@@ -27,7 +27,7 @@ module.exports = function (next) {
         Game.bulkCreate([
             addGame(1, '2014-08-16 12:45', 'Manchester United', 'Swansea City', 1),
             addGame(2, '2014-08-16 15:00', 'Leicester City', 'Everton FC', 1),
-            addGame(3, '2014-08-16 15:00', 'Queens Park Rangers', 'Hull City', 1),
+            addGame(3, '2014-08-16 15:00', 'QPR', 'Hull City', 1),
             addGame(4, '2014-08-16 15:00', 'Stoke City', 'Aston Villa', 1),
             addGame(5, '2014-08-16 15:00', 'West Bromwich Albion', 'Sunderland AFC', 1),
             addGame(6, '2014-08-16 15:00', 'West Ham United', 'Tottenham Hotspur', 1),

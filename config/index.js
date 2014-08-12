@@ -2,7 +2,7 @@ exports = require('./' + (process.env.NODE_ENV || 'dev') + '.js')
 
 exports.POINTS = {
     perfect: 50,
-    win: 20,
+    win: 30,
     lost: 0,
 }
 
