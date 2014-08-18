@@ -1,14 +1,13 @@
 var db = require('../models'),
-    moment = require('moment-timezone'),
-    Game = db.Game,
-    Competitor = db.Competitor
+    moment = require('moment-timezone')
 
 
+function insert () {
 
-module.exports = function (next) {
-    Competitor.findAll().success(function (rows) {
-        // Shortcuts for the competitors
+    db.Competitor.findAll().success(function (rows) {
         var competitors = {}
+
+        // Shortcuts for the competitors
         rows.forEach(function (c) {
             competitors[c.name] = c.id
         })
@@ -24,7 +23,7 @@ module.exports = function (next) {
             }
         }
 
-        Game.bulkCreate([
+        var games = [
             addGame(1, '2014-08-16 13:45', 'Manchester United', 'Swansea City', 1),
             addGame(2, '2014-08-16 16:00', 'Leicester City', 'Everton FC', 1),
             addGame(3, '2014-08-16 16:00', 'QPR', 'Hull City', 1),
@@ -45,7 +44,29 @@ module.exports = function (next) {
             addGame(18, '2014-07-24 14:30', 'Tottenham Hotspur', 'QPR', 2),
             addGame(19, '2014-07-24 17:00', 'Sunderland AFC', 'Manchester United', 2),
             addGame(20, '2014-07-25 21:00', 'Manchester City', 'Liverpool FC', 2),
-        ]).success(next)
+        ];
+
+        games.forEach(function (game) {
+            db.Game.find({where: {number: game.number}}).success(function (g) {
+                out = game.number;
+                if (!g) {
+                    db.Game.create(game);
+                    out += ' created';
+                }
+                console.log(out);
+            });
+        });
 
     })
 }
+
+
+db.sequelize
+    .sync({force: false})
+    .complete(function (err) {
+        if (err) {
+            throw err
+        } else {
+            insert()
+        }
+    })
