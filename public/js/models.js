@@ -44,7 +44,7 @@ Bet.prototype.type = function () {
             return 'win';
         case 50:
             return 'perfect';
-        case 20:
+        case 30:
             return 'win';
         case 0:
             return 'lost';
