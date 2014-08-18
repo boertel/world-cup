@@ -74,11 +74,14 @@ app.factory('games', ['$http', function ($http) {
         return promise
     }
 
-    function groupByDay() {
+    function groupByDay(condition) {
         var group = [],
             periodsDict = {};
 
         return promise.then(function (data) {
+            if (condition) {
+                data = data.filter(condition);
+            }
             data.forEach(function (d) {
                 periodsDict[d.day] = periodsDict[d.day] || [];
                 periodsDict[d.day].push(d);
@@ -111,10 +114,17 @@ app.factory('games', ['$http', function ($http) {
         });
     }
 
+    function filter(condition) {
+        return promise.then(function (games) {
+            return games.filter(condition);
+        });
+    }
+
     return {
         get: get,
         updateBet: updateBet,
-        groupByDay: groupByDay
+        groupByDay: groupByDay,
+        filter: filter
     }
 }]);
 

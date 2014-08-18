@@ -9,8 +9,10 @@ app.controller('GamesController', ['$scope', 'games', function ($scope, games) {
         $('.game.period-' + period).toggleClass('past');
     };
 
-    games.groupByDay().then(function (data) {
-        $scope.days = data;
+    games.groupByDay(function (d) {
+        return d.group_id === $scope.group;
+    }).then(function (data) {
+        $scope.days = data
     });
 }]);
 
