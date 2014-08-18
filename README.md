@@ -28,7 +28,7 @@ On the front-end, it's using ```angular```.
 To update points for users (in both your database and for facebook leaderboard), you need to:
 
 1. Update the match scores
-2. Run ```node commands/update_scores.js```
+2. Run ```node commands/update_score.js```
 
 (It's flagging each bet as *validated*, so it's only computing new matches)
 
