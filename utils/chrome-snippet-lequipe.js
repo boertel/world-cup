@@ -15,7 +15,7 @@ var MONTHS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet",
 function extractDate(str) {
     var split = str.split(" "),
         day = split[1],
-        month = MONTHS.indexOf(split[2]),
+        month = MONTHS.indexOf(split[2]) + 1,
         year = split[3];
     return [year, (month < 10) ? "0" + month : month, day].join('-');
 }
