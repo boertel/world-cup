@@ -59,7 +59,7 @@ app.controller('GameController', ['$scope', '$http', '$routeParams', 'notificati
             }
         }).success(function (data) {
             games.updateBet(new Bet(data));
-            $location.url('/#game-' + $scope.bet.game.id);
+            $location.url('/');
             notification.notify("Your bet has been saved.");
         });
     };
