@@ -1,7 +1,7 @@
 
 
 app.controller('HomeController', ['$scope', 'notification', function ($scope, notification) {
-    $scope.week = 4;
+    $scope.week = 5;
 }]);
 
 app.controller('GamesController', ['$scope', 'games', function ($scope, games) {
