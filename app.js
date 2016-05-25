@@ -95,14 +95,13 @@ require('./routes')(app)
 
 db.sequelize
     .sync({force: false})
-    .complete(function (err) {
-        if (err) {
-            throw err;
-        } else {
-            http.createServer(app).listen(app.get('port'), function(){
-              console.log('Express server listening on port ' + app.get('port'));
-            });
-        }
+    .then(function () {
+        http.createServer(app).listen(app.get('port'), function(){
+          console.log('Express server listening on port ' + app.get('port'));
+        });
     })
+    .catch(function (err) {
+        throw err;
+    });
 
 exports.app = app

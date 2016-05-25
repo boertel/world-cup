@@ -1,6 +1,6 @@
 var Group = require('../models').Group
 
-module.exports = function (next) {
+module.exports = function () {
     return Group.bulkCreate([
         {name: 'Group A'},
         {name: 'Group B'},
@@ -15,5 +15,5 @@ module.exports = function (next) {
         {name: 'Semi Finals'},
         {name: 'Play-off for third place'},
         {name: 'Final'}
-    ]).success(next)
+    ]);
 }

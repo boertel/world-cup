@@ -87,8 +87,8 @@ module.exports = function (sequelize, DataTypes) {
             },
             associate: function (models) {
                 Game.belongsTo(models.Competitor, {foreignKey: 'competitor_a_id', as: 'competitor_a'})
-                    .belongsTo(models.Competitor, {foreignKey: 'competitor_b_id', as: 'competitor_b'})
-                    .belongsTo(models.Group)
+                Game.belongsTo(models.Competitor, {foreignKey: 'competitor_b_id', as: 'competitor_b'})
+                Game.belongsTo(models.Group)
             }
         }
     })

@@ -1,38 +1,29 @@
 var db = require('../models'),
     competitors = require('./competitors'),
     groups = require('./groups'),
-    games = require('./games')
+    games = require('./games'),
+    points = require('./points');
 
 
 function populateDatabase() {
-    competitors(function () {
-        groups(function () {
-            games(function () {
-            })
-        })
-    })
+    return competitors()
+        .then(points)
+        .then(groups)
+        .then(games);
 }
 
 function insert() {
-    db.sequelize
+    return db.sequelize
         .sync({force: true})
-        .complete(function (err) {
-            if (err) {
-                throw err
-            } else {
-                populateDatabase()
-            }
-        })
+        .then(populateDatabase)
+        .catch(function (err) {
+            throw err
+        });
 }
 
-function drop(next) {
-    db.sequelize.drop().success(function () {
-        next();
-    });
-}
 
 if (process.env.NODE_ENV === 'prod') {
     insert();
 } else {
-    drop(insert);
+    db.sequelize.drop().then(insert);
 }

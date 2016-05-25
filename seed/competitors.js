@@ -1,6 +1,6 @@
 var Competitor = require('../models').Competitor
 
-module.exports = function (next) {
+module.exports = function () {
     return Competitor.bulkCreate([
         {name: 'Brazil'},
         {name: 'Croatia'},
@@ -41,7 +41,5 @@ module.exports = function (next) {
         {name: 'Algeria'},
         {name: 'Russia'},
         {name: 'Korea Republic'}
-    ]).success(next).error(function (err) {
-        console.log(err);
-    });
+    ])
 }

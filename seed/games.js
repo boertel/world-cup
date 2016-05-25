@@ -4,9 +4,8 @@ var db = require('../models'),
     Competitor = db.Competitor
 
 
-
-module.exports = function (next) {
-    Competitor.findAll().success(function (rows) {
+module.exports = function () {
+    return Competitor.findAll().then(function (rows) {
         // Shortcuts for the competitors
         var competitors = {}
         rows.forEach(function (c) {
@@ -24,7 +23,7 @@ module.exports = function (next) {
             }
         }
 
-        Game.bulkCreate([
+        return Game.bulkCreate([
             addGame(1, '2014-06-12 17:00:00', 'Brazil', 'Croatia', 1),
             addGame(2, '2014-06-13 13:00:00', 'Mexico', 'Cameroon', 1),
             addGame(17, '2014-06-17 16:00:00', 'Brazil', 'Mexico', 1),
@@ -81,7 +80,6 @@ module.exports = function (next) {
             addGame(47, '2014-06-26 17:00:00', 'Korea Republic', 'Belgium', 8),
             addGame(48, '2014-06-26 17:00:00', 'Algeria', 'Russia', 8)
 
-        ]).success(next)
-
+        ])
     })
 }

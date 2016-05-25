@@ -1,40 +1,30 @@
 {
-  "name": "application-name",
+  "name": "eurofoot2016",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "NODE_ENV=dev node app.js",
     "test": "NODE_ENV=test make test"
   },
-  "engines": {
-    "node": "0.10.x"
-  },
   "dependencies": {
-    "express": "4.x",
+    "body-parser": "^1.15.1",
+    "connect-redis": "^3.0.2",
+    "cookie-parser": "^1.4.2",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "fb": "^0.7.3",
     "jade": "*",
-    "stylus": "*",
-    "sequelize": "~1.7.0",
-    "lodash": "~2.4.1",
-    "pg": "~2.11.1",
-    "passport": "~0.2.0",
-    "passport-facebook": "~1.0.3",
-    "request": "~2.34.0",
-    "should": "~3.2.0-beta1",
-    "mocha": "~1.18.2",
-    "supertest": "~0.10.0",
+    "lodash": "^4.13.1",
+    "method-override": "^2.3.6",
     "moment-timezone": "0.0.3",
-    "connect-redis": "2.x",
-    "connect": "*",
-    "raven": "~0.6.3",
-    "cookie-parser": "~1.0.1",
-    "method-override": "~1.0.0",
-    "body-parser": "~1.0.2",
-    "favicon": "0.0.2",
-    "serve-static": "~1.0.4",
-    "morgan": "~1.0.0",
-    "static-favicon": "~1.0.2",
-    "express-session": "~1.0.2",
-    "errorhandler": "~1.0.0",
-    "fb": "~0.7.0"
+    "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
+    "pg": "^4.5.5",
+    "pg-hstore": "^2.3.2",
+    "raven": "^0.11.0",
+    "request": "^2.72.0",
+    "sequelize": "^3.23.2",
+    "stylus": "^0.54.5"
   }
 }

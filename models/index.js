@@ -2,13 +2,12 @@ var fs = require('fs'),
     config = require('../config'),
     path = require('path'),
     Sequelize = require('sequelize'),
-    lodash = require('lodash'),
+    _ = require('lodash'),
     sequelize = new Sequelize(config.database, {
         define: {
             underscored: true,
             freezeTableName: true,
         },
-        native: true,
         logging: false
     }),
     db = {}
@@ -28,7 +27,7 @@ Object.keys(db).forEach(function (modelName) {
     }
 })
 
-module.exports = lodash.extend({
+module.exports = _.extend({
     sequelize: sequelize,
     Sequelize: Sequelize
 }, db)
