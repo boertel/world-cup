@@ -5,7 +5,7 @@ module.exports = function (sequelize, DataTypes) {
         classMethods: {
             associate: function (models) {
                 Group.hasMany(models.Game);
-                Group.hasOne(models.Points);
+                Group.belongsTo(models.Points);
             },
             attrs: function () {
                 return ['id', 'name']
