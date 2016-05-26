@@ -3,7 +3,7 @@ extends layout
 block header
     div(ng-controller="UserController")
             div.pure-menu.pure-menu-open.pure-menu-horizontal
-                a.pure-menu-heading(href="#/") World Cup 2014
+                a.pure-menu-heading(href="#/") Euro 2016
                 ul
                     li
                         a(href="#/", ng-class="{'pure-menu-selected':isActive('/')}") Matches
@@ -34,24 +34,24 @@ block script
                     <div class="pure-u-1-2 pure-u-md-1 pure-u-lg-1 group">{{ game.group.name }}</div>
                 </div>
             </div>
-            <div class="pure-u-1-3 pure-u-md-1-4 pure-u-lg-1-4">
-                <div class="left flag">
-                    <img ng-src="images/flags/competitor-{{ game.competitorA.id }}.png">
+            <div class="pure-u-1-3 pure-u-md-1-4 pure-u-lg-1-4 media">
+                <div class="flag">
+                    <img ng-src="images/flags/competitor-{{ game.competitor_a.id }}.png">
                 </div>
-                <div class="left">
-                    {{ game.competitorA.name }}
+                <div class="">
+                    {{ game.competitor_a.name }}
                 </div>
             </div>
             <div class="pure-u-1-3 pure-u-md-1-3 pure-u-lg-1-3 center scores">
                 <div class="bet-score">{{ game.bet.score_a }} - {{ game.bet.score_b }}</div>
                 <div class="game-score" ng-class="{hidden: !game.hasScore}">{{ game.score_a }} - {{ game.score_b }}</div>
             </div>
-            <div class="pure-u-1-3 pure-u-md-1-4 pure-u-lg-1-4">
-                <div class="right flag">
-                    <img ng-src="images/flags/competitor-{{ game.competitorB.id }}.png">
+            <div class="pure-u-1-3 pure-u-md-1-4 pure-u-lg-1-4 media media-right">
+                <div class="flag">
+                    <img ng-src="images/flags/competitor-{{ game.competitor_b.id }}.png">
                 </div>
-                <div class="right">
-                    {{ game.competitorB.name }}
+                <div class="">
+                    {{ game.competitor_b.name }}
                 </div>
             </div>
         </div>

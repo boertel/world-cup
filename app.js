@@ -20,7 +20,7 @@ function static(dirname, age) {
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 //app.use(require('static-favicon')(__dirname + '/public/favicon.ico'));
 app.use(require('morgan')('dev'));
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
@@ -73,7 +73,8 @@ passport.deserializeUser(db.User.deserialize);
 passport.use(new FacebookStrategy({
     clientID: config.social.facebook.clientID,
     clientSecret: config.social.facebook.clientSecret,
-    callbackURL: '/auth/facebook/callback'
+    callbackURL: '/auth/facebook/callback',
+    profileFields: ['first_name', 'last_name', 'gender', 'link', 'timezone'],
 }, db.User.authenticate))
 
 

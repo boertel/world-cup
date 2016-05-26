@@ -11,7 +11,7 @@ module.exports = {
             db.User.find({
                 where: {id: user_id},
                 attributes: db.User.attrs()
-            }).success(function (user) {
+            }).then(function (user) {
                 res.json(user)
             })
         }
@@ -52,7 +52,7 @@ module.exports = {
                     }
                 ]
             }
-            db.Bet.findAll(filters).success(function (bets) {
+            db.Bet.findAll(filters).then(function (bets) {
                 res.json(bets)
             })
         }

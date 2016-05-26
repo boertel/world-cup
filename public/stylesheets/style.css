@@ -51,7 +51,7 @@ ul {
   text-align: center;
 }
 .page-width {
-  max-width: 645px;
+  max-width: 745px;
   padding: 0 10px;
   margin: auto;
 }
@@ -62,8 +62,8 @@ ul {
   margin: 0 auto;
 }
 header {
-  background: #4eb11e;
-  color: #b7e696;
+  background: #058;
+  color: #559ac3;
   padding: 10px 0;
   width: 100%;
   color: #fff;
@@ -81,10 +81,10 @@ header {
 }
 .pure-menu li a:hover,
 .pure-menu li a:focus {
-  background: #3e8e18;
+  background: #00446d;
 }
 .pure-menu-selected {
-  background: #469f1b;
+  background: #004c7a;
 }
 .pure-menu-heading {
   display: none !important;
@@ -122,8 +122,8 @@ header {
 }
 .notification {
   padding: 10px;
-  color: #4eb11e;
-  background: #b7e696;
+  color: #058;
+  background: #559ac3;
 }
 .notification.info {
   background-color: #d9def4;
@@ -179,6 +179,7 @@ header {
 }
 .separator .bet-summary {
   float: right;
+  text-align: right;
   width: 40px;
 }
 .little-score {
@@ -256,8 +257,17 @@ div.game .subtitle > div {
 div.game .subtitle .group {
   color: #9e9e9e;
 }
+div.game .media {
+  display: flex;
+  align-items: center;
+}
+div.game .media.media-right {
+  flex-direction: row-reverse;
+}
 div.game .flag {
   width: 40px;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 div.game .flag img {
   width: 100%;

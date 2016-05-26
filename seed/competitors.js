@@ -2,44 +2,35 @@ var Competitor = require('../models').Competitor
 
 module.exports = function () {
     return Competitor.bulkCreate([
-        {name: 'Brazil'},
-        {name: 'Croatia'},
-        {name: 'Mexico'},
-        {name: 'Cameroon'},
-
-        {name: 'Spain'},
-        {name: 'Netherlands'},
-        {name: 'Chile'},
-        {name: 'Australia'},
-
-        {name: 'Colombia'},
-        {name: 'Greece'},
-        {name: 'Côte d\'Ivoire'},
-        {name: 'Japan'},
-
-        {name: 'Uruguay'},
-        {name: 'Costa Rica'},
-        {name: 'England'},
-        {name: 'Italy'},
-
-        {name: 'Switzerland'},
-        {name: 'Ecuador'},
         {name: 'France'},
-        {name: 'Honduras'},
+        {name: 'Romania'},
+        {name: 'Albania'},
+        {name: 'Switzerland'},
 
-        {name: 'Argentina'},
-        {name: 'Bosnia and Herzegovina'},
-        {name: 'Iran'},
-        {name: 'Nigeria'},
+        {name: 'England'},
+        {name: 'Russia'},
+        {name: 'Wales'},
+        {name: 'Slovakia'},
 
         {name: 'Germany'},
-        {name: 'Portugal'},
-        {name: 'Ghana'},
-        {name: 'USA'},
+        {name: 'Ukraine'},
+        {name: 'Poland'},
+        {name: 'Northern Ireland'},
+
+        {name: 'Spain'},
+        {name: 'Czech Republic'},
+        {name: 'Turkey'},
+        {name: 'Croatia'},
 
         {name: 'Belgium'},
-        {name: 'Algeria'},
-        {name: 'Russia'},
-        {name: 'Korea Republic'}
+        {name: 'Italy'},
+        {name: 'Republic of Ireland'},
+        {name: 'Sweden'},
+
+        {name: 'Portugal'},
+        {name: 'Iceland'},
+        {name: 'Austria'},
+        {name: 'Hungary'},
+
     ])
 }

@@ -1,6 +1,6 @@
 colors = {
-    primary: #4eb11e,
-    secondary: #b7e696,
+    primary: #005588,
+    secondary: #559AC3,
     saved: #8191DA,
     subtle: #f6f6f6,
     perfect: #FFE557,
@@ -54,7 +54,7 @@ ul
 
 
 .page-width
-    max-width: 645px
+    max-width: 745px
     padding: 0 10px
     margin: auto
 
@@ -173,6 +173,7 @@ header
 
     .bet-summary
         float: right
+        text-align: right
         width: 40px
 
 .little-score
@@ -250,8 +251,17 @@ div.game
         .group
             color: #9e9e9e
 
+    .media
+        display: flex
+        align-items: center
+
+        &.media-right
+            flex-direction: row-reverse
+
     .flag
         width: 40px
+        margin-right: 10px
+        margin-left: 10px
 
         img
             width: 100%

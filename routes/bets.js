@@ -2,20 +2,16 @@ var db = require('../models')
 
 module.exports = {
     post: function (req, res) {
-        db.Game.find(req.params.id).success(function (game) {
+        db.Game.findById(req.params.id).then(function (game) {
             if (game.lock()) {
                 res.json(403, {error: 'Not allowed to bet on this game.'});
             } else {
-                db.Bet.findOrCreate({
-                    user_id: req.user.id,
-                    game_id: game.id
-                }, {
-                    score_a: req.body.score_a,
-                    score_b: req.body.score_b
-                }).success(function (bet) {
+                var where ={ user_id: req.user.id, game_id: game.id },
+                    defaults = { score_a: req.body.score_a, score_b: req.body.score_b };
+                db.Bet.findOrCreate({ where: where, defaults: defaults}).spread(function (bet, created) {
                     bet.score_a = req.body.score_a,
                     bet.score_b = req.body.score_b
-                    bet.save().success(function (bet) {
+                    bet.save().then(function (bet) {
                         res.json(bet);
                     })
                 })
@@ -42,7 +38,7 @@ module.exports = {
                     ]
                 }
             ]
-        }).success(function (bets) {
+        }).then(function (bets) {
             var need_update = [],
                 now = 0,
                 before = 0;
@@ -79,7 +75,11 @@ module.exports = {
         var game_include = [
             {
                 model: db.Group,
-                attributes: db.Group.attrs()
+                attributes: db.Group.attrs(),
+                as: 'group',
+                include: [
+                    { model: db.Points, as: 'points' },
+                ]
             },
             {
                 model: db.Competitor,
@@ -110,20 +110,21 @@ module.exports = {
             include: [
                 {
                     model: db.Game,
+                    as: 'game',
                     attributes: db.Game.attrs(),
-                    include: game_include
+                    include: game_include,
                 }
             ]
         }
 
         if (!req.query.friends && !req.query.all) {
-            db.Bet.find(filters).success(function (bet) {
+            db.Bet.find(filters).then(function (bet) {
                 if (!bet) {
                     db.Game.find({
                         where: {id: req.params.id},
                         attributes: db.Game.attrs(),
                         include: game_include
-                    }).success(function (game) {
+                    }).then(function (game) {
                         var bet = {
                             game: game,
                             score_a: null,
@@ -148,9 +149,13 @@ module.exports = {
                     {
                         model: db.Game,
                         attributes: db.Game.attrs(),
+                        as: 'game',
+                        include: [
+                            { model: db.Points },
+                        ]
                     }
                 ]
-            }).success(function (bets) {
+            }).then(function (bets) {
                 bets = bets.map(function (bet) {
                     if (req.user.id === bet.user_id) {
                         bet.values.me = true;

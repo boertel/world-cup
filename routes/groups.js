@@ -7,6 +7,9 @@ module.exports = {
             attributes: db.Group.attrs(),
             include: [
                 {
+                    model: db.Points,
+                },
+                {
                     model: db.Game,
                     attributes: db.Game.attrs(),
                     include:[

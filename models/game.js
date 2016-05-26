@@ -39,19 +39,7 @@ module.exports = function (sequelize, DataTypes) {
                 return new Date(this.time.getTime() + 120 * 60000)
             },
             points: function () {
-                if (this.group_id < 9) {
-                    return {
-                        perfect: config.POINTS.perfect,
-                        win: config.POINTS.win,
-                        lost: config.POINTS.lost
-                    }
-                } else {
-                    return {
-                        perfect: config.SECOND_POINTS.perfect,
-                        win: config.SECOND_POINTS.win,
-                        lost: config.SECOND_POINTS.lost,
-                    }
-                }
+                return 0
             },
             status: function () {
                 if (this.end() > new Date()) {
@@ -66,11 +54,12 @@ module.exports = function (sequelize, DataTypes) {
                 return text;
             },
             toJSON: function () {
-                var json = this.values;
+                var json = this.get({plain: true});
                 json.lock = this.lock();
                 json.deadline = this.deadline();
                 json.end = this.end();
                 json.status = this.status();
+                json.points = this.points();
                 return json;
             }
         },
@@ -88,7 +77,7 @@ module.exports = function (sequelize, DataTypes) {
             associate: function (models) {
                 Game.belongsTo(models.Competitor, {foreignKey: 'competitor_a_id', as: 'competitor_a'})
                 Game.belongsTo(models.Competitor, {foreignKey: 'competitor_b_id', as: 'competitor_b'})
-                Game.belongsTo(models.Group)
+                Game.belongsTo(models.Group, { as: 'group' });
             }
         }
     })

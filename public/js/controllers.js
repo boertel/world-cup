@@ -1,80 +1,5 @@
-var stages = {
-    sixteen: {
-        start: '2014-06-28 16:00',
-        end: '2014-07-03 23:00'
-    },
-    quarter: {
-        start: '2014-07-04 16:00',
-        end: '2014-07-06 23:00'
-    },
-    semi: {
-        start: '2014-07-08 16:00',
-        end: '2014-07-10 23:00'
-    },
-    'final': {
-        start: '2014-07-11 16:00',
-        end: '2014-07-14 23:00'
-    }
-};
-
-for (var key in stages) {
-    var stage = stages[key];
-
-    if (moment.utc(stage.start).diff(moment.utc(new Date()), 'days') <= 1) {
-        defaultScope = key;
-    }
-
-}
-
 app.controller('HomeController', ['$scope', 'notification', function ($scope, notification) {
-    $scope.scope = defaultScope;
-}]);
-
-function filterStage(timerange) {
-    return function (d) {
-        var m = moment(d.day);
-        return m.diff(moment(timerange.start), 'days') >= 0 && m.diff(moment(timerange.end), 'days') < 0;
-    }
-}
-
-app.controller('SixteenController', ['$scope', 'games', function ($scope, games) {
-    $scope.showPast = function (period) {
-        $('.game.period-' + period).toggleClass('past');
-    };
-
-    games.groupByDay().then(function (data) {
-        $scope.days = data.filter(filterStage(stages.sixteen));
-    });
-}]);
-
-app.controller('QuarterController', ['$scope', 'games', function ($scope, games) {
-    $scope.showPast = function (period) {
-        $('.game.period-' + period).toggleClass('past');
-    };
-
-    games.groupByDay().then(function (data) {
-        $scope.days = data.filter(filterStage(stages.quarter));
-    });
-}]);
-
-app.controller('SemiController', ['$scope', 'games', function ($scope, games) {
-    $scope.showPast = function (period) {
-        $('.game.period-' + period).toggleClass('past');
-    };
-
-    games.groupByDay().then(function (data) {
-        $scope.days = data.filter(filterStage(stages.semi));
-    });
-}]);
-
-app.controller('FinalController', ['$scope', 'games', function ($scope, games) {
-    $scope.showPast = function (period) {
-        $('.game.period-' + period).toggleClass('past');
-    };
-
-    games.groupByDay().then(function (data) {
-        $scope.days = data.filter(filterStage(stages['final']));
-    });
+    $scope.scope = '1,2,3,4,5,6';
 }]);
 
 app.controller('GamesController', ['$scope', 'games', function ($scope, games) {
@@ -83,9 +8,7 @@ app.controller('GamesController', ['$scope', 'games', function ($scope, games) {
     };
 
     games.groupByDay().then(function (data) {
-        $scope.days = data.filter(function (d) {
-            return moment(d.day).diff(moment('2014-06-28')) < 0;
-        });
+        $scope.days = data
     });
 }]);
 

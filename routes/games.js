@@ -9,7 +9,8 @@ module.exports = {
             include: [
                 {
                     model: db.Group,
-                    attributes: db.Group.attrs()
+                    attributes: db.Group.attrs(),
+                    as: 'group',
                 },
                 {
                     model: db.Competitor,
@@ -32,7 +33,7 @@ module.exports = {
         if (req.query.limit) {
             filters.limit = req.query.limit
         }
-        db.Game.findAll(filters).success(function (games) {
+        db.Game.findAll(filters).then(function (games) {
             var games_ids = games.map(function (game) {
                 return game.id
             });
@@ -45,10 +46,11 @@ module.exports = {
                 include: [
                     {
                         model: db.Game,
+                        as: 'game',
                         attributes: db.Game.attrs()
                     }
                 ]
-            }).success(function (bets) {
+            }).then(function (bets) {
                 var mapping = {};
                 bets.forEach(function (bet) {
                     mapping[bet.game_id] = bet;
@@ -58,9 +60,10 @@ module.exports = {
                     games = games[0]
                 }
                 games = games.map(function (game) {
-                    game.values.bet = mapping[game.id]
+                    game.setDataValue('bet', mapping[game.id])
                     return game;
                 });
+                console.log(games[0].get('bet'));
                 res.json(games)
             })
         })

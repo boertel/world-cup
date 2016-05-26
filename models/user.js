@@ -51,7 +51,7 @@ module.exports = function (sequelize, DataTypes) {
                 })
             },
             toJSON: function () {
-                var json = this.values;
+                var json = this.get();
                 json.name = this.first_name + ' ' + this.last_name;
                 return json;
             }
@@ -74,7 +74,9 @@ module.exports = function (sequelize, DataTypes) {
                 done(null, user.id)
             },
             deserialize: function (id, done) {
-                User.find({where: {id: id}}).complete(done)
+                return User.find({where: {id: id}}).then(function (user) {
+                    done(null, user);
+                });
             },
             authenticate: function (accessToken, refreshToken, profile, done) {
                 var find = {username: profile.id},
@@ -87,30 +89,28 @@ module.exports = function (sequelize, DataTypes) {
                         link: profile._json.link
                     };
 
+                console.log(profile);
                 if (profile.emails) {
                     if  (profile.emails.length > 0) {
                         create.email = profile.emails[0].value;
                     }
                 }
-                User.findOrCreate(find, create).success(function (user, created) {
-                    var db = require('../models')
-                    db.Social.findOrCreate({provider: 'facebook', uid: find.username, user_id: user.id}, {
-                        credentials: JSON.stringify({access_token: accessToken})}).success(function (social, created) {
-                            social.setUser(user) // FIXME check incomplete
-                            if (!user.picture) {
-                                var url = 'https://graph.facebook.com/me/picture?redirect=false&access_token=' + accessToken
-                                request.get(url, function (error, response, body) {
-                                    var json = JSON.parse(body);
-                                        user.picture = json.data.url
-                                        user.save()
-                                })
-                            }
-                            done(null, user)
-                        }).error(function (err) {
-                            done(err)
-                        })
-                }).error(function (err) {
-                    done(err)
+                User.findOrCreate({where: find, defaults: create}).spread(function (user, created) {
+                    var db = require('../models');
+                    var where = {provider: 'facebook', uid: find.username, user_id: user.id},
+                        defaults = { credentials: JSON.stringify({access_token: accessToken}) };
+                    db.Social.findOrCreate({where: where, defaults: defaults}).spread(function (social, created) {
+                        social.setUser(user) // FIXME check incomplete
+                        if (!user.picture) {
+                            var url = 'https://graph.facebook.com/me/picture?redirect=false&access_token=' + accessToken
+                            request.get(url, function (error, response, body) {
+                                var json = JSON.parse(body);
+                                    user.picture = json.data.url
+                                    user.save()
+                            })
+                        }
+                        done(null, user)
+                    })
                 })
             }
         }

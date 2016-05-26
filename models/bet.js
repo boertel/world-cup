@@ -55,7 +55,8 @@ module.exports = function (sequelize, DataTypes) {
                 return gamePoints.lost;
             },
             toJSON: function () {
-                var json = this.values;
+                var json = this.get();
+                console.log(this.points);
                 json.points = this.points();
                 return json;
             }
@@ -72,7 +73,7 @@ module.exports = function (sequelize, DataTypes) {
                 return attributes
             },
             associate: function (models) {
-                Bet.belongsTo(models.Game)
+                Bet.belongsTo(models.Game, { as: 'game' })
                 Bet.belongsTo(models.User)
             }
         }
