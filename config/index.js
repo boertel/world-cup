@@ -16,7 +16,7 @@ exports.notification = {
     secret: process.env.NOTIFICATION_SECRET
 }
 
-exports.database = exports.database || process.env.DATABASE_URL;
-exports.redis.url = exports.redis.url || process.env.REDIS_URL;
+exports.database = process.env.DATABASE_URL || exports.database;
+exports.redis.url = process.env.REDIS_URL || exports.redis.url;
 
 module.exports = exports
