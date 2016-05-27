@@ -89,7 +89,6 @@ module.exports = function (sequelize, DataTypes) {
                         link: profile._json.link
                     };
 
-                console.log(profile);
                 if (profile.emails) {
                     if  (profile.emails.length > 0) {
                         create.email = profile.emails[0].value;

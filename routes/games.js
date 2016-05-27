@@ -63,7 +63,6 @@ module.exports = {
                     game.setDataValue('bet', mapping[game.id])
                     return game;
                 });
-                console.log(games[0].get('bet'));
                 res.json(games)
             })
         })

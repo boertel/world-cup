@@ -56,7 +56,6 @@ module.exports = function (sequelize, DataTypes) {
             },
             toJSON: function () {
                 var json = this.get();
-                console.log(this.points);
                 json.points = this.points();
                 return json;
             }
