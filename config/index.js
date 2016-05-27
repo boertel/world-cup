@@ -1,16 +1,5 @@
 exports = require('./' + (process.env.NODE_ENV || 'dev') + '.js')
 
-exports.POINTS = {
-    perfect: 50,
-    win: 20,
-    lost: 0,
-}
-
-exports.SECOND_POINTS = {
-    perfect: 150,
-    win: 100,
-    lost: 0,
-}
 exports.social = {
     facebook: {
         clientID: '1477567782456567',
@@ -28,6 +17,6 @@ exports.notification = {
 }
 
 exports.database = exports.database || process.env.DATABASE_URL;
-exports.redis.url = exports.redis.url || process.env.REDISCLOUD_URL;
+exports.redis.url = exports.redis.url || process.env.REDIS_URL;
 
 module.exports = exports
