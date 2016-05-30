@@ -4,13 +4,9 @@ var fs = require('fs'),
     Sequelize = require('sequelize'),
     _ = require('lodash'),
     sequelize = new Sequelize(config.database, {
-        ssl: true,
         define: {
             underscored: true,
             freezeTableName: true,
-        },
-        dialectOptions: {
-            ssl: true
         },
         logging: false
     }),

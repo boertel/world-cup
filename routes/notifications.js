@@ -18,7 +18,7 @@ exports = {
             }
 
         sequelize.query('SELECT u.username FROM "User" u WHERE id NOT IN (SELECT b.user_id FROM "Game" g LEFT JOIN "Bet" b ON g.id = b.game_id WHERE time >= ? AND time <= ? GROUP by b.user_id);', null, { raw: true }, [beginning, end])
-            .success(function (usernames) {
+            .then(function (usernames) {
                 var access_token = config.social.facebook.app_access_token
                 FB.setAccessToken(access_token);
                 usernames.map(function (user) {

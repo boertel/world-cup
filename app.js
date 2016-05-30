@@ -55,7 +55,7 @@ app.param('user', function (req, res, next, id) {
     if (id === 'me') {
         next()
     } else {
-        db.User.find(id).success(function (user) {
+        db.User.find(id).then(function (user) {
             req.user = user
             next()
         })

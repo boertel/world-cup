@@ -9,7 +9,7 @@ module.exports = {
         if (req.params.id) {
             filters.where = {id: req.params.id}
         }
-        db.Competitor.findAll(filters).success(function (competitors) {
+        db.Competitor.findAll(filters).then(function (competitors) {
             if (req.params.id) {
                 competitors = competitors[0]
             }
@@ -46,7 +46,7 @@ module.exports = {
                 where: ['competitor_a.id=? or competitor_b.id=?', competitorId, competitorId]
             }
 
-            db.Game.findAll(filters).success(function (games) {
+            db.Game.findAll(filters).then(function (games) {
                 var games_ids = games.map(function (game) {
                     return game.id
                 });
@@ -62,7 +62,7 @@ module.exports = {
                             attributes: db.Game.attrs()
                         }
                     ]
-                }).success(function (bets) {
+                }).then(function (bets) {
                     var mapping = {};
                     bets.forEach(function (bet) {
                         mapping[bet.game_id] = bet;

@@ -30,7 +30,7 @@ module.exports = {
         if (req.params.id) {
             filters.where = {id: req.params.id}
         }
-        db.Group.findAll(filters).success(function (groups) {
+        db.Group.findAll(filters).then(function (groups) {
             res.json(groups)
         })
     }

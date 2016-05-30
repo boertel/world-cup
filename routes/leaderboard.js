@@ -4,10 +4,10 @@ module.exports = {
     read: function (req, res) {
         db.User.findAll({
             order: 'points DESC,first_name ASC'
-        }).success(function (users) {
+        }).then(function (users) {
             users.forEach(function (user) {
                 if (req.user.id == user.id) {
-                    user.values.me = true;
+                    user.setDataValue('me', true);
                 }
             });
             res.json(users);
