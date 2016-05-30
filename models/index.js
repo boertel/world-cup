@@ -2,15 +2,20 @@ var fs = require('fs'),
     config = require('../config'),
     path = require('path'),
     Sequelize = require('sequelize'),
-    _ = require('lodash'),
-    sequelize = new Sequelize(config.database, {
-        define: {
-            underscored: true,
-            freezeTableName: true,
-        },
-        logging: false
-    }),
-    db = {}
+    _ = require('lodash');
+
+
+var sequelize = new Sequelize(config.database, {
+    define: {
+        underscored: true,
+        freezeTableName: true,
+    },
+    dialectOptions: {
+        ssl: process.env.NODE_ENV === 'production'
+    },
+    logging: false
+});
+var db = {};
 
 fs.readdirSync(__dirname)
     .filter(function (file) {
