@@ -125,16 +125,24 @@ module.exports = {
                         attributes: db.Game.attrs(),
                         include: game_include
                     }).then(function (game) {
-                        var bet = {
-                            game: game,
-                            score_a: null,
-                            score_b: null,
-                            user_id: req.user.id,
-                        };
-                        res.json(bet);
+                        game.next().then(function (nextGame) {
+                            if (nextGame) {
+                                game.setDataValue('next', nextGame.id);
+                            }
+                            var bet = {
+                                game: game,
+                                score_a: null,
+                                score_b: null,
+                                user_id: req.user.id,
+                            };
+                            res.json(bet);
+                        });
                     })
                 } else {
-                    res.json(bet);
+                    bet.game.next().then(function (nextGame) {
+                        bet.game.setDataValue('next', nextGame.id);
+                        res.json(bet);
+                    });
                 }
             })
         } else {

@@ -29,6 +29,9 @@ module.exports = function (sequelize, DataTypes) {
         }
     }, {
         instanceMethods: {
+            next: function () {
+                return Game.find({where: {number: this.number + 1}});
+            },
             deadline: function () {
                 return new Date(this.time.getTime() - 15 * 60000)
             },

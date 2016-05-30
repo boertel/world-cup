@@ -23,8 +23,8 @@ block content
 
 block script
     script(type="text/ng-template", id="widget-game.html").
-        <div id="game-{{ game.id }}"
-             class="pure-g game period-{{ game.day }} {{ game.bet.cssClass() }}"
+        <a class="anchor" id="game-{{ game.id }}"></a>
+        <div class="pure-g game period-{{ game.day }} {{ game.bet.cssClass() }}"
              title="{{ game.local|date: 'short' }}"
              data-href="#/games/{{ game.id }}"
              ng-class="{saved:game.bet.id, past:day.past}">

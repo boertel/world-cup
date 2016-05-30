@@ -62,23 +62,22 @@ app.factory('user', ['$http', function ($http) {
 }]);
 
 app.factory('games', ['$http', function ($http) {
-    var promise = $http.get('/api/v1/games').then(function (response) {
-        var games = response.data.map(function (game) {
-            game.bet = new Bet(game.bet);
-            return new Game(game);
-        });
-        return games;
-    });
 
     function get(filters) {
-        return promise
+        return $http.get('/api/v1/games').then(function (response) {
+            var games = response.data.map(function (game) {
+                game.bet = new Bet(game.bet);
+                return new Game(game);
+            });
+            return games;
+        });
     }
 
     function groupByDay() {
         var group = [],
             periodsDict = {};
 
-        return promise.then(function (data) {
+        return get().then(function (data) {
             data.forEach(function (d) {
                 periodsDict[d.day] = periodsDict[d.day] || [];
                 periodsDict[d.day].push(d);
@@ -101,7 +100,7 @@ app.factory('games', ['$http', function ($http) {
     }
 
     function updateBet(bet) {
-        promise.then(function (games) {
+        get().then(function (games) {
             games.forEach(function (game) {
                 if (game.id === bet.game_id) {
                     game.bet = game.bet || new Bet({});

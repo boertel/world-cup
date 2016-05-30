@@ -2,13 +2,17 @@ app.controller('HomeController', ['$scope', 'notification', function ($scope, no
     $scope.scope = '1,2,3,4,5,6';
 }]);
 
-app.controller('GamesController', ['$scope', 'games', function ($scope, games) {
+app.controller('GamesController', ['$scope', 'games', '$location', '$anchorScroll', '$timeout', function ($scope, games, $location, $anchorScroll, $timeout) {
     $scope.showPast = function (period) {
         $('.game.period-' + period).toggleClass('past');
     };
 
+
     games.groupByDay().then(function (data) {
         $scope.days = data
+        $timeout(function () {
+            $location.hash() && $anchorScroll();
+        });
     });
 }]);
 
@@ -45,7 +49,7 @@ app.controller('GameController', ['$scope', '$http', '$routeParams', 'notificati
         $rootScope.$emit('gameLoaded', {game: data.game});
     });
 
-    $scope.submit = function (form) {
+    function save(nextUrl) {
         $http({
             method: 'POST',
             url: url,
@@ -55,9 +59,17 @@ app.controller('GameController', ['$scope', '$http', '$routeParams', 'notificati
             }
         }).success(function (data) {
             games.updateBet(new Bet(data));
-            $location.url('/#game-' + $scope.bet.game.id);
+            $location.url(nextUrl);
             notification.notify("Your bet has been saved.");
-        });
+        })
+    }
+
+    $scope.submit = function () {
+        save('/#game-' + $scope.bet.game.id);
+    };
+
+    $scope.submitAndNext = function() {
+        save('/games/' + $scope.bet.game.next);
     };
 
     $scope.back = function () {

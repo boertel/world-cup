@@ -24,7 +24,7 @@ var app = angular.module('content', ['ngRoute'])
                 templateUrl: 'pages/competitor.html',
                 controller: 'CompetitorController'
             });
-    }]).run(function ($rootScope, $route, $window, $location, notification) {
+    }]).run(function ($rootScope, $route, $window, $location, $anchorScroll, notification) {
         $rootScope.$on('$routeChangeError', function (e, curr, prev) {
         });
 
@@ -44,7 +44,7 @@ $(document).ready(function () {
     $(document.body).on('click', '.invite-friends', function () {
             FB.ui({
                 method: 'apprequests',
-                message: 'Bet on the World Cup 2014 and compete with your friends.'
+                message: 'Bet on the Euro Foot 2016 and compete with your friends.'
             }, requestCallback);
     });
 

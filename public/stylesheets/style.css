@@ -50,6 +50,12 @@ ul {
 .center {
   text-align: center;
 }
+.anchor {
+  display: block;
+  position: relative;
+  top: -60px;
+  visibility: hidden;
+}
 .page-width {
   max-width: 745px;
   padding: 0 10px;
