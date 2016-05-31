@@ -33,7 +33,7 @@
         <div class="pure-u-1 submit">
             <button type="submit" ng-if="!bet.game.lock" class="pure-button pure-button-primary" ng-disabled="bet.id && !form_bet.$dirty">Save</button>
             <button type="button" ng-click="submitAndNext()" ng-if="!bet.game.lock && bet.game.next" class="pure-button pure-button-primary" ng-disabled="bet.id && !form_bet.$dirty">Save and next</button>
-            <button type="submit" ng-if="bet.game.lock" class="pure-button pure-button-primary" ng-disabled="bet.id && !form_bet.$dirty">Next</button>
+            <button type="button" ng-click="next()" ng-if="bet.game.lock && bet.game.next" class="pure-button pure-button-primary" ng-disabled="bet.id && !form_bet.$dirty">Next</button>
         </div>
     </div>
 </form>
