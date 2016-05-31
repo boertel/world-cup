@@ -7,8 +7,8 @@ app.controller('GamesController', ['$scope', 'games', '$location', '$anchorScrol
         $('.game.period-' + period).toggleClass('past');
     };
 
-
-    games.groupByDay().then(function (data) {
+    var groups = $scope.$parent.scope.split(',').map(function(g) { return parseInt(g, 10) });
+    games.groupByDay(groups).then(function (data) {
         $scope.days = data
         $timeout(function () {
             $location.hash() && $anchorScroll();

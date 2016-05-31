@@ -73,11 +73,15 @@ app.factory('games', ['$http', function ($http) {
         });
     }
 
-    function groupByDay() {
+    function groupByDay(groups) {
         var group = [],
             periodsDict = {};
 
         return get().then(function (data) {
+            data = data.filter(function(d) {
+                return groups.indexOf(d.group.id) !== -1;
+            });
+
             data.forEach(function (d) {
                 periodsDict[d.day] = periodsDict[d.day] || [];
                 periodsDict[d.day].push(d);
