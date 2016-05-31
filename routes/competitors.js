@@ -30,6 +30,7 @@ module.exports = {
                 include: [
                     {
                         model: db.Group,
+                        as: 'group',
                         attributes: db.Group.attrs()
                     },
                     {
@@ -59,7 +60,8 @@ module.exports = {
                     include: [
                         {
                             model: db.Game,
-                            attributes: db.Game.attrs()
+                            attributes: db.Game.attrs(),
+                            as: 'game',
                         }
                     ]
                 }).then(function (bets) {
@@ -69,7 +71,7 @@ module.exports = {
                     });
 
                     games = games.map(function (game) {
-                        game.values.bet = mapping[game.id]
+                        game.setDataValue('bet', mapping[game.id]);
                         return game;
                     });
                     res.json(games)
