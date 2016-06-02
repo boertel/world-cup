@@ -158,7 +158,7 @@ app.controller('BetsController', ['$scope', '$http', '$rootScope', 'friends', fu
                         return f.username;
                     });
                     data = data.map(function (d) {
-                        if (friendslist.indexOf(d.user.username) !== -1) {
+                        if (friendslist.indexOf(d.User.username) !== -1) {
                             d.friend = true;
                         }
                         return new Bet(d);

@@ -22,33 +22,19 @@ function Bet(data) {
     for (var key in data) {
         this[key] = data[key];
     }
+    this.user = this.User;
 }
 
 Bet.prototype.isPerfect = function () {
-    return this.type() === 'perfect';
+    return this.type === 'perfect';
 };
 
 Bet.prototype.isWin = function () {
-    return this.type() === 'win';
+    return this.type === 'win';
 };
 
 Bet.prototype.isLost = function () {
-    return this.type() === 'lost';
-};
-
-Bet.prototype.type = function () {
-    switch (this.points) {
-        case 150:
-            return 'perfect';
-        case 100:
-            return 'win';
-        case 50:
-            return 'perfect';
-        case 20:
-            return 'win';
-        case 0:
-            return 'lost';
-    }
+    return this.type === 'lost';
 };
 
 Bet.prototype.cssClass = function () {
