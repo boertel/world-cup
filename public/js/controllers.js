@@ -215,18 +215,12 @@ app.controller('LeaderboardController', ['$scope', '$http', function ($scope, $h
     });
 }]);
 
-app.controller('FriendsLeaderboardController', ['$scope', 'friends', 'user', function ($scope, friends, user) {
-    $scope.waiting = true;
-    friends.then(function (response) {
-        $scope.waiting = false;
-        user.get('me').then(function (u) {
-            response = response.map(function (friend) {
-                if (u.username === friend.username) {
-                    friend.me = true;
-                }
-                return friend;
-            });
-            $scope.users = response;
+app.controller('FriendsLeaderboardController', ['$scope', '$http', function ($scope, $http) {
+    $http.get('/api/v1/friends').then(function (response) {
+        var users = formatLeaderboardUser(response.data);
+        users.forEach(function (user) {
+            user.link = '#/user/' + user.id;
         });
+        $scope.users = users;
     });
 }]);

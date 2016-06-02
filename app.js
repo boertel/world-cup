@@ -61,7 +61,7 @@ app.use(function (req, res, next) {
     if (req.isAuthenticated()) {
         res.locals.user = req.user
     }
-    res.locals.debug = (env !== 'production');
+    //res.locals.debug = (env !== 'production');
     next()
 })
 
@@ -92,7 +92,7 @@ app.get('/error', function mainHandler(req, res) {
 });
 
 app.get('/auth/facebook', passport.authenticate('facebook', {
-    scope: ['email', 'publish_actions']
+    scope: ['email', 'user_friends',]
 }))
 app.get('/auth/facebook/callback', passport.authenticate('facebook', {
     successRedirect: '/',

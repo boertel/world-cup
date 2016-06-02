@@ -46,26 +46,8 @@ module.exports = function (sequelize, DataTypes) {
                     return 'lost';
                 }
             },
-            points: function () {
-                if (!this.game) {
-                    return
-                }
-                var gamePoints = this.game.points();
-                if (this.game.score_a === null || this.game.score_b === null ||
-                    this.score_a === null || this.score_b === null) {
-                    return;
-                }
-                if (this.perfect()) {
-                    return gamePoints.perfect;
-                }
-                if (this.win()) {
-                    return gamePoints.win;
-                }
-                return gamePoints.lost;
-            },
             toJSON: function () {
                 var json = this.get();
-                json.points = this.points();
                 return json;
             }
         },

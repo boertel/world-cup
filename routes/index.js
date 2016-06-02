@@ -5,6 +5,7 @@ var competitors = require('./competitors.js'),
     bets = require('./bets.js'),
     leaderboard = require('./leaderboard.js'),
     notifications = require('./notifications.js'),
+    friends = require('./friends.js'),
     db = require('../models')
 
 module.exports = function (app) {
@@ -26,6 +27,8 @@ module.exports = function (app) {
     app.get('/api/v1/users/:id', users.profile.read)
     app.get('/api/v1/users/:id/bets', users.bets.read)
     app.post('/api/v1/users/:id/points', users.points.post)
+
+    app.get('/api/v1/friends', friends.read)
 
     app.get('/api/v1/leaderboard', leaderboard.read)
 

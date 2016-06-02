@@ -41,9 +41,6 @@ module.exports = function (sequelize, DataTypes) {
             end: function () {
                 return new Date(this.time.getTime() + 120 * 60000)
             },
-            points: function () {
-                return 0
-            },
             status: function () {
                 if (this.end() > new Date()) {
                     text = 'ended';
@@ -62,7 +59,6 @@ module.exports = function (sequelize, DataTypes) {
                 json.deadline = this.deadline();
                 json.end = this.end();
                 json.status = this.status();
-                json.points = this.points();
                 return json;
             }
         },

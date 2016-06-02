@@ -101,13 +101,16 @@ module.exports = function (sequelize, DataTypes) {
                     db.Social.findOrCreate({where: where, defaults: defaults}).spread(function (social, created) {
                         social.setUser(user) // FIXME check incomplete
                         if (!user.picture) {
-                            var url = 'https://graph.facebook.com/me/picture?redirect=false&access_token=' + accessToken
-                            request.get(url, function (error, response, body) {
-                                var json = JSON.parse(body);
-                                    user.picture = json.data.url
-                                    user.save()
+                            social.getAvatar().then(function(url) {
+                                user.picture = url;
+                                user.save();
                             })
                         }
+
+                        social.getFriends().then(function(friends) {
+                            db.Friend.bulkCreate(friends.map(function(friend) { return { username: friend, user_id: user.id} }));
+                        });
+
                         done(null, user)
                     })
                 })
