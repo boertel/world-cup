@@ -36,7 +36,8 @@ module.exports = {
                         include: [
                             {
                                 model: db.Group,
-                                attributes: db.Group.attrs()
+                                attributes: db.Group.attrs(),
+                                as: 'group',
                             },
                             {
                                 model: db.Competitor,
