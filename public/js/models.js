@@ -39,7 +39,7 @@ Bet.prototype.isLost = function () {
 
 Bet.prototype.cssClass = function () {
     var classes = [];
-    classes.push(this.type());
+    classes.push(this.type);
     return classes.join(', ');
 };
 
