@@ -225,6 +225,7 @@ div.game {
   border-left-width: 4px;
   border-color: #ddd;
   cursor: pointer;
+  display: flex;
 }
 div.game.past {
   display: none;
