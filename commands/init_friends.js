@@ -3,9 +3,13 @@ var db = require('../models');
 
 db.Social.findAll().then(function(socials) {
     socials.forEach(function(social) {
-        social.getFriends().then(function(friends) {
-            console.log(friends.length, social.user_id);
-            db.Friend.bulkCreate(friends.map(function(friend) { return { username: friend, user_id: social.user_id} }));
+        social.getFriends().then(function(facebookFriends) {
+            db.Friend.findAll({where: {user_id: social.user_id}, raw: true, attributes: ['username']}).then(function(friends) {
+                friends = friends.map(function(friend) { return friend.username; });
+                diff = facebookFriends.filter(function(friend) { return friends.indexOf(friend) === -1 });
+                console.log(friends.length, facebookFriends.length, diff.length, social.user_id);
+                db.Friend.bulkCreate(diff.map(function(friend) { return { username: friend, user_id: social.user_id} }));
+            })
         });
     });
 });

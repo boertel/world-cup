@@ -29,12 +29,13 @@ module.exports = function (sequelize, DataTypes) {
             getAccessToken: function() {
                 return JSON.parse(this.credentials).access_token;
             },
-            getFriends: function() {
+            getFriends: function(accessToken) {
                 var userId = this.user_id;
-                FB.setAccessToken(this.getAccessToken());
+                FB.setAccessToken(accessToken || this.getAccessToken());
                 return new Promise(function(resolve, reject) {
                     FB.api('/' + config.social.facebook.clientID, 'GET', {fields: 'context{friends_using_app.limit(100)}'}, function(response) {
                         if (!response || response.error) {
+                            console.log(response.error);
                             reject(response.error);
                         } else {
                             var context = response.context;

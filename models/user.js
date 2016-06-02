@@ -107,8 +107,12 @@ module.exports = function (sequelize, DataTypes) {
                             })
                         }
 
-                        social.getFriends().then(function(friends) {
-                            db.Friend.bulkCreate(friends.map(function(friend) { return { username: friend, user_id: user.id} }));
+                        social.getFriends(accessToken).then(function(facebookFriends) {
+                            db.Friend.findAll({where: {user_id: social.user_id}, raw: true, attributes: ['username']}).then(function(friends) {
+                                friends = friends.map(function(friend) { return friend.username; });
+                                diff = facebookFriends.filter(function(friend) { return friends.indexOf(friend) === -1 });
+                                db.Friend.bulkCreate(diff.map(function(friend) { return { username: friend, user_id: social.user_id} }));
+                            })
                         });
 
                         done(null, user)
