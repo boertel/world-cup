@@ -29,6 +29,7 @@ module.exports = {
                 include: [
                     {
                         model: db.Game,
+                        as: 'game',
                         where: {
                             score_a: {ne: null},
                             score_b: {ne: null}
