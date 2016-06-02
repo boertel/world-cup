@@ -10,6 +10,7 @@ var passport = require('passport'),
     RedisStore = require('connect-redis')(session),
     raven = require('raven');
 
+var env = process.env.NODE_ENV || 'development';
 
 var app = express();
 
@@ -21,6 +22,13 @@ function static(dirname, age) {
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
+
+if (env === 'production') {
+    // The request handler must be the first item
+    app.use(raven.middleware.express.requestHandler(config.sentry));
+}
+
 //app.use(require('static-favicon')(__dirname + '/public/favicon.ico'));
 app.use(require('morgan')('dev'));
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
@@ -37,9 +45,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-var env = process.env.NODE_ENV || 'development';
-if (env === 'prod') {
-    app.use(raven.middleware.express(config.raven.url));
+
+if (env === 'production') {
+    // The error handler must be before any other error middleware
+    app.use(raven.middleware.express.errorHandler(config.sentry));
 }
 
 app.use(function (req, res, next) {
@@ -62,8 +71,17 @@ app.param('user', function (req, res, next, id) {
     }
 })
 
-// development only
-if ('development' == app.get('env')) {
+
+function onError(err, req, res, next) {
+    // The error id is attached to `res.sentry` to be returned
+    // and optionally displayed to the user for support.
+    res.statusCode = 500;
+    res.end(res.sentry+'\n');
+}
+
+if (env === 'production') {
+    app.use(onError);
+} else {
     app.use(require('errorhandler')());
 }
 
