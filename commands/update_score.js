@@ -51,13 +51,8 @@ db.Bet.findAll({
             var points = users[user.id].points;
             user.points += points;
             user.save(['points']).then(function () {
-                user.publishScore(function (response) {
-                    if (response) {
-                        console.log(user.points + '\t\t' +  user.first_name + ' ' + user.last_name);
-                    } else {
-                        console.log('[fb:scores', response);
-                    }
-                });
+                console.log(user.points + '\t\t' +  user.first_name + ' ' + user.last_name);
+            });
             }).catch(function (err) {
                 console.log('[user:save]', err);
             });

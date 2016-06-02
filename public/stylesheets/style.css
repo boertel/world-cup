@@ -304,6 +304,12 @@ div.game .bet-score {
 .legend ul {
   margin-left: 2em;
 }
+.permissions {
+  text-align: center;
+}
+.permissions button {
+  margin: 1em;
+}
 .leaderboard {
   padding: 0 10px;
 }

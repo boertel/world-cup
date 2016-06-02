@@ -122,6 +122,41 @@ app.factory('games', ['$http', function ($http) {
 }]);
 
 
+app.factory('facebook', ['$q', function($q) {
+    function ready(callback) {
+        window.fbReady.push(function() {
+            if (!FB.getUserID()) {
+                FB.Event.subscribe('auth.statusChange', function (response) {
+                    if (response.status === 'connected') {
+                        callback();
+                    }
+                });
+            } else {
+                callback();
+            }
+        })
+    }
+
+    function api() {
+        var args = Array.prototype.slice.call(arguments);
+        ready(function() {
+            return FB.api.apply(FB, args);
+        });
+    }
+
+    function login() {
+        var args = Array.prototype.slice.call(arguments);
+        window.fbReady.push(function() {
+            FB.login.apply(FB, args);
+        });
+    }
+
+    return {
+        'api': api,
+        'login': login,
+    }
+}]);
+
 app.factory('friends', ['$q', function ($q) {
     var deferred = $q.defer();
     function getScores () {

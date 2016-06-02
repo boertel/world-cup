@@ -6,6 +6,10 @@
 
     <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-2 leaderboard" ng-controller="FriendsLeaderboardController">
         <h2>Friends Leaderboard</h2>
+        <div ng-if="permissions.user_friends !== 'granted' && !waiting" class="permissions">
+            <p>You need to give access to your Facebook Friends in order to see your friends in this leaderboard.</p>
+            <button ng-click="morePermissions()" class="pure-button pure-button-primary">Give access to my friends list</button>
+        </div>
         <div class="ajax-loader" ng-if="waiting"></div>
         <ul widget-leaderboard></ul>
     </div>

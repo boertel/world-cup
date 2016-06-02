@@ -6,6 +6,7 @@ var competitors = require('./competitors.js'),
     leaderboard = require('./leaderboard.js'),
     notifications = require('./notifications.js'),
     friends = require('./friends.js'),
+    social = require('./social.js'),
     db = require('../models')
 
 module.exports = function (app) {
@@ -29,6 +30,7 @@ module.exports = function (app) {
     app.post('/api/v1/users/:id/points', users.points.post)
 
     app.get('/api/v1/friends', friends.read)
+    app.post('/api/v1/social', social.post)
 
     app.get('/api/v1/leaderboard', leaderboard.read)
 
