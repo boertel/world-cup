@@ -52,10 +52,10 @@ module.exports = function (app) {
     })
 
     var authenticated = function (req, res, next) {
-        if (!req.isAuthenticated()) {
-            res.redirect('/login')
+        if (req.isAuthenticated()) {
+            return next();
         }
-        next()
+        res.redirect('/login');
     }
 
     app.get('/dashboard', authenticated, function (req, res) {
