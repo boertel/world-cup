@@ -1,12 +1,13 @@
 app.factory('notification', ['$sce', function ($sce) {
     var notifications = [];
 
-    function notify(message, type, jump) {
+    function notify(message, type, keep) {
         type = type || 'success';
         notifications.push({
             message: $sce.trustAsHtml(message),
             type: type,
-            jump: jump || 0
+            keep: keep,
+            jump: 0,
         });
     }
 
@@ -16,10 +17,8 @@ app.factory('notification', ['$sce', function ($sce) {
 
     function remove() {
         var notif = notifications.pop();
-        if (notif) {
-            if (notif.jump === 0) {
-                notifications.push(notif);
-            }
+        if (notif && notif.keep && !notif.jump) {
+            notifications.push(notif);
             notif.jump += 1;
         }
     }

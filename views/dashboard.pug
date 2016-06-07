@@ -15,6 +15,9 @@ block header
 
 block notification
     div#notification(ng-controller="NotificationController")
+        div.notification.info
+            div.page-width
+                p Tip: <strong>Enter the score for all games now.</strong><br>You can always update the score later on. Better be safe than sorry ;)
         div.notification(ng-repeat="notification in notifications", class="{{ notification.type }}")
             div.page-width
                 p(ng-bind-html="notification.message") {{ notification.message }}

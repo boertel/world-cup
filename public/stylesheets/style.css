@@ -131,6 +131,9 @@ header {
   color: #058;
   background: #559ac3;
 }
+.notification strong {
+  font-size: 1.1em;
+}
 .notification.info {
   background-color: #d9def4;
   color: #8191da;

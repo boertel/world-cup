@@ -60,8 +60,7 @@ app.controller('GameController', ['$scope', '$http', '$routeParams', 'notificati
         }).success(function (data) {
             games.updateBet(new Bet(data));
             $location.url(nextUrl);
-            notification.remove();
-            notification.notify("Your bet has been saved.");
+            notification.notify('Your bet has been saved.', null, true);
         })
     }
 
