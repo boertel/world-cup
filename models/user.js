@@ -94,30 +94,32 @@ module.exports = function (sequelize, DataTypes) {
                         create.email = profile.emails[0].value;
                     }
                 }
-                User.findOrCreate({where: find, defaults: create}).spread(function (user, created) {
-                    var db = require('../models');
-                    var where = {provider: 'facebook', uid: find.username, user_id: user.id},
-                        defaults = { credentials: JSON.stringify({access_token: accessToken}) };
-                    db.Social.findOrCreate({where: where, defaults: defaults}).spread(function (social, created) {
-                        social.setUser(user) // FIXME check incomplete
-                        if (!user.picture) {
-                            social.getAvatar().then(function(url) {
-                                user.picture = url;
-                                user.save();
-                            })
-                        }
+                process.nextTick(function() {
+                    User.findOrCreate({where: find, defaults: create}).spread(function (user, created) {
+                        var db = require('../models');
+                        var where = {provider: 'facebook', uid: find.username, user_id: user.id},
+                            defaults = { credentials: JSON.stringify({access_token: accessToken}) };
+                        db.Social.findOrCreate({where: where, defaults: defaults}).spread(function (social, created) {
+                            social.setUser(user) // FIXME check incomplete
+                            if (!user.picture) {
+                                social.getAvatar().then(function(url) {
+                                    user.picture = url;
+                                    user.save();
+                                })
+                            }
 
-                        social.getFriends(accessToken).then(function(facebookFriends) {
-                            db.Friend.findAll({where: {user_id: social.user_id}, raw: true, attributes: ['username']}).then(function(friends) {
-                                friends = friends.map(function(friend) { return friend.username; });
-                                diff = facebookFriends.filter(function(friend) { return friends.indexOf(friend) === -1 });
-                                db.Friend.bulkCreate(diff.map(function(friend) { return { username: friend, user_id: social.user_id} }));
-                            })
-                        });
+                            social.getFriends(accessToken).then(function(facebookFriends) {
+                                db.Friend.findAll({where: {user_id: social.user_id}, raw: true, attributes: ['username']}).then(function(friends) {
+                                    friends = friends.map(function(friend) { return friend.username; });
+                                    diff = facebookFriends.filter(function(friend) { return friends.indexOf(friend) === -1 });
+                                    db.Friend.bulkCreate(diff.map(function(friend) { return { username: friend, user_id: social.user_id} }));
+                                })
+                            });
 
-                        done(null, user)
+                            done(null, user)
+                        })
                     })
-                })
+                });
             }
         }
     })
