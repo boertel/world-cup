@@ -216,11 +216,8 @@ app.controller('LeaderboardController', ['$scope', '$http', function ($scope, $h
 
 app.controller('FriendsLeaderboardController', ['$scope', '$http', 'facebook', '$timeout', function ($scope, $http, facebook, $timeout) {
     $scope.waiting = true;
-    facebook.api('/me/permissions', function(response) {
-        var permissions = {};
-        response.data.forEach(function(permission) {
-            permissions[permission.permission] = permission.status;
-        });
+
+    facebook.permissions(function(permissions) {
         $timeout(function() {
             $scope.permissions = permissions;
             $scope.waiting = false;
@@ -228,17 +225,11 @@ app.controller('FriendsLeaderboardController', ['$scope', '$http', 'facebook', '
     });
 
     $scope.morePermissions = function() {
-        facebook.login(function(response) {
-            var accessToken = response.authResponse.accessToken;
-            var permissions = response.authResponse.grantedScopes;
-            if (permissions.indexOf('user_friends') !== -1) {
-                $scope.permissions.user_friends = 'granted';
-            }
-
-            if (accessToken) {
-                $http.post('/api/v1/social', {access_token: accessToken});
-            }
-        }, {scope: 'user_friends', return_scopes: true});
+        facebook.askPermissions(['user_friends'], function(permissions) {
+            permissions.forEach(function(permission) {
+                $scope.permissions[permission] = 'granted';
+            });
+        });
     };
 
     $http.get('/api/v1/friends').then(function (response) {

@@ -4,7 +4,6 @@ var competitors = require('./competitors.js'),
     users = require('./users.js'),
     bets = require('./bets.js'),
     leaderboard = require('./leaderboard.js'),
-    notifications = require('./notifications.js'),
     friends = require('./friends.js'),
     social = require('./social.js'),
     db = require('../models')
@@ -33,8 +32,6 @@ module.exports = function (app) {
     app.post('/api/v1/social', social.post)
 
     app.get('/api/v1/leaderboard', leaderboard.read)
-
-    app.get('/api/v1/notifications', notifications.read)
 
     // Views
     function indexView(req, res) {

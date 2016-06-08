@@ -121,7 +121,7 @@ app.factory('games', ['$http', function ($http) {
 }]);
 
 
-app.factory('facebook', ['$q', function($q) {
+app.factory('facebook', ['$q', '$http', function($q, $http) {
     function ready(callback) {
         window.fbReady.push(function() {
             if (!FB.getUserID()) {
@@ -150,9 +150,41 @@ app.factory('facebook', ['$q', function($q) {
         });
     }
 
+    function permissions(callback) {
+        return api('/me/permissions', function(response) {
+            var perms = {};
+            response.data.forEach(function(permission) {
+                perms[permission.permission] = permission.status;
+            });
+            callback && callback(perms);
+        });
+    }
+
+    function askPermissions(permissions, callback) {
+        login(function(response) {
+            var output = [];
+            var accessToken = response.authResponse.accessToken;
+            var scopes = response.authResponse.grantedScopes;
+
+            permissions.forEach(function(permission) {
+                if (scopes.indexOf(permission) !== -1) {
+                    output.push(permission);
+                }
+            });
+
+            if (accessToken) {
+                $http.post('/api/v1/social', {access_token: accessToken}).then(function() {
+                    callback && callback(output);
+                });
+            }
+        }, {scope: permissions.join(','), return_scopes: true});
+    }
+
     return {
         'api': api,
         'login': login,
+        'permissions': permissions,
+        'askPermissions': askPermissions,
     }
 }]);
 
