@@ -1,0 +1,34 @@
+var db = require('../models');
+var FB = require('fb');
+var config = require('../config');
+var moment = require('moment');
+
+var sequelize = db.sequelize;
+FB.setAccessToken(config.social.facebook.app_access_token);
+
+
+var notification = { template: "Don't forget to bet on the Euro 2016 matches" };
+
+var start = moment.utc();
+var end = start.add(1, 'day');
+// select users who haven't bet on a game happening in the next 24 hours
+var query = 'SELECT u.username FROM "User" u WHERE id NOT IN (SELECT b.user_id FROM "Game" g LEFT JOIN "Bet" b ON g.id = b.game_id WHERE time >= :start AND time <= :end GROUP by b.user_id);';
+
+var options = {
+    type: sequelize.QueryTypes.SELECT,
+    replacements: {
+        'start': start.toDate(),
+        'end': end.toDate()
+    },
+};
+
+console.log('games between: ', start.format(), 'and', end.format());
+
+sequelize.query(query, options).then(function (users) {
+    console.log('# of users:', users.length);
+    users.map(function (user) {
+        FB.api('/' + user.username + '/notifications', 'post', notification, function (response) {
+            console.log(user.username, response);
+        })
+    })
+});
