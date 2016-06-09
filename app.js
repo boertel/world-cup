@@ -46,11 +46,11 @@ app.use(static('public/cached', 86400000));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(require('method-override')());
-app.use(require('cookie-parser')());
 app.enable("trust proxy");
 app.use(session({
     store: new RedisStore(config.redis),
-    secret: 'elephan7Bleu'
+    secret: 'elephan7Bleu',
+    cookie: { maxAge: (3600000 * 24 * 30) },
 }));
 app.use(passport.initialize());
 app.use(passport.session());
