@@ -55,7 +55,7 @@
             </div>
         </div>
         <div class="pure-u-1 pure-u-md-1 pure-u-lg-1-3">
-            <div class="center bets-title">{{ bet.game.competitor_a.name }} &amp; {{ bet.game.competitor_a.name }} tie</div>
+            <div class="center bets-title">{{ bet.game.competitor_a.name }} &amp; {{ bet.game.competitor_b.name }} tie</div>
             <div class="bet-row center" ng-repeat="bet in tie" ng-class="{me:bet.me, perfect:bet.isPerfect(), won:bet.isWin(), lost:bet.isLost(), 'not-friend':!bet.friend}">
                 <div class="left">
                     <a href="#/user/{{ bet.user.id }}">{{ bet.user.first_name }} {{ bet.user.last_name }}</a>
