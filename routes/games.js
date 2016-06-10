@@ -53,6 +53,7 @@ module.exports = {
             }).then(function (bets) {
                 var mapping = {};
                 bets.forEach(function (bet) {
+                    bet.setDataValue('type', bet.getType());
                     mapping[bet.game_id] = bet;
                 });
 

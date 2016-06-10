@@ -38,6 +38,9 @@ module.exports = function (sequelize, DataTypes) {
                     || (this.game.score_a < this.game.score_b && this.score_a < this.score_b)
             },
             getType: function() {
+                if (this.game.score_a === null && this.game.score_b === null) {
+                    return '';
+                }
                 if (this.perfect()) {
                     return 'perfect';
                 } else if (this.win()) {
