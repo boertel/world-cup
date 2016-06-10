@@ -164,8 +164,8 @@ module.exports = {
                 bets = bets.map(function (bet) {
                     if (req.user.id === bet.user_id) {
                         bet.setDataValue('me', true);
-                        bet.setDataValue('type', bet.getType());
                     }
+                    bet.setDataValue('type', bet.getType());
                     return bet;
                 })
                 res.json(bets);
