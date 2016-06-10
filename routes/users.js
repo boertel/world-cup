@@ -55,6 +55,10 @@ module.exports = {
                 ]
             }
             db.Bet.findAll(filters).then(function (bets) {
+                bets = bets.map(function(bet) {
+                    bet.setDataValue('type', bet.getType());
+                    return bet;
+                });
                 res.json(bets)
             })
         }

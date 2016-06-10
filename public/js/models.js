@@ -34,7 +34,7 @@ Bet.prototype.isWin = function () {
 };
 
 Bet.prototype.isLost = function () {
-    return this.type === 'lost';
+    return this.type === 'loss';
 };
 
 Bet.prototype.cssClass = function () {

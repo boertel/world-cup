@@ -87,7 +87,7 @@ app.controller('ProfileController', ['$scope', '$http', '$routeParams', 'user', 
     $scope.number = {
         perfect: 0,
         win: 0,
-        lost: 0
+        loss: 0
     };
 
     $scope.showGame = function (bet) {

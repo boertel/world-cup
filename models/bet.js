@@ -43,7 +43,7 @@ module.exports = function (sequelize, DataTypes) {
                 } else if (this.win()) {
                     return 'win';
                 } else {
-                    return 'lost';
+                    return 'loss';
                 }
             },
             toJSON: function () {

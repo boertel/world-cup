@@ -50,12 +50,13 @@ db.Bet.findAll({
         db.User.find({where : {id: user_id}}).then(function (user) {
             var points = users[user.id].points;
             user.points += points;
-            user.save(['points']).then(function () {
-                console.log(user.points + '\t\t' +  user.first_name + ' ' + user.last_name);
-            });
-            }).catch(function (err) {
-                console.log('[user:save]', err);
-            });
+            user.save(['points'])
+                .then(function () {
+                    console.log(user.points + '\t\t' +  user.first_name + ' ' + user.last_name);
+                })
+                .catch(function (err) {
+                    console.log('[user:save]', err);
+                });
         }).catch(function (err) {
             console.log('[user:find]', err);
         });
