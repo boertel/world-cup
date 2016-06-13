@@ -188,34 +188,8 @@ app.factory('facebook', ['$q', '$http', function($q, $http) {
     }
 }]);
 
-app.factory('friends', ['$q', function ($q) {
-    var deferred = $q.defer();
-    function getScores () {
-        FB.api('/1477567782456567/scores', function (response) {
-            var data = response.data.map(function (score) {
-                var user = {
-                    points: parseInt(score.score, 10),
-                    link: 'https://www.facebook.com/profile.php?id=' + score.user.id,
-                    name: score.user.name,
-                    username: score.user.id,
-                    id: 'fb_' + score.user.id
-                };
-                return user;
-            });
-            deferred.resolve(formatLeaderboardUser(data));
-        });
-    }
-    window.fbReady.push(function () {
-        if (!FB.getUserID()) {
-            FB.Event.subscribe('auth.statusChange', function (response) {
-                if (response.status === 'connected') {
-                    getScores();
-                }
-            });
-        } else {
-            getScores();
-        }
+app.factory('friends', ['$http', function ($http) {
+    return $http.get('/api/v1/friends').then(function (response) {
+        return response.data;
     });
-
-    return deferred.promise;
 }]);
