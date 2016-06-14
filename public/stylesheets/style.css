@@ -138,6 +138,10 @@ header {
   background-color: #d9def4;
   color: #8191da;
 }
+.notification.warning {
+  background-color: #fff7cd;
+  color: #ab9100;
+}
 .notification.error,
 .header-size {
   width: 100%;
