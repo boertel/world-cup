@@ -140,7 +140,9 @@ module.exports = {
                     })
                 } else {
                     bet.game.next().then(function (nextGame) {
-                        bet.game.setDataValue('next', nextGame.id);
+                        if (nextGame) {
+                            bet.game.setDataValue('next', nextGame.id);
+                        }
                         res.json(bet);
                     });
                 }
