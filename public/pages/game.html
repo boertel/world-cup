@@ -80,12 +80,12 @@
 </div>
 
 <div class="pure-g">
-    <div class="pure-u-1"><em>{{ bet.game.local|date: 'MMM d, y HH:mm' }}</em></div>
+    <div class="pure-u-1"><em>{{ bet.game.local|date: 'MMM d, y HH:mm a' }}</em></div>
 </div>
 
 <div class="pure-g help">
     <div class="pure-u-1">
-        <h3>How points will be computed at the end of the match?</h3>
+        <h3>How points will be computed at the end of the match? (at the end of the 90th minutes)</h3>
         <ul>
             <li><span class="score">{{ bet.game.group.points.perfect }} points</span>. <em>Perfect</em>: you guessed the perfect score.</li>
             <li><span class="score">{{ bet.game.group.points.win }} points</span>. <em>Won</em>: you guessed the correct winner (or correct looser) or if it's a tie.</li>

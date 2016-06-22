@@ -17,7 +17,7 @@ block notification
     div#notification(ng-controller="NotificationController")
         div.notification.warning
             div.page-width
-                p Info: <strong>Matches after the group stage will be worth more points.</strong> Don't loss hope, you can still make it to the podium ;)
+                p NEW POINTS: <strong>+100</strong> points for a perfect prediction, <strong>+60</strong> for the correct winner. At the end of the <strong>90th minutes</strong>.
         div.notification(ng-repeat="notification in notifications", class="{{ notification.type }}")
             div.page-width
                 p(ng-bind-html="notification.message") {{ notification.message }}
@@ -71,13 +71,13 @@ block script
                         <span class="little-score saved"></span>: You did bet on this game
                     </li>
                     <li>
-                        <span class="little-score lost"></span>: 0 points
+                        <span class="little-score lost"></span>: wrong winner
                     </li>
                     <li>
-                        <span class="little-score win"></span>: +30 points
+                        <span class="little-score win"></span>: you predicted the correct winner
                     </li>
                     <li>
-                        <span class="little-score perfect"></span>: +50 points
+                        <span class="little-score perfect"></span>: you predicted the perfect score
                     </li>
                 </ul>
             </div>
