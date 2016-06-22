@@ -1,5 +1,8 @@
 app.controller('HomeController', ['$scope', 'notification', function ($scope, notification) {
-    $scope.scope = '1,2,3,4,5,6';
+    $scope.groups = '1,2,3,4,5,6';
+    $scope.changeGroup = function(groups) {
+        $scope.groups = groups;
+    };
 }]);
 
 app.controller('GamesController', ['$scope', 'games', '$location', '$anchorScroll', '$timeout', function ($scope, games, $location, $anchorScroll, $timeout) {
@@ -7,11 +10,13 @@ app.controller('GamesController', ['$scope', 'games', '$location', '$anchorScrol
         $('.game.period-' + period).toggleClass('past');
     };
 
-    var groups = $scope.$parent.scope.split(',').map(function(g) { return parseInt(g, 10) });
-    games.groupByDay(groups).then(function (data) {
-        $scope.days = data
-        $timeout(function () {
-            $location.hash() && $anchorScroll();
+    $scope.$parent.$watch('groups', function() {
+        var groups = $scope.$parent.groups.split(',').map(function(g) { return parseInt(g, 10) });
+        games.groupByDay(groups).then(function (data) {
+            $scope.days = data
+            $timeout(function () {
+                $location.hash() && $anchorScroll();
+            });
         });
     });
 }]);

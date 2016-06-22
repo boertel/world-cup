@@ -1,16 +1,16 @@
 <div class="pure-g">
     <div class="pure-u-1 center">
         <ul class="filters">
-            <li><a ng-click="scope='1,2,3,4,5,6'" ng-class="{selected: scope === '1,2,3,4,5,6'}">Group stage</a></li>
-            <li><a ng-click="scope='7'" ng-class="{selected: scope === '7'}">Round of 16</a></li>
-            <li><a ng-click="scope='8'" class="" ng-class="{selected: scope === '8'}">Quarter Finals</a></li>
-            <li><a ng-click="scope='9'" ng-class="{selected: scope === '9'}">Semi Finals</a></li>
-            <li><a ng-click="scope='10,11'" ng-class="{selected: scope === '10,11'}">Final</a></li>
+            <li><a ng-click="changeGroup('1,2,3,4,5,6')" ng-class="{selected: groups === '1,2,3,4,5,6'}">Group stage</a></li>
+            <li><a ng-click="changeGroup('7')" ng-class="{selected: groups === '7'}">Round of 16</a></li>
+            <li><a ng-click="changeGroup('8')" class="" ng-class="{selected: groups === '8'}">Quarter Finals</a></li>
+            <li><a ng-click="changeGroup('9')" ng-class="{selected: groups === '9'}">Semi Finals</a></li>
+            <li><a ng-click="changeGroup('10,11')" ng-class="{selected: groups === '10,11'}">Final</a></li>
         </ul>
     </div>
 </div>
 
-<div ng-controller="GamesController" widget-games ng-show="scope === '1,2,3,4,5,6'"></div>
+<div ng-controller="GamesController" widget-games></div>
 
 <div widget-legend></div>
 
