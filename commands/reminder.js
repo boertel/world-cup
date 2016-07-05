@@ -8,7 +8,7 @@ FB.setAccessToken(config.social.facebook.app_access_token);
 
 
 //var notification = { template: "Don't forget to bet on the Euro 2016 matches" };
-var notification = { template: "Quarter finals starts on Friday! Go fill up the scores. Good luck!"};
+var notification = { template: "Semi finals starts on Wednesday! Go fill up the scores. Good luck!"};
 
 var start = moment.utc();
 var end = moment.utc().add(1, 'days');
