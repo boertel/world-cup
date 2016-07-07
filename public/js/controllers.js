@@ -1,5 +1,5 @@
 app.controller('HomeController', ['$scope', 'notification', function ($scope, notification) {
-    $scope.groups = '9';
+    $scope.groups = '11';
     $scope.changeGroup = function(groups) {
         $scope.groups = groups;
     };

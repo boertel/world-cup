@@ -17,7 +17,7 @@ block notification
     div#notification(ng-controller="NotificationController")
         div.notification.warning
             div.page-width
-                p NEW POINTS: <strong>+100</strong> points for a perfect prediction, <strong>+60</strong> for the correct winner. It's the score at the end of the <strong>90th minutes</strong> that you will need to predict.
+                p NEW POINTS FOR THE FINAL: <strong>+200</strong> points for a perfect prediction, <strong>+120</strong> for the correct winner. It's the score at the end of the <strong>90th minutes</strong> that you will need to predict.
         div.notification(ng-repeat="notification in notifications", class="{{ notification.type }}")
             div.page-width
                 p(ng-bind-html="notification.message") {{ notification.message }}
